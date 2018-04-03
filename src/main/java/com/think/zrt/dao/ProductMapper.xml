@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.think.zrt.dao.ProductMapper">
+
+	<select id="getProductInfoByName"  resultType="ProductInfo">
+		select 
+			product_name as ProductName,
+			product_series as seriesName,
+			product_pic as productPic,
+			product_desc as productDesc,
+			video_url as videoUrl,
+			audio_url as audioUrl,
+			audio_pic as audioPic,
+			template_id as templateId
+		from zrt_product t 
+		where  t.product_name=#{name}
+		
+	</select>
+
+
+
+</mapper>

@@ -1,0 +1,98 @@
+2018-04-04 06:19:20.275  INFO 16280 --- [restartedMain] com.think.zrt.ZrtApplication             : Starting ZrtApplication on DESKTOP-4V8P2LO with PID 16280 (G:\ELPS_Files\workspace_neno_1\zrt\target\classes started by LPF in G:\ELPS_Files\workspace_neno_1\zrt)
+2018-04-04 06:19:20.277 DEBUG 16280 --- [restartedMain] com.think.zrt.ZrtApplication             : Running with Spring Boot v1.5.10.RELEASE, Spring v4.3.14.RELEASE
+2018-04-04 06:19:20.277  INFO 16280 --- [restartedMain] com.think.zrt.ZrtApplication             : The following profiles are active: dev
+2018-04-04 06:19:20.414  INFO 16280 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6e3fcf57: startup date [Wed Apr 04 06:19:20 CST 2018]; root of context hierarchy
+2018-04-04 06:19:21.987  INFO 16280 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-04-04 06:19:22.757  INFO 16280 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9b992d12] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-04 06:19:23.065 ERROR 16280 --- [restartedMain] o.s.b.b.PropertiesConfigurationFactory   : Properties configuration failed validation
+2018-04-04 06:19:23.065 ERROR 16280 --- [restartedMain] o.s.b.b.PropertiesConfigurationFactory   : Field error in object 'server' on field 'tomcat.uriEncoding': rejected value [UTF-8 ]; codes [typeMismatch.server.tomcat.uriEncoding,typeMismatch.tomcat.uriEncoding,typeMismatch.uriEncoding,typeMismatch.java.nio.charset.Charset,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [server.tomcat.uriEncoding,tomcat.uriEncoding]; arguments []; default message [tomcat.uriEncoding]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'java.nio.charset.Charset' for property 'tomcat.uriEncoding'; nested exception is org.springframework.core.convert.ConverterNotFoundException: No converter found capable of converting from type [java.lang.String] to type [java.nio.charset.Charset]]
+2018-04-04 06:19:23.067  WARN 16280 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start embedded container; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'tomcatEmbeddedServletContainerFactory' defined in class path resource [org/springframework/boot/autoconfigure/web/EmbeddedServletContainerAutoConfiguration$EmbeddedTomcat.class]: Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverProperties': Could not bind properties to ServerProperties (prefix=server, ignoreInvalidFields=false, ignoreUnknownFields=true, ignoreNestedProperties=false); nested exception is org.springframework.validation.BindException: org.springframework.boot.bind.RelaxedDataBinder$RelaxedBeanPropertyBindingResult: 1 errors
+Field error in object 'server' on field 'tomcat.uriEncoding': rejected value [UTF-8 ]; codes [typeMismatch.server.tomcat.uriEncoding,typeMismatch.tomcat.uriEncoding,typeMismatch.uriEncoding,typeMismatch.java.nio.charset.Charset,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [server.tomcat.uriEncoding,tomcat.uriEncoding]; arguments []; default message [tomcat.uriEncoding]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'java.nio.charset.Charset' for property 'tomcat.uriEncoding'; nested exception is org.springframework.core.convert.ConverterNotFoundException: No converter found capable of converting from type [java.lang.String] to type [java.nio.charset.Charset]]
+2018-04-04 06:19:23.078  INFO 16280 --- [restartedMain] utoConfigurationReportLoggingInitializer : 
+
+Error starting ApplicationContext. To display the auto-configuration report re-run your application with 'debug' enabled.
+2018-04-04 06:19:23.083 ERROR 16280 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Binding to target org.springframework.boot.autoconfigure.web.ServerProperties@765e1428 failed:
+
+    Property: server.tomcat.uriEncoding
+    Value: UTF-8 
+    Reason: Failed to convert property value of type 'java.lang.String' to required type 'java.nio.charset.Charset' for property 'tomcat.uriEncoding'; nested exception is org.springframework.core.convert.ConverterNotFoundException: No converter found capable of converting from type [java.lang.String] to type [java.nio.charset.Charset]
+
+
+Action:
+
+Update your application's configuration
+
+2018-04-04 06:21:25.253  INFO 2988 --- [restartedMain] com.think.zrt.ZrtApplication             : Starting ZrtApplication on DESKTOP-4V8P2LO with PID 2988 (G:\ELPS_Files\workspace_neno_1\zrt\target\classes started by LPF in G:\ELPS_Files\workspace_neno_1\zrt)
+2018-04-04 06:21:25.255 DEBUG 2988 --- [restartedMain] com.think.zrt.ZrtApplication             : Running with Spring Boot v1.5.10.RELEASE, Spring v4.3.14.RELEASE
+2018-04-04 06:21:25.255  INFO 2988 --- [restartedMain] com.think.zrt.ZrtApplication             : The following profiles are active: dev
+2018-04-04 06:21:25.390  INFO 2988 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4debde2b: startup date [Wed Apr 04 06:21:25 CST 2018]; root of context hierarchy
+2018-04-04 06:21:27.047  INFO 2988 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-04-04 06:21:27.833  INFO 2988 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$e996755e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-04 06:21:28.675  INFO 2988 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 9999 (http)
+2018-04-04 06:21:28.694  INFO 2988 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-04-04 06:21:28.697  INFO 2988 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-04-04 06:21:28.884  INFO 2988 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-04-04 06:21:28.885  INFO 2988 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3499 ms
+2018-04-04 06:21:29.127  INFO 2988 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-04-04 06:21:29.134  INFO 2988 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-04-04 06:21:29.135  INFO 2988 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-04-04 06:21:29.135  INFO 2988 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-04-04 06:21:29.136  INFO 2988 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-04-04 06:21:30.725  INFO 2988 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4debde2b: startup date [Wed Apr 04 06:21:25 CST 2018]; root of context hierarchy
+2018-04-04 06:21:30.861  INFO 2988 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/admin]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.login(java.lang.String,java.lang.String)
+2018-04-04 06:21:30.867  INFO 2988 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/product_info]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.ProductController.getProductInfo(java.lang.String)
+2018-04-04 06:21:30.868  INFO 2988 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/auth_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.ProductController.authProductInfo(java.lang.String)
+2018-04-04 06:21:30.869  INFO 2988 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/to_weichat]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.ProductController.forwardToWeichat(java.lang.String)
+2018-04-04 06:21:30.872  INFO 2988 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-04-04 06:21:30.873  INFO 2988 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-04-04 06:21:30.956  INFO 2988 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-04 06:21:30.957  INFO 2988 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-04 06:21:31.039  INFO 2988 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-04 06:21:31.855  INFO 2988 --- [restartedMain] o.s.ui.freemarker.SpringTemplateLoader   : SpringTemplateLoader for FreeMarker: using resource loader [org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4debde2b: startup date [Wed Apr 04 06:21:25 CST 2018]; root of context hierarchy] and template loader path [classpath:/templates/]
+2018-04-04 06:21:31.856  INFO 2988 --- [restartedMain] o.s.w.s.v.f.FreeMarkerConfigurer         : ClassTemplateLoader for Spring macros added to FreeMarker configuration
+2018-04-04 06:21:31.884  WARN 2988 --- [restartedMain] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2018-04-04 06:21:32.150  INFO 2988 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2018-04-04 06:21:32.265  INFO 2988 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-04-04 06:21:32.437  INFO 2988 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 9999 (http)
+2018-04-04 06:21:32.453  INFO 2988 --- [restartedMain] com.think.zrt.ZrtApplication             : Started ZrtApplication in 7.688 seconds (JVM running for 8.29)
+2018-04-04 06:22:02.936  INFO 17932 --- [restartedMain] com.think.zrt.ZrtApplication             : Starting ZrtApplication on DESKTOP-4V8P2LO with PID 17932 (G:\ELPS_Files\workspace_neno_1\zrt\target\classes started by LPF in G:\ELPS_Files\workspace_neno_1\zrt)
+2018-04-04 06:22:02.938 DEBUG 17932 --- [restartedMain] com.think.zrt.ZrtApplication             : Running with Spring Boot v1.5.10.RELEASE, Spring v4.3.14.RELEASE
+2018-04-04 06:22:02.938  INFO 17932 --- [restartedMain] com.think.zrt.ZrtApplication             : The following profiles are active: dev
+2018-04-04 06:22:03.069  INFO 17932 --- [restartedMain] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4debde2b: startup date [Wed Apr 04 06:22:03 CST 2018]; root of context hierarchy
+2018-04-04 06:22:04.644  INFO 17932 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2018-04-04 06:22:05.359  INFO 17932 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$208d36e5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-04 06:22:06.164  INFO 17932 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 9999 (http)
+2018-04-04 06:22:06.187  INFO 17932 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2018-04-04 06:22:06.189  INFO 17932 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-04-04 06:22:06.399  INFO 17932 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2018-04-04 06:22:06.399  INFO 17932 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3335 ms
+2018-04-04 06:22:06.649  INFO 17932 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2018-04-04 06:22:06.656  INFO 17932 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-04-04 06:22:06.656  INFO 17932 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-04-04 06:22:06.657  INFO 17932 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-04-04 06:22:06.657  INFO 17932 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2018-04-04 06:22:07.835  INFO 17932 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4debde2b: startup date [Wed Apr 04 06:22:03 CST 2018]; root of context hierarchy
+2018-04-04 06:22:07.950  INFO 17932 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/admin]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.login(java.lang.String,java.lang.String)
+2018-04-04 06:22:07.953  INFO 17932 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/to_weichat]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.ProductController.forwardToWeichat(java.lang.String)
+2018-04-04 06:22:07.954  INFO 17932 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/auth_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.ProductController.authProductInfo(java.lang.String)
+2018-04-04 06:22:07.955  INFO 17932 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/product_info]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.ProductController.getProductInfo(java.lang.String)
+2018-04-04 06:22:07.958  INFO 17932 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-04-04 06:22:07.959  INFO 17932 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-04-04 06:22:08.018  INFO 17932 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-04 06:22:08.018  INFO 17932 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-04 06:22:08.098  INFO 17932 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-04 06:22:08.778  INFO 17932 --- [restartedMain] o.s.ui.freemarker.SpringTemplateLoader   : SpringTemplateLoader for FreeMarker: using resource loader [org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4debde2b: startup date [Wed Apr 04 06:22:03 CST 2018]; root of context hierarchy] and template loader path [classpath:/templates/]
+2018-04-04 06:22:08.780  INFO 17932 --- [restartedMain] o.s.w.s.v.f.FreeMarkerConfigurer         : ClassTemplateLoader for Spring macros added to FreeMarker configuration
+2018-04-04 06:22:08.814  WARN 17932 --- [restartedMain] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2018-04-04 06:22:09.050  INFO 17932 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2018-04-04 06:22:09.162  INFO 17932 --- [restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-04-04 06:22:09.290  INFO 17932 --- [restartedMain] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 9999 (http)
+2018-04-04 06:22:09.297  INFO 17932 --- [restartedMain] com.think.zrt.ZrtApplication             : Started ZrtApplication in 6.819 seconds (JVM running for 7.551)

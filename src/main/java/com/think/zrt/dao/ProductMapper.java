@@ -10,6 +10,6 @@ public interface ProductMapper {
 	 * @param name
 	 * @return
 	 */
-	public ProductInfo queryProductInfoByName(String name);
+	public ProductInfo getProductInfoByName(String name);
 
 }

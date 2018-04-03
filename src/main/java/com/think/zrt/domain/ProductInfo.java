@@ -17,6 +17,9 @@ public class ProductInfo implements Serializable {
 
 	// 商品图片地址
 	private String productPic;
+	
+	//商品描述信息
+	private String productDesc;
 
 	// 音频信息地址
 	private String videoUrl;
@@ -86,12 +89,20 @@ public class ProductInfo implements Serializable {
 		this.templateId = templateId;
 	}
 
+	public String getProductDesc() {
+		return productDesc;
+	}
+
+	public void setProductDesc(String productDesc) {
+		this.productDesc = productDesc;
+	}
+
 	@Override
 	public String toString() {
-		return "ProductInfo [productName=" + productName + ", seriesName="
-				+ seriesName + ", productPic=" + productPic + ", videoUrl="
-				+ videoUrl + ", audioUrl=" + audioUrl + ", audioPic="
+		return "ProductInfo [productName=" + productName + ", seriesName=" + seriesName + ", productPic=" + productPic
+				+ ", productDesc=" + productDesc + ", videoUrl=" + videoUrl + ", audioUrl=" + audioUrl + ", audioPic="
 				+ audioPic + ", templateId=" + templateId + "]";
 	}
+
 
 }

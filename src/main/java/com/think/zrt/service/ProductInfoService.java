@@ -10,6 +10,6 @@ public interface ProductInfoService {
 	 * @param productName
 	 * @return
 	 */
-	public ProductInfo getProductInfo(String productName);
+	public ProductInfo queryProductInfo(String productName);
 
 }
