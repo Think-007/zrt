@@ -64,7 +64,8 @@ public class ProductController {
 		try {
 
 			// 1、现根据16位串码查询产品的名称。
-			String encode = SecurityUtils.encodeProductCode(param);
+			String data = "{ 'code':'" + param + "','TimeStamp':152143525223 }";
+			String encode = SecurityUtils.encodeProductCode(data);
 			// 工具类加密后每76字节会自动换行，需要去除空格
 			encode = encode.replaceAll("[\\s*\t\n\r]", "");
 
@@ -74,8 +75,10 @@ public class ProductController {
 
 				// 2、拿到名称，去数据库查询该名称对应的信息。
 				String responseJson = response.getBody();
+				ZrtLog.debug(logger, "getProductInfo", null, " responseJson :" + responseJson);
 				JSONObject jsonObj = JSON.parseObject(responseJson);
-				String productName =jsonObj.getString("pName");
+
+				String productName = jsonObj.getString("pName");
 				ZrtLog.debug(logger, "getProductInfo", null, " productName :" + productName);
 				ProductInfo productInfo = productInfoService.queryProductInfo(productName);
 				processResult.setRetCode(ProcessResult.SUCCESS);
@@ -92,7 +95,7 @@ public class ProductController {
 			processResult.setRetMsg(ZrtConst.TIME_OUT_MSG);
 			ZrtLog.error(logger, "getProductInfo", null, processResult, e);
 			// 发邮件
-//			MailService.sendMail(sender, receiver, "主题", "内容");
+			// MailService.sendMail(sender, receiver, "主题", "内容");
 		} catch (Throwable t) {
 
 			processResult.setRetCode(ZrtConst.EXCEPTION);
@@ -101,7 +104,7 @@ public class ProductController {
 			ZrtLog.error(logger, "getProductInfo", null, processResult, t);
 			t.printStackTrace();
 			// 发邮件
-//			MailService.sendMail(sender, receiver, "主题", "内容");
+			// MailService.sendMail(sender, receiver, "主题", "内容");
 		}
 		ZrtLog.debug(logger, " finish getProductInfo ", null, " processResult: " + processResult);
 		return processResult;
@@ -121,8 +124,8 @@ public class ProductController {
 
 		try {
 			// 1、直接调用自然堂接口进行校验即可。
-
-			String encode = SecurityUtils.encodeProductCode(code);
+			String data = "{ 'code':'" + code + "','TimeStamp':152143525223 }";
+			String encode = SecurityUtils.encodeProductCode(data);
 			// 工具类加密后每76字节会自动换行，需要去除空格
 			encode = encode.replaceAll("[\\s*\t\n\r]", "");
 
@@ -145,7 +148,7 @@ public class ProductController {
 			processResult.setRetMsg(ZrtConst.TIME_OUT_MSG);
 			ZrtLog.error(logger, "authProductInfo", null, processResult, e);
 			// 发邮件
-//			MailService.sendMail(sender, receiver, "主题", "内容");
+			// MailService.sendMail(sender, receiver, "主题", "内容");
 		} catch (Throwable t) {
 
 			processResult.setRetCode(ZrtConst.EXCEPTION);
@@ -154,7 +157,7 @@ public class ProductController {
 			ZrtLog.error(logger, "authProductInfo", null, processResult, t);
 			t.printStackTrace();
 			// 发邮件
-//			MailService.sendMail(sender, receiver, "主题", "内容");
+			// MailService.sendMail(sender, receiver, "主题", "内容");
 		}
 
 		ZrtLog.debug(logger, " finish authProductInfo ", null, " processResult: " + processResult);
@@ -200,14 +203,13 @@ public class ProductController {
 		return processResult;
 
 	}
-	
+
 	public static void main(String[] args) {
-		
-		
-		String json="{\"errCode\":-1,\"pName\":null,\"errMsg\":\"浜淮借В\"}";
-		
+
+		String json = "{\"errCode\":-1,\"pName\":null,\"errMsg\":\"浜淮借В\"}";
+
 		JSONObject jsonObj = JSON.parseObject(json);
-		
+
 		System.out.println(jsonObj.get("errCode"));
 	}
 

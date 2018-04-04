@@ -27,9 +27,13 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	@Override
 	public ProductInfo queryProductInfo(String productName) {
 		ZrtLog.debug(logger, " enter getProductInfo", null, " productName : " + productName);
-
 		// 1、根据名称查询
-		ProductInfo productInfo = productMapper.getProductInfoByName(productName);
+		ProductInfo productInfo = null;
+		if (productName == null) {
+			productInfo = productMapper.getProductInfoByName(DEFAULT_NAME);
+			return productInfo;
+		}
+		productInfo = productMapper.getProductInfoByName(productName);
 		// 2、查不到就返回默认值
 		if (productInfo == null) {
 			productInfo = productMapper.getProductInfoByName(DEFAULT_NAME);

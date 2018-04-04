@@ -15,7 +15,7 @@ public interface ProductMapper {
 	 * @param name
 	 * @return
 	 */
-	public ProductInfo getProductInfoByName(String name);
+	public ProductInfo getProductInfoByName(@Param("name") String name);
 
 	/**
 	 * 存储商品信息
@@ -31,7 +31,7 @@ public interface ProductMapper {
 	 * @param name
 	 * @return
 	 */
-	public int deleteProductInfoByName(String name);
+	public int deleteProductInfoByName(@Param("name")String name);
 
 	/**
 	 * 分页查询所有记录
