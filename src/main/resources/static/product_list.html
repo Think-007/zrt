@@ -1,0 +1,243 @@
+﻿<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<!-- Apple devices fullscreen -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!-- Apple devices fullscreen -->
+	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+	<title>自然堂</title>
+
+	<!-- Bootstrap CSS框架-->
+	<link rel="stylesheet" href="adminskin/css/bootstrap.min.css">
+	<!-- Bootstrap responsive 响应式布局CSS框架-->
+	<link rel="stylesheet" href="adminskin/css/bootstrap-responsive.min.css">
+	<!-- jQuery UI -->
+	<link rel="stylesheet" href="adminskin/css/plugins/jquery-ui/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="adminskin/css/plugins/jquery-ui/smoothness/jquery.ui.theme.css">
+	<!-- dataTables -->
+	<link rel="stylesheet" href="adminskin/css/plugins/datatable/TableTools.css">
+	<!-- chosen选择  -->
+	<link rel="stylesheet" href="adminskin/css/plugins/chosen/chosen.css">
+	<!-- 界面 CSS -->
+	<link rel="stylesheet" href="adminskin/css/style.css">
+	<!-- 肤色 CSS -->
+	<link rel="stylesheet" href="adminskin/css/themes.css">
+	<!-- 自定义 CSS -->
+	<link rel="stylesheet" href="adminskin/css/customerui.css">
+
+	<!-- jQuery -->
+	<script src="adminskin/js/jquery.min.js"></script>
+	
+	<!-- 滚动条插件 -->
+	<script src="adminskin/js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
+	<!-- imagesLoaded 图像堆叠 -->
+	<script src="adminskin/js/plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
+	<!-- jQuery UI -->
+	<script src="adminskin/js/plugins/jquery-ui/jquery.ui.core.min.js"></script>
+	<script src="adminskin/js/plugins/jquery-ui/jquery.ui.widget.min.js"></script>
+	<script src="adminskin/js/plugins/jquery-ui/jquery.ui.mouse.min.js"></script>
+	<script src="adminskin/js/plugins/jquery-ui/jquery.ui.resizable.min.js"></script>
+	<script src="adminskin/js/plugins/jquery-ui/jquery.ui.sortable.min.js"></script>
+	<!-- slimScroll  悬停滚动条-->
+	<script src="adminskin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- Bootstrap  前端CSS/HTML开发框架 -->
+	<script src="adminskin/js/bootstrap.min.js"></script>
+	<!-- Bootbox 对话框 -->
+	<script src="adminskin/js/plugins/bootbox/jquery.bootbox.js"></script>
+	<!-- dataTables -->
+	<script src="adminskin/js/plugins/datatable/jquery.dataTables.min.js"></script>
+	<script src="adminskin/js/plugins/datatable/TableTools.min.js"></script>
+	<script src="adminskin/js/plugins/datatable/ColReorder.min.js"></script>
+	<script src="adminskin/js/plugins/datatable/ColVis.min.js"></script>
+	<script src="adminskin/js/plugins/datatable/jquery.dataTables.columnFilter.js"></script>
+	<!-- Chosen选择 -->
+	<script src="adminskin/js/plugins/chosen/chosen.jquery.min.js"></script>
+
+	<!-- Theme framework -->
+	<script src="adminskin/js/eakroko.min.js"></script>
+	<!-- Theme scripts -->
+	<script src="adminskin/js/application.min.js"></script>
+	<!-- Just for demonstration -->
+	<script src="adminskin/js/demonstration.min.js"></script>
+
+	<!--[if lte IE 9]>
+		<script src="adminskin/js/plugins/placeholder/jquery.placeholder.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('input, textarea').placeholder();
+			});
+		</script>
+	<![endif]-->
+	
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="adminskin/img/favicon.ico" />
+	<!-- Apple devices Homescreen icon -->
+	<link rel="apple-touch-icon-precomposed" href="adminskin/img/apple-touch-icon-precomposed.png" />
+    <script>
+    $(function () {
+    	
+    	initPage();
+    	
+    })
+    function initPage(){
+    	
+    	 $.ajax({
+             async: false,
+             type: "POST",
+             url: "auth/list_product",
+             data: {
+            	 startPage:0
+             },
+             success: function (data, textStatus) {
+                 if (typeof data != 'object') {
+                     data = JSON.parse(data)
+                 }
+                 if (data.retCode == 0) {
+                    console.log(data.obj.list)
+                	var myrow="";
+                    queryList=JSON.stringify(data.obj.list);
+    				queryList=eval('('+queryList +')');
+    				console.log(queryList);
+    				for(i=0;i<queryList.length;i++){
+    				myrow+='<tr>'
+    				 +'<td class="with-checkbox"> <input type="checkbox" name="check" value="1"> </td>'
+						+'<td class="data-mun">'+queryList[i].productName+'</td>'
+						+'<td class="data-mun">'+queryList[i].seriesName+'</td>'
+						+'<td class="data-mun">'+queryList[i].productDesc+'</td>'
+						+'<td class="data-mun"><img src="'+queryList[i].productPic+'" style="width:60px;" /></td>'
+						+'<td class="data-mun">'+queryList[i].videoUrl+'</td>'
+						+'<td class="data-mun">'+queryList[i].audioUrl+'</td>'
+						+'<td class="data-mun">'+queryList[i].templateId+'</td>'
+						+' <td class="data-act"><a href="product_edit.html?id=1"><i class="icon-edit"></i> 编辑</a> | <a style="cursor: pointer;" onclick="if(confirm('+'确认要删除吗?'+')){ajaxDelItem(1)};" class="delt"><i class="icon-remove"></i> 删除</a></td>'
+						+'<tr>';
+                 }
+
+                 $("#productList").html(myrow);
+                 }
+             }
+
+         });
+    }
+    function ajaxDelItem(pid) {
+        $.post("url", {
+          act: "del",
+           pid: pid
+        }, function (data, textStatus) {
+           $("#tr_" + pid).hide();
+        }
+        );
+
+        $("#tr_" + pid).hide();
+
+    }
+    </script>
+
+</head>
+
+<body>
+    <div id="navigation">
+        <div class="container-fluid">
+            <a href="#" id="brand">自然堂</a>
+            <a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="收起侧栏"><i class="icon-reorder"></i></a>
+        </div>
+    </div>
+	<div class="container-fluid" id="content">
+        <div id="left">
+            <div class="subnav">
+                <div class="subnav-title">
+                    <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>扫码产品管理</span></a>
+                </div>
+                <ul class="subnav-menu">
+                    <li>
+                        <a href="product_add.html">添加产品</a>
+                    </li>
+                    <li>
+                        <a href="product_list.html">产品管理</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+		<div id="main">
+			<div class="container-fluid">
+
+				<!--带过滤器列表-->
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="box">
+							<div class="box-title">
+								<h3>
+									<i class="icon-table"></i>
+									产品列表
+								</h3>
+							</div>
+						  <div class="box-content nopadding">
+
+                            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                    <tr>
+                                        <td width="80" height="70" align="center">关键字查询：</td>
+                                        <td align="left">
+                                            <input name="tbsearch" type="text" maxlength="25" id="tbsearch" placeholder="" class="input-xlarge" />
+                                            &nbsp;&nbsp;
+                                            系列名称
+                                            <select name="DropDownList1" id="DropDownList1" class="input-large" style="width:90px;">
+                                                <option selected="selected" value="">全部</option>
+                                                <option value="系列1">系列1</option>
+                                                <option value="系列2">系列2</option>
+                                            </select>
+
+                                            <input type="submit" name="btn_Seach" value="查找" id="btn_Seach" class="btn btn-primary" style=" margin:0px 0px 11px 0px;" />
+                                        </td>
+                                    </tr>
+                              </table>
+
+
+							  <table class="table table-hover table-nomargin table-bordered dataTable dataTable-nosort" data-nosort="0,2,4">
+								  <thead>
+									  <tr>
+										  <th class="with-checkbox"><input type="checkbox" name="check_all" id="check_all"></th>
+										  <th>产品名称</th>
+										  <th>系列名称</th>
+                                          <th>产品描述</th>
+                                          <th>产品图片</th>
+                                          <th>音频地址</th>
+                                          <th>视频地址</th>
+                                          <th>模板</th>
+										  <th>操作</th>
+									  </tr>
+								  </thead>
+								  <tbody id="productList">
+                                      <tr id="tr_1">
+                                          <td class="with-checkbox">
+                                              <input type="checkbox" name="check" value="1">
+                                          </td>
+                                          <td class="data-mun">花露水</td>
+                                          <td class="data-mun">润肤</td>
+                                          <td class="data-mun">描述</td>
+                                          <td class="data-mun"><img src="1.jpg" style="width:60px;" /></td>
+                                          <td class="data-mun"><a href="1.mp3" target="_blank">1.mp3</a></td>
+                                          <td class="data-mun"><a href="2.mp4" target="_blank">2.mp4</a></td>
+                                          <td class="data-mun">1</td>
+                                          <td class="data-act"><a href="product_edit.html?id=1"><i class="icon-edit"></i> 编辑</a> | <a style="cursor: pointer;" onclick="if(confirm('确认要删除吗?')){ajaxDelItem(1)};" class="delt"><i class="icon-remove"></i> 删除</a></td>
+                                      </tr>
+								  </tbody>
+							  </table>
+							</div>
+
+                            <div>
+                                <input type="button" name="btn_Seach" value="删 除" id="btn_Seach" class="btn btn-primary" style=" margin:0px 0px 11px 0px;" onclick="if(confirm('确认要删除吗?')){ };" />
+                            </div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

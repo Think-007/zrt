@@ -1,0 +1,74 @@
+/*ADD BY CR*/
+.fwb{
+	font-weight:bold;
+}
+.pdl40{
+	padding-left:40px;
+}
+.treetitle {
+	font-size: 13px;
+	font-weight: bold;
+	padding: 5px 0;
+}
+.w150{
+	width: 150px;
+	float: left;
+	padding-top: 5px;
+}
+/*编辑器顶部线条*/
+.cke.cke_chrome{
+	border-top:#DDD 1px solid;
+}
+/*TAGS*/
+#tags_tagsinput.tagsinput {
+    padding-bottom: 0;
+}
+
+#tags_tagsinput.tagsinput .tag {
+    background: none repeat scroll 0 0 #368EE0;
+    border: 0 none;
+    border-radius: 0 0 0 0;
+    color: #FFFFFF;
+}
+
+#tags_tagsinput.tagsinput .tag a {
+    color: #FFFFFF;
+}
+
+/*登陆 浏览器提示*/
+.login .wrapper .login-body .browser{
+	padding: 5px 30px;
+}
+
+
+/*datatable 表格样式*/
+.data-act{
+	width: 110px;
+}
+.data-mun {
+	width: 120px;
+}
+.data-time{
+	width: 190px;
+}
+.data-title{
+}
+
+
+/*栏目管理*/
+.column-id{
+	width: 30px;
+}
+.column-name{
+}
+.column-sequence{
+	width: 30px;
+}
+.column-sequence input{
+	margin-bottom: 0;
+	height: 22px;
+	line-height: 22px;
+}
+.column-act{
+	width: 110px;
+}

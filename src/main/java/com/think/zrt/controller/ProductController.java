@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.think.zrt.domain.ProcessResult;
 import com.think.zrt.domain.ProductInfo;
 import com.think.zrt.service.MailService;
@@ -71,7 +73,9 @@ public class ProductController {
 			if (response.getStatusCode() == HttpStatus.OK) {
 
 				// 2、拿到名称，去数据库查询该名称对应的信息。
-				String productName = response.getBody();
+				String responseJson = response.getBody();
+				JSONObject jsonObj = JSON.parseObject(responseJson);
+				String productName =jsonObj.getString("pName");
 				ZrtLog.debug(logger, "getProductInfo", null, " productName :" + productName);
 				ProductInfo productInfo = productInfoService.queryProductInfo(productName);
 				processResult.setRetCode(ProcessResult.SUCCESS);
@@ -195,6 +199,16 @@ public class ProductController {
 
 		return processResult;
 
+	}
+	
+	public static void main(String[] args) {
+		
+		
+		String json="{\"errCode\":-1,\"pName\":null,\"errMsg\":\"浜淮借В\"}";
+		
+		JSONObject jsonObj = JSON.parseObject(json);
+		
+		System.out.println(jsonObj.get("errCode"));
 	}
 
 }

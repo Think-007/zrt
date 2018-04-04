@@ -42,7 +42,7 @@ public class MailServiceImplTest {
 	@Test
 	public void sendMainTest() {
 
-		mailService.sendMail(sender, "wylipengfei@163.com", "主题测试", "测试内容sssss");
+		mailService.sendMail(sender, receiver, "主题测试", "测试内容sssss   chando");
 
 	}
 

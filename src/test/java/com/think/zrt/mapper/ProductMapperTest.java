@@ -9,6 +9,8 @@
 
 package com.think.zrt.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,25 +26,60 @@ import com.think.zrt.domain.ProductInfo;
  * 
  * <p>
  * 类详细描述
- * </p> 
-* 
+ * </p>
+ * 
  * @author LPF
  * 
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductMapperTest {
-	
+
 	@Autowired
 	private ProductMapper productMapper;
-	
+
 	@Test
-	public void queryProductInfoByName(){
-		
-		ProductInfo p =  productMapper.getProductInfoByName("冰川水s");
-		
+	public void queryProductInfoByName() {
+
+		ProductInfo p = productMapper.getProductInfoByName("冰川水s");
+
 		System.out.println(p);
-		
+
+	}
+
+	@Test
+	public void saveProductInfoTest() {
+
+		ProductInfo p = new ProductInfo();
+		p.setAudioPic("sfsdfsdf11");
+		p.setProductName("afdaf444");
+		p.setAudioUrl("fdsfasdfasfaf");
+
+		productMapper.saveProductInfo(p);
+	}
+
+	@Test
+	public void deleteProductInfoByNameTest() {
+
+		int result = productMapper.deleteProductInfoByName("afdaf");
+
+		System.out.println(result);
+	}
+
+	@Test
+	public void getAllProductInfoByPageTest() {
+
+		List<ProductInfo> list = productMapper.listAllProductInfoByPage();
+		System.out.println(list);
+
+	}
+
+
+	@Test
+	public void listProductInfoTest() {
+
+		List<ProductInfo> list = productMapper.listProductInfo("44","");
+		System.out.println(list);
 	}
 
 }

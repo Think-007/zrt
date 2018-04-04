@@ -4,7 +4,7 @@
 
 	<select id="getProductInfoByName"  resultType="ProductInfo">
 		select 
-			product_name as ProductName,
+			product_name as productName,
 			product_series as seriesName,
 			product_pic as productPic,
 			product_desc as productDesc,
@@ -16,7 +16,89 @@
 		where  t.product_name=#{name}
 		
 	</select>
-
-
+	
+	<insert id="saveProductInfo" parameterType="ProductInfo">
+		
+		insert into zrt_product (
+			product_name,
+			product_series,
+			product_pic,
+			product_desc,
+			video_url,
+			audio_url,
+			audio_pic,
+			template_id
+		)values(
+			#{productName},
+			#{seriesName},
+			#{productPic},
+			#{productDesc},
+			#{videoUrl},
+			#{audioUrl},
+			#{audioPic},
+			#{templateId}
+		)
+	
+	</insert>
+	
+	<delete id="deleteProductInfoByName">
+	
+		delete from zrt_product where product_name=#{name}
+		
+	</delete>
+	
+	<select id="listAllProductInfoByPage" resultType="ProductInfo">
+		
+		select 
+			product_name as productName,
+			product_series as seriesName,
+			product_pic as productPic,
+			product_desc as productDesc,
+			video_url as videoUrl,
+			audio_url as audioUrl,
+			audio_pic as audioPic,
+			template_id as templateId
+		from zrt_product 
+	
+	</select>
+	
+	<select id="listProductInfo" resultType="ProductInfo">
+		select 
+			product_name as productName,
+			product_series as seriesName,
+			product_pic as productPic,
+			product_desc as productDesc,
+			video_url as videoUrl,
+			audio_url as audioUrl,
+			audio_pic as audioPic,
+			template_id as templateId
+		from zrt_product t
+		
+		where 1=1 
+		<if test="null != seriesName and '' != seriesName">
+			and t.product_series=#{seriesName} 
+		</if>
+		
+		<if test="null != product_name and '' != product_name">
+			and t.product_name like "%"#{name}"%"
+		</if>
+		
+	</select>
+<!-- 	
+	<select id="listProductInfoBySeries" resultType="ProductInfo">
+		select 
+			product_name as productName,
+			product_series as seriesName,
+			product_pic as productPic,
+			product_desc as productDesc,
+			video_url as videoUrl,
+			audio_url as audioUrl,
+			audio_pic as audioPic,
+			template_id as templateId
+		from zrt_product t
+		
+		where t.product_series=#{seriesName}
+	
+	</select> -->
 
 </mapper>
