@@ -49,7 +49,7 @@ public class ProductInfoServiceTest {
 	public void saveProductInfoTest() {
 
 		ProductInfo p = new ProductInfo();
-		p.setAudioPic("sfsdfsdf11servi");
+		p.setVideoPic("sfsdfsdf11servi");
 		p.setProductName("afdaf");
 		p.setAudioUrl("fdsfasdfasfaf");
 		productInfoService.saveProductInfo(p);

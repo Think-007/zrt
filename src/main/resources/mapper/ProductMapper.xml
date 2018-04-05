@@ -12,7 +12,7 @@
 		product_desc as productDesc,
 		video_url as videoUrl,
 		audio_url as audioUrl,
-		audio_pic as audioPic,
+		video_pic as videoPic,
 		template_id as templateId
 		from zrt_product t
 		where t.product_name=#{name}
@@ -30,7 +30,7 @@
 		product_desc,
 		video_url,
 		audio_url,
-		audio_pic,
+		video_pic,
 		template_id
 		)values(
 		#{id},
@@ -40,7 +40,7 @@
 		#{productDesc},
 		#{videoUrl},
 		#{audioUrl},
-		#{audioPic},
+		#{videoPic},
 		#{templateId}
 		)
 
@@ -63,7 +63,7 @@
 		product_desc as productDesc,
 		video_url as videoUrl,
 		audio_url as audioUrl,
-		audio_pic as audioPic,
+		video_pic as videoPic,
 		template_id as templateId
 		from zrt_product
 
@@ -79,7 +79,7 @@
 		product_desc as productDesc,
 		video_url as videoUrl,
 		audio_url as audioUrl,
-		audio_pic as audioPic,
+		video_pic as videoPic,
 		template_id as templateId
 		from zrt_product t
 
@@ -122,8 +122,8 @@
 			<if test="null != productInfo.audioUrl and '' != productInfo.audioUrl">
 				audio_url =#{productInfo.audioUrl},
 			</if>
-			<if test="null != productInfo.audioPic and '' != productInfo.audioPic">
-				audio_pic =#{productInfo.audioPic},
+			<if test="null != productInfo.videoPic and '' != productInfo.videoPic">
+				video_pic =#{productInfo.videoPic},
 			</if>
 			<if test="productInfo.templateId !=-1">
 				template_id =#{productInfo.templateId},

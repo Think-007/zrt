@@ -52,7 +52,8 @@ public class ProductMapperTest {
 
 		ProductInfo p = new ProductInfo();
 		p.setId(123124);
-		p.setAudioPic("sfsdfsdf11");
+		p.setVideoPic("sfsdfsdf11");
+		p.setVideoUrl("videourl");
 		p.setProductName("afdaf444");
 		p.setAudioUrl("fdsfasdfasfaf");
 
@@ -99,7 +100,7 @@ public class ProductMapperTest {
 		ProductInfo productInfo = new ProductInfo(); 
 		productInfo.setId(20);
 		productInfo.setProductName("产品22354555555");
-		productInfo.setAudioPic("00000");
+		productInfo.setVideoPic("00000");
 		
 		productMapper.updateProductInfo(productInfo,"产品223545");
 		

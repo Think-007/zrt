@@ -25,13 +25,13 @@ public class ProductInfo implements Serializable {
 	private String productDesc;
 
 	// 音频信息地址
-	private String videoUrl;
-
-	// 视屏信息地址
 	private String audioUrl;
 
+	// 视屏信息地址
+	private String videoUrl;
+
 	// 视频封面地址
-	private String audioPic;
+	private String videoPic;
 
 	// 模板id
 	private int templateId;
@@ -39,12 +39,12 @@ public class ProductInfo implements Serializable {
 	// 自然堂的名称
 	private String searchName;
 
-	public String getSearchName() {
-		return searchName;
+	public long getId() {
+		return id;
 	}
 
-	public void setSearchName(String searchName) {
-		this.searchName = searchName;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getProductName() {
@@ -71,12 +71,12 @@ public class ProductInfo implements Serializable {
 		this.productPic = productPic;
 	}
 
-	public String getVideoUrl() {
-		return videoUrl;
+	public String getProductDesc() {
+		return productDesc;
 	}
 
-	public void setVideoUrl(String videoUrl) {
-		this.videoUrl = videoUrl;
+	public void setProductDesc(String productDesc) {
+		this.productDesc = productDesc;
 	}
 
 	public String getAudioUrl() {
@@ -87,12 +87,20 @@ public class ProductInfo implements Serializable {
 		this.audioUrl = audioUrl;
 	}
 
-	public String getAudioPic() {
-		return audioPic;
+	public String getVideoUrl() {
+		return videoUrl;
 	}
 
-	public void setAudioPic(String audioPic) {
-		this.audioPic = audioPic;
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
+	}
+
+	public String getVideoPic() {
+		return videoPic;
+	}
+
+	public void setVideoPic(String videoPic) {
+		this.videoPic = videoPic;
 	}
 
 	public int getTemplateId() {
@@ -103,27 +111,19 @@ public class ProductInfo implements Serializable {
 		this.templateId = templateId;
 	}
 
-	public String getProductDesc() {
-		return productDesc;
+	public String getSearchName() {
+		return searchName;
 	}
 
-	public void setProductDesc(String productDesc) {
-		this.productDesc = productDesc;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
+	public void setSearchName(String searchName) {
+		this.searchName = searchName;
 	}
 
 	@Override
 	public String toString() {
 		return "ProductInfo [id=" + id + ", productName=" + productName + ", seriesName=" + seriesName + ", productPic="
-				+ productPic + ", productDesc=" + productDesc + ", videoUrl=" + videoUrl + ", audioUrl=" + audioUrl
-				+ ", audioPic=" + audioPic + ", templateId=" + templateId + ", searchName=" + searchName + "]";
+				+ productPic + ", productDesc=" + productDesc + ", audioUrl=" + audioUrl + ", videoUrl=" + videoUrl
+				+ ", videoPic=" + videoPic + ", templateId=" + templateId + ", searchName=" + searchName + "]";
 	}
 
 }

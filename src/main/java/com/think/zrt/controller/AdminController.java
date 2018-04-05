@@ -102,15 +102,15 @@ public class AdminController {
 			}
 			if (file1 != null && !file1.isEmpty()) {
 				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file1);
-				productInfo.setVideoUrl(clienPath);
+				productInfo.setAudioUrl(clienPath);
 			}
 			if (file2 != null && !file2.isEmpty()) {
 				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file2);
-				productInfo.setAudioPic(clienPath);
+				productInfo.setVideoPic(clienPath);
 			}
 			if (file3 != null && !file3.isEmpty()) {
 				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file3);
-				productInfo.setAudioUrl(clienPath);
+				productInfo.setVideoUrl(clienPath);
 			}
 			productInfoService.saveProductInfo(productInfo);
 			processResult.setRetCode(ProcessResult.SUCCESS);
@@ -357,21 +357,21 @@ public class AdminController {
 			}
 			if (file1 != null && !file1.isEmpty()) {
 				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file1);
-				productInfo.setVideoUrl(clienPath);
-			} else {
-				productInfo.setVideoUrl(null);
-			}
-			if (file2 != null && !file2.isEmpty()) {
-				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file2);
-				productInfo.setAudioPic(clienPath);
-			} else {
-				productInfo.setAudioPic(null);
-			}
-			if (file3 != null && !file3.isEmpty()) {
-				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file3);
 				productInfo.setAudioUrl(clienPath);
 			} else {
 				productInfo.setAudioUrl(null);
+			}
+			if (file2 != null && !file2.isEmpty()) {
+				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file2);
+				productInfo.setVideoPic(clienPath);
+			} else {
+				productInfo.setVideoPic(null);
+			}
+			if (file3 != null && !file3.isEmpty()) {
+				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file3);
+				productInfo.setVideoUrl(clienPath);
+			} else {
+				productInfo.setVideoUrl(null);
 			}
 
 			productInfoService.updateProductInfo(productInfo, oldName);
