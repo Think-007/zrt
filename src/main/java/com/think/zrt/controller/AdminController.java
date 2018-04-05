@@ -88,7 +88,6 @@ public class AdminController {
 			} else {
 				productInfo.setTemplateId(Integer.parseInt(templateId));
 			}
-			productInfo.setTemplateId(Integer.parseInt(templateId));
 			productInfo.setProductDesc(productDesc);
 			productInfo.setSeriesName(seriesName);
 			productInfo.setId(IdUtil.generateId());
