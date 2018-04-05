@@ -81,6 +81,7 @@ public class ProductController {
 				String productName = jsonObj.getString("pName");
 				ZrtLog.debug(logger, "getProductInfo", null, " productName :" + productName);
 				ProductInfo productInfo = productInfoService.queryProductInfo(productName);
+				productInfo.setSearchName(productName);
 				processResult.setRetCode(ProcessResult.SUCCESS);
 				processResult.setRetMsg("ok");
 				processResult.setObj(productInfo);
@@ -95,7 +96,7 @@ public class ProductController {
 			processResult.setRetMsg(ZrtConst.TIME_OUT_MSG);
 			ZrtLog.error(logger, "getProductInfo", null, processResult, e);
 			// 发邮件
-			// MailService.sendMail(sender, receiver, "主题", "内容");
+			MailService.sendMail(sender, receiver, "自然堂查询", e.toString());
 		} catch (Throwable t) {
 
 			processResult.setRetCode(ZrtConst.EXCEPTION);
@@ -104,7 +105,7 @@ public class ProductController {
 			ZrtLog.error(logger, "getProductInfo", null, processResult, t);
 			t.printStackTrace();
 			// 发邮件
-			// MailService.sendMail(sender, receiver, "主题", "内容");
+			MailService.sendMail(sender, receiver, "自然堂查询", t.toString());
 		}
 		ZrtLog.debug(logger, " finish getProductInfo ", null, " processResult: " + processResult);
 		return processResult;
@@ -148,7 +149,7 @@ public class ProductController {
 			processResult.setRetMsg(ZrtConst.TIME_OUT_MSG);
 			ZrtLog.error(logger, "authProductInfo", null, processResult, e);
 			// 发邮件
-			// MailService.sendMail(sender, receiver, "主题", "内容");
+			MailService.sendMail(sender, receiver, "自然堂防伪", e.toString());
 		} catch (Throwable t) {
 
 			processResult.setRetCode(ZrtConst.EXCEPTION);
@@ -157,7 +158,7 @@ public class ProductController {
 			ZrtLog.error(logger, "authProductInfo", null, processResult, t);
 			t.printStackTrace();
 			// 发邮件
-			// MailService.sendMail(sender, receiver, "主题", "内容");
+			MailService.sendMail(sender, receiver, "自然堂查询", t.toString());
 		}
 
 		ZrtLog.debug(logger, " finish authProductInfo ", null, " processResult: " + processResult);

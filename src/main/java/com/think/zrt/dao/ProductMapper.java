@@ -31,7 +31,7 @@ public interface ProductMapper {
 	 * @param name
 	 * @return
 	 */
-	public int deleteProductInfoByName(@Param("name")String name);
+	public int deleteProductInfoByName(@Param("name") String name);
 
 	/**
 	 * 分页查询所有记录
@@ -56,5 +56,15 @@ public interface ProductMapper {
 	// * @return
 	// */
 	// public List<ProductInfo> listProductInfoBySeries(String seriesName);
+
+	public List<String> listProductSeries();
+
+	/**
+	 * 更新商品信息
+	 * 
+	 * @param productInfo
+	 * @return
+	 */
+	public int updateProductInfo(@Param("productInfo") ProductInfo productInfo, @Param("oldName") String oldName);
 
 }

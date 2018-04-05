@@ -44,11 +44,9 @@ public interface ZrtConst {
 	public static final int PARAM_ERROR = -4;
 
 	// 参数不对描述
-	public static final String PARAM_ERROR_MSG = "TIME,OUT";
+	public static final String PARAM_ERROR_MSG = "账户或者密码有误";
 
 	// 图片服务器地址
-	 public static final String DATA_PATH = "./tomcat_zrt/webapps/zrtfile/";
-
-//	public static final String DATA_PATH = "./";
+	public static final String DATA_PATH = "/upload/";
 
 }

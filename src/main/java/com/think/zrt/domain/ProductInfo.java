@@ -9,6 +9,9 @@ public class ProductInfo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	// 商品id
+	private long id;
+
 	// 商品名称
 	private String productName;
 
@@ -17,8 +20,8 @@ public class ProductInfo implements Serializable {
 
 	// 商品图片地址
 	private String productPic;
-	
-	//商品描述信息
+
+	// 商品描述信息
 	private String productDesc;
 
 	// 音频信息地址
@@ -32,6 +35,17 @@ public class ProductInfo implements Serializable {
 
 	// 模板id
 	private int templateId;
+
+	// 自然堂的名称
+	private String searchName;
+
+	public String getSearchName() {
+		return searchName;
+	}
+
+	public void setSearchName(String searchName) {
+		this.searchName = searchName;
+	}
 
 	public String getProductName() {
 		return productName;
@@ -97,12 +111,19 @@ public class ProductInfo implements Serializable {
 		this.productDesc = productDesc;
 	}
 
-	@Override
-	public String toString() {
-		return "ProductInfo [productName=" + productName + ", seriesName=" + seriesName + ", productPic=" + productPic
-				+ ", productDesc=" + productDesc + ", videoUrl=" + videoUrl + ", audioUrl=" + audioUrl + ", audioPic="
-				+ audioPic + ", templateId=" + templateId + "]";
+	public long getId() {
+		return id;
 	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductInfo [id=" + id + ", productName=" + productName + ", seriesName=" + seriesName + ", productPic="
+				+ productPic + ", productDesc=" + productDesc + ", videoUrl=" + videoUrl + ", audioUrl=" + audioUrl
+				+ ", audioPic=" + audioPic + ", templateId=" + templateId + ", searchName=" + searchName + "]";
+	}
 
 }

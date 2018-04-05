@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class UrlFilter
  */
-//@WebFilter(filterName = "/UrlFilter", urlPatterns = "/*")
+@WebFilter(filterName = "/UrlFilter", urlPatterns = "/*")
 public class UrlFilter implements Filter {
 
 	private List<String> urlList = new ArrayList<String>();
@@ -52,13 +52,25 @@ public class UrlFilter implements Filter {
 
 		System.out.println(url);
 
-		if (urlList.contains(url)) {
+		boolean flag = false;
+
+		for (String temp : urlList) {
+			if (url.contains(temp)) {
+				flag = true;
+			}
+		}
+
+		if (flag) {
 			if (session.getAttribute("user") == null) {
 				RequestDispatcher requestDispatcher = httpRequest.getRequestDispatcher("/relogin");
 				requestDispatcher.forward(request, response);
+			} else {
+				chain.doFilter(request, response);
 			}
+		} else {
+			chain.doFilter(request, response);
 		}
-		chain.doFilter(request, response);
+
 	}
 
 	/**
@@ -68,7 +80,7 @@ public class UrlFilter implements Filter {
 		urlList.add("/product_list.html");
 		urlList.add("/product_add.html");
 		urlList.add("/product_edit.html");
-		urlList.add("/auth");
+		urlList.add("/auth/");
 	}
 
 }

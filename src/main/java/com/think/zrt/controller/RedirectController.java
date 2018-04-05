@@ -52,7 +52,7 @@ public class RedirectController {
 	@RequestMapping("/relogin")
 	public String redirect() {
 
-		return "redirect:/login.html";
+		return "redirect:/";
 	}
 
 	@RequestMapping("/admin")

@@ -101,7 +101,44 @@
 	<link rel="shortcut icon" href="adminskin/img/favicon.ico" />
 	<!-- Apple devices Homescreen icon -->
 	<link rel="apple-touch-icon-precomposed" href="adminskin/img/apple-touch-icon-precomposed.png" />
+ <script>
+ function addBtn(){
+ 	
+	  var fd = new FormData();
+      var file = document.getElementById('upload_file').files[0];
+      var file1 = document.getElementById('upload_file_audiopic').files[0];
+      var file2 = document.getElementById('upload_file_audio').files[0];
+      var file3 = document.getElementById('upload_file_vedio').files[0];
+      fd.append('file0', file); 
+      fd.append('file2', file1); 
+      fd.append('file1', file2); 
+      fd.append('file3', file3); 
+      fd.append('templateId',$("#selectDemo").val());
+      fd.append('productName',$("#productName").val());
+      fd.append('productDesc',$("#productDes").val());
+      fd.append('seriesName',$("#seriesName").val());
+      console.log(fd);
+	 $.ajax({
+       asynca: false,
+       type: "POST",
+       url:"/zrtweb/auth/upload",
+       data: fd,
+       processData: false,  
+       contentType: false,
+       success: function (data, textStatus) {
+      	 if (data.retCode == 0) {
+           	alert("修改成功！")
+           	location = 'product_list.html';
+           	 }else{
+           		 alert("修改失败！")
+           	 }
+       }
+	 })
 
+	
+}
+</script>
+    </script>
 </head>
 
 <body>
@@ -136,23 +173,23 @@
 								<h3><i class="icon-th-list"></i> 添加扫码产品</h3>
 							</div>
 							<div class="box-content nopadding">
-								<form action="#" method="POST" class='form-horizontal form-striped'>
+								<form  class='form-horizontal form-striped'>
 									<div class="control-group">
 										<label for="textfield" class="control-label">产品名称<small>用以匹配的产品名称</small></label>
 										<div class="controls">
-											<input type="text" name="textfield" id="textfield" placeholder="" class="input-xlarge">
+											<input type="text" name="textfield" id="productName" placeholder="" class="input-xlarge">
 										</div>
 									</div>
 									<div class="control-group">
 										<label for="textfield1" class="control-label">系列名称</label>
 										<div class="controls">
-											<input type="text" name="textfield1" id="textfield1" placeholder="" class="input-xlarge">
+											<input type="text" name="textfield1" id="seriesName" placeholder="" class="input-xlarge">
 										</div>
 									</div>
                                     <div class="control-group">
                                         <label for="textfield" class="control-label">产品描述</label>
                                         <div class="controls">
-                                            <textarea name="textarea" id="textarea" rows="5" placeholder="" class="input-block-level"></textarea>
+                                            <textarea name="textarea" id="productDes" rows="5" placeholder="" class="input-block-level"></textarea>
                                             <!--<span class="help-block">提示信息示例</span>-->
                                         </div>
                                     </div>
@@ -163,7 +200,7 @@
                                                 <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="adminskin/img/noimage.gif" /></div>
                                                 <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                                 <div>
-                                                    <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更改</span><input type="file" name='imagefile' /></span>
+                                                    <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更改</span><input id="upload_file" type="file" name="file" /></span>
                                                     <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
                                                 </div>
                                             </div>
@@ -174,7 +211,7 @@
 										<div class="controls">
 											<div class="fileupload fileupload-new" data-provides="fileupload">
 												<div class="input-append">
-													<div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">选择文件</span><span class="fileupload-exists">更改</span><input type="file" name="aaaa" /></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
+													<div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">选择文件</span><span class="fileupload-exists">更改</span><input type="file" id="upload_file_audio" name="file"/></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
 												</div>
 											</div>
 											<span class="help-block">文件大小请限制在5M以内</span>
@@ -187,7 +224,7 @@
 												<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="adminskin/img/noimage.gif" /></div>
 												<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
 												<div>
-													<span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更改</span><input type="file" name='imagefile' /></span>
+													<span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更改</span><input type="file" id="upload_file_audiopic" name="file" /></span>
 													<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
 												</div>
 											</div>
@@ -198,7 +235,7 @@
                                         <div class="controls">
                                             <div class="fileupload fileupload-new" data-provides="fileupload">
                                                 <div class="input-append">
-                                                    <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">选择文件</span><span class="fileupload-exists">更改</span><input type="file" name="aaaa" /></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
+                                                    <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">选择文件</span><span class="fileupload-exists">更改</span><input type="file" id="upload_file_vedio"  name="file"/></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
                                                 </div>
                                             </div>
                                             <span class="help-block">视频大小请限制在50M以内</span>
@@ -207,7 +244,7 @@
 									<div class="control-group">
 										<label for="select" class="control-label">选择模板</label>
 										<div class="controls">
-											<select name="select" id="select" class='input-large'>
+											<select name="select" id="selectDemo" class='input-large'>
                                                 <option value="">请选择</option>
 												<option value="1">1</option>
 												<option value="2">2</option>
@@ -233,7 +270,7 @@
 										</div>
 									</div>
 									<div class="form-actions">
-										<button type="submit" class="btn btn-primary">保存</button>
+										<button type="button" class="btn btn-primary" onclick="addBtn()">保存</button>
 										<button type="button" class="btn" onclick="location = 'product_list.html'">取消</button>
 									</div>
 								</form>

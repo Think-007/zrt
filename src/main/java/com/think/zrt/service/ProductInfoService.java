@@ -45,10 +45,18 @@ public interface ProductInfoService {
 	 */
 	public PageInfo<ProductInfo> listProductInfo(String name, String seriesName, int startPage, int pageSize);
 
-//	/**
-//	 * 根据系列名称查询产品
-//	 * 
-//	 * @return
-//	 */
-//	public PageInfo<ProductInfo> listProductInfoBySeries(String seriesName, int startPage, int pageSize);
+	/**
+	 * 查询系列数目
+	 * 
+	 * @return
+	 */
+	public List<String> listSeriesInfo();
+
+	/**
+	 * 更新产品信息
+	 * 
+	 * @param productInfo
+	 * @return
+	 */
+	public int updateProductInfo(ProductInfo productInfo,String oldName);
 }

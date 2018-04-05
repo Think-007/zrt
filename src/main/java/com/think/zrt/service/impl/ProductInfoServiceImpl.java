@@ -1,5 +1,6 @@
 package com.think.zrt.service.impl;
 
+import java.io.File;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -22,7 +23,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	@Autowired
 	private ProductMapper productMapper;
 
-	private static final String DEFAULT_NAME = "默认值";
+	private static final String DEFAULT_NAME = "默认产品";
 
 	@Override
 	public ProductInfo queryProductInfo(String productName) {
@@ -59,8 +60,28 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		if (DEFAULT_NAME.equals(productName)) {
 			return 0;
 		}
+		// 找到该产品
+		ProductInfo productInfo = productMapper.getProductInfoByName(productName);
+		// 删除记录
 		int result = productMapper.deleteProductInfoByName(productName);
+
+		// 如果文件存在就删除文件
+		File file = new File("D:/upload/" + productInfo.getId());
+		if (file.exists()) {
+			deleteDir(file);
+		}
 		return result;
+	}
+
+	// 删除文件
+	private void deleteDir(File dir) {
+		if (dir.isDirectory()) {
+			File[] files = dir.listFiles();
+			for (int i = 0; i < files.length; i++) {
+				deleteDir(files[i]);
+			}
+		}
+		dir.delete();
 	}
 
 	@Override
@@ -82,20 +103,19 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
 	}
 
-	// @Override
-	// public PageInfo<ProductInfo> listProductInfoBySeries(String seriesName,
-	// int startPage, int pageSize) {
-	//
-	// PageHelper.startPage(startPage, pageSize);
-	// List<ProductInfo> allProductList = null;
-	// if (seriesName == null || "".equals(seriesName.trim())) {
-	// allProductList = productMapper.listAllProductInfoByPage();
-	// } else {
-	// allProductList = productMapper.listProductInfo(seriesName);
-	// }
-	// PageInfo<ProductInfo> pageProductInfo = new
-	// PageInfo<ProductInfo>(allProductList);
-	// return pageProductInfo;
-	// }
+	@Override
+	public List<String> listSeriesInfo() {
+
+		List<String> seriesList = productMapper.listProductSeries();
+		return seriesList;
+	}
+
+	@Override
+	public int updateProductInfo(ProductInfo productInfo, String oldName) {
+
+		int result = productMapper.updateProductInfo(productInfo, oldName);
+
+		return result;
+	}
 
 }

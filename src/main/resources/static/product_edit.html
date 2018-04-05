@@ -101,7 +101,104 @@
 	<link rel="shortcut icon" href="adminskin/img/favicon.ico" />
 	<!-- Apple devices Homescreen icon -->
 	<link rel="apple-touch-icon-precomposed" href="adminskin/img/apple-touch-icon-precomposed.png" />
-
+ <script>
+    
+ $(function () {
+ 	
+ 	
+ 	var initName=GetQueryString("productName");
+ 
+ 	initData(initName);
+ })
+ function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+ function stringG(url){
+ 	
+ 	var str = url;
+ 	var index = str.lastIndexOf("/");  
+ 	str = str.substring(index+1, str.length);
+ 	return str;
+ }
+ function initData(name){
+	 
+	 $.ajax({
+         async: false,
+         type: "POST",
+         url:"/zrtweb/auth/edit_product",
+         data: {
+        	productName:name
+         },
+         success: function (data, textStatus) {
+        	 if (data.retCode == 0) {
+        	 $("#productName").val(data.obj.productName);
+        	 $("#oldName").val(data.obj.productName);
+        	 $("#productDesc").val(data.obj.productDesc);
+        	 $("#seriesName").val(data.obj.seriesName);
+        	
+        	 if(data.obj.productPic!=null){
+        		 
+        		 $("#imageId").attr("src",data.obj.productPic);
+        	 }else{
+        		 $("#imageId").attr("src","/adminskin/img/noimage.gif");
+        	 }
+if(data.obj.audioPic!=null){
+        		 
+        		 $("#imageId2").attr("src",data.obj.audioPic);
+        	 }else{
+        		 $("#imageId2").attr("src","/adminskin/img/noimage.gif");
+        	 }
+$("#audioName").text(stringG(data.obj.audioUrl));
+$("#audioherf").attr("href",data.obj.audioUrl); 
+$("#audioNamepreview").text(stringG(data.obj.audioUrl));
+        	$("#vedio").text(stringG(data.obj.videoUrl));
+        	$("#vedioherf").attr("href",data.obj.videoUrl); 
+        	$("#vedioprview").text(stringG(data.obj.videoUrl));
+        	 $("#selectDemo").find("option[value="+data.obj.templateId+"]").attr("selected",true); 
+        	//$(".selector").find("option[text='pxx']").attr("selected",true); 
+        	 console.log(data.obj)
+        	 }
+         }
+	 })
+ }
+    function saveBtn(){
+    	 var fd = new FormData();
+         var file = document.getElementById('upload_file').files[0];
+         var file1 = document.getElementById('upload_file_audiopic').files[0];
+         var file2 = document.getElementById('upload_file_audio').files[0];
+         var file3 = document.getElementById('upload_file_vedio').files[0];
+         fd.append('file0', file); 
+         fd.append('file2', file1); 
+         fd.append('file1', file2); 
+         fd.append('file3', file3); 
+          fd.append('templateId',$("#selectDemo").find("option:selected").val());
+          fd.append('productName',$("#productName").val());
+          fd.append('oldName',$("#oldName").val());
+          fd.append('productDesc',$("#productDesc").val());
+          fd.append('seriesName',$("#seriesName").val());
+         
+          
+    	 $.ajax({
+           async: false,
+           type: "POST",
+           url:"/zrtweb/auth/update",
+           data: fd,
+           processData: false,  
+           contentType: false,
+           success: function (data, textStatus) {
+          	 if (data.retCode == 0) {
+               	alert("修改成功！")
+               	location = 'product_list.html';
+               	 }else{
+               		 alert("修改失败！")
+               	 }
+           }
+    	 })
+    }
+    </script>
 </head>
 
 <body>
@@ -136,23 +233,24 @@
 								<h3><i class="icon-th-list"></i> 添加扫码产品</h3>
 							</div>
 							<div class="box-content nopadding">
-								<form action="#" method="POST" class='form-horizontal form-striped'>
+								<form action="#" class='form-horizontal form-striped'>
 									<div class="control-group">
 										<label for="textfield" class="control-label">产品名称<small>用以匹配的产品名称</small></label>
 										<div class="controls">
-											<input type="text" name="textfield" id="textfield" placeholder="" class="input-xlarge">
+											<input type="text" name="textfield" id="productName" placeholder="" class="input-xlarge">
+											<input type="hidden" name="textfield" id="oldName" value=""/>
 										</div>
 									</div>
 									<div class="control-group">
 										<label for="textfield1" class="control-label">系列名称</label>
 										<div class="controls">
-											<input type="text" name="textfield1" id="textfield1" placeholder="" class="input-xlarge">
+											<input type="text" name="textfield1" id="seriesName" placeholder="" class="input-xlarge">
 										</div>
 									</div>
                                     <div class="control-group">
                                         <label for="textfield" class="control-label">产品描述</label>
                                         <div class="controls">
-                                            <textarea name="textarea" id="textarea" rows="5" placeholder="" class="input-block-level"></textarea>
+                                            <textarea name="textarea" id="productDesc" rows="5" placeholder="" class="input-block-level"></textarea>
                                             <!--<span class="help-block">提示信息示例</span>-->
                                         </div>
                                     </div>
@@ -162,9 +260,9 @@
                                             <div class="fileupload fileupload-exists" data-provides="fileupload">
                                                 <input type="hidden" value="" name="">
                                                 <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="adminskin/img/noimage.gif"></div>
-                                                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 133px;"><img src="1.jpg" style="max-height: 150px;"></div>
+                                                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 133px;"><img src="" id="imageId" style="max-height: 150px;"></div>
                                                 <div>
-                                                    <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更改</span><input type="file" name="imagefile"></span>
+                                                    <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更改</span><input id="upload_file" type="file" name="file" /></span>
                                                     <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
                                                 </div>
                                             </div>
@@ -173,11 +271,11 @@
 									<div class="control-group">
 										<label for="textfield" class="control-label">音频上传</label>
 										<div class="controls">
-                                            <a href="1.mp3" target="_blank">1.mp3</a>
+                                            <a id="vediohref" href="" target="_blank"><span id="vedio"></span></a>
                                             <div class="fileupload fileupload-exists" data-provides="fileupload">
                                                 <input type="hidden" value="" name="">
                                                 <div class="input-append">
-                                                    <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview">1.mp3</span></div><span class="btn btn-file"><span class="fileupload-new">选择文件</span><span class="fileupload-exists">更改</span><input type="file" name="aaaa"></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
+                                                    <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span id="vedioprview" class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">选择文件</span><span class="fileupload-exists">更改</span><input type="file" id="upload_file_audio" name="file"/></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
                                                 </div>
                                             </div>
 											<span class="help-block">文件大小请限制在5M以内</span>
@@ -189,9 +287,9 @@
                                             <div class="fileupload fileupload-exists" data-provides="fileupload">
                                                 <input type="hidden" value="" name="">
                                                 <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="adminskin/img/noimage.gif"></div>
-                                                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 133px;"><img src="2.jpg" style="max-height: 150px;"></div>
+                                                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 133px;"><img id="imageId2" src="" style="max-height: 150px;"></div>
                                                 <div>
-                                                    <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更改</span><input type="file" name="imagefile"></span>
+                                                    <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更改</span><input type="file" id="upload_file_audiopic" name="file" /></span>
                                                     <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
                                                 </div>
                                             </div>
@@ -200,11 +298,11 @@
                                     <div class="control-group">
                                         <label for="textfield" class="control-label">视频上传</label>
                                         <div class="controls">
-                                            <a href="2.mp4" target="_blank">2.mp4</a>
+                                            <a  id="audiohref" href="" target="_blank"><span id="audioName"></span></a>
                                             <div class="fileupload fileupload-exists" data-provides="fileupload">
                                                 <input type="hidden" value="" name="">
                                                 <div class="input-append">
-                                                    <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview">2.mp4</span></div><span class="btn btn-file"><span class="fileupload-new">选择文件</span><span class="fileupload-exists">更改</span><input type="file" name="aaaa"></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
+                                                    <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span id="audioNamepreview" class="fileupload-preview"></span></div><span class="btn btn-file"><span class="fileupload-new">选择文件</span><span class="fileupload-exists">更改</span><input type="file" id="upload_file_vedio"  name="file"/></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
                                                 </div>
                                             </div>
                                             <span class="help-block">视频大小请限制在50M以内</span>
@@ -213,13 +311,13 @@
 									<div class="control-group">
 										<label for="select" class="control-label">选择模板</label>
 										<div class="controls">
-											<select name="select" id="select" class='input-large'>
+											<select name="select" id="selectDemo" class='input-large'>
 												<option value="1">1</option>
 												<option value="2">2</option>
 												<option value="3">3</option>
 												<option value="4">4</option>
                                                 <option value="5">5</option>
-                                                <option value="6" selected>6</option>
+                                                <option value="6">6</option>
                                                 <option value="7">7</option>
                                                 <option value="8">8</option>
                                                 <option value="9">9</option>
@@ -238,8 +336,8 @@
 										</div>
 									</div>
 									<div class="form-actions">
-										<button type="submit" class="btn btn-primary">保存</button>
-										<button type="button" class="btn" onclick="location = 'product_list.html'">取消</button>
+										<button type="button" class="btn btn-primary" onclick="saveBtn();" >保存</button>
+										<button type="button" class="btn" onclick="location ='product_list.html'">取消</button>
 									</div>
 								</form>
 							</div>

@@ -2,103 +2,135 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.think.zrt.dao.ProductMapper">
 
-	<select id="getProductInfoByName"  resultType="ProductInfo">
-		select 
-			product_name as productName,
-			product_series as seriesName,
-			product_pic as productPic,
-			product_desc as productDesc,
-			video_url as videoUrl,
-			audio_url as audioUrl,
-			audio_pic as audioPic,
-			template_id as templateId
-		from zrt_product t 
-		where  t.product_name=#{name}
-		
-	</select>
-	
-	<insert id="saveProductInfo" parameterType="ProductInfo">
-		
-		insert into zrt_product (
-			product_name,
-			product_series,
-			product_pic,
-			product_desc,
-			video_url,
-			audio_url,
-			audio_pic,
-			template_id
-		)values(
-			#{productName},
-			#{seriesName},
-			#{productPic},
-			#{productDesc},
-			#{videoUrl},
-			#{audioUrl},
-			#{audioPic},
-			#{templateId}
-		)
-	
-	</insert>
-	
-	<delete id="deleteProductInfoByName">
-	
-		delete from zrt_product where product_name=#{name}
-		
-	</delete>
-	
-	<select id="listAllProductInfoByPage" resultType="ProductInfo">
-		
-		select 
-			product_name as productName,
-			product_series as seriesName,
-			product_pic as productPic,
-			product_desc as productDesc,
-			video_url as videoUrl,
-			audio_url as audioUrl,
-			audio_pic as audioPic,
-			template_id as templateId
-		from zrt_product 
-	
-	</select>
-	
-	<select id="listProductInfo" resultType="ProductInfo">
-		select 
-			product_name as productName,
-			product_series as seriesName,
-			product_pic as productPic,
-			product_desc as productDesc,
-			video_url as videoUrl,
-			audio_url as audioUrl,
-			audio_pic as audioPic,
-			template_id as templateId
+	<select id="getProductInfoByName" resultType="ProductInfo">
+		select
+		id as id,
+		product_name as productName,
+		product_series as seriesName,
+		product_pic
+		as productPic,
+		product_desc as productDesc,
+		video_url as videoUrl,
+		audio_url as audioUrl,
+		audio_pic as audioPic,
+		template_id as templateId
 		from zrt_product t
-		
-		where 1=1 
+		where t.product_name=#{name}
+
+	</select>
+
+	<insert id="saveProductInfo" parameterType="ProductInfo">
+
+		insert into
+		zrt_product (
+		id,
+		product_name,
+		product_series,
+		product_pic,
+		product_desc,
+		video_url,
+		audio_url,
+		audio_pic,
+		template_id
+		)values(
+		#{id},
+		#{productName},
+		#{seriesName},
+		#{productPic},
+		#{productDesc},
+		#{videoUrl},
+		#{audioUrl},
+		#{audioPic},
+		#{templateId}
+		)
+
+	</insert>
+
+	<delete id="deleteProductInfoByName">
+
+		delete from zrt_product where product_name=#{name}
+
+	</delete>
+
+	<select id="listAllProductInfoByPage" resultType="ProductInfo">
+
+		select
+		id as id,
+		product_name as productName,
+		product_series as seriesName,
+		product_pic
+		as productPic,
+		product_desc as productDesc,
+		video_url as videoUrl,
+		audio_url as audioUrl,
+		audio_pic as audioPic,
+		template_id as templateId
+		from zrt_product
+
+	</select>
+
+	<select id="listProductInfo" resultType="ProductInfo">
+		select
+		id as id,
+		product_name as productName,
+		product_series as
+		seriesName,
+		product_pic as productPic,
+		product_desc as productDesc,
+		video_url as videoUrl,
+		audio_url as audioUrl,
+		audio_pic as audioPic,
+		template_id as templateId
+		from zrt_product t
+
+		where 1=1
 		<if test="null != seriesName and '' != seriesName">
-			and t.product_series=#{seriesName} 
+			and t.product_series=#{seriesName}
 		</if>
-		
-		<if test="null != product_name and '' != product_name">
+
+		<if test="null != name and '' != name">
 			and t.product_name like "%"#{name}"%"
 		</if>
-		
+
 	</select>
-<!-- 	
-	<select id="listProductInfoBySeries" resultType="ProductInfo">
-		select 
-			product_name as productName,
-			product_series as seriesName,
-			product_pic as productPic,
-			product_desc as productDesc,
-			video_url as videoUrl,
-			audio_url as audioUrl,
-			audio_pic as audioPic,
-			template_id as templateId
-		from zrt_product t
+
+	<select id="listProductSeries" resultType="String">
+		select product_series
+		as series
+		from zrt_product group by product_series
+	</select>
+
+	<update id="updateProductInfo" parameterType="ProductInfo">
+		update zrt_product
 		
-		where t.product_series=#{seriesName}
-	
-	</select> -->
+		<trim prefix="set" suffixOverrides=",">
+			<if test="null != productInfo.productName and '' != productInfo.productName">
+				product_name =#{productInfo.productName},
+			</if>
+			<if test="null != productInfo.seriesName and '' != productInfo.seriesName">
+				product_series =#{productInfo.seriesName},
+			</if>
+			<if test="null != productInfo.productPic and '' != productInfo.productPic">
+				product_pic =#{productInfo.productPic},
+			</if>
+			<if test="null != productInfo.productDesc and '' != productInfo.productDesc">
+				product_desc =#{productInfo.productDesc},
+			</if>
+			<if test="null != productInfo.videoUrl and '' != productInfo.videoUrl">
+				video_url =#{productInfo.videoUrl},
+			</if>
+			<if test="null != productInfo.audioUrl and '' != productInfo.audioUrl">
+				audio_url =#{productInfo.audioUrl},
+			</if>
+			<if test="null != productInfo.audioPic and '' != productInfo.audioPic">
+				audio_pic =#{productInfo.audioPic},
+			</if>
+			<if test="productInfo.templateId !=-1">
+				template_id =#{productInfo.templateId},
+			</if>
+		</trim>
+		where product_name = #{oldName}
+
+	</update>
 
 </mapper>

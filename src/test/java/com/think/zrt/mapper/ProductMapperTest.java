@@ -51,6 +51,7 @@ public class ProductMapperTest {
 	public void saveProductInfoTest() {
 
 		ProductInfo p = new ProductInfo();
+		p.setId(123124);
 		p.setAudioPic("sfsdfsdf11");
 		p.setProductName("afdaf444");
 		p.setAudioUrl("fdsfasdfasfaf");
@@ -80,6 +81,28 @@ public class ProductMapperTest {
 
 		List<ProductInfo> list = productMapper.listProductInfo("44","");
 		System.out.println(list);
+	}
+	
+	@Test
+	
+	public void listSeriesTest(){
+		
+		
+		List l = productMapper.listProductSeries();
+		
+		System.out.println(l);
+	}
+	
+	@Test
+	public void updateProductInfoTest(){
+		
+		ProductInfo productInfo = new ProductInfo(); 
+		productInfo.setId(20);
+		productInfo.setProductName("产品22354555555");
+		productInfo.setAudioPic("00000");
+		
+		productMapper.updateProductInfo(productInfo,"产品223545");
+		
 	}
 
 }
