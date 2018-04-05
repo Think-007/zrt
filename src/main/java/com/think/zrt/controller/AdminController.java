@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.think.zrt.domain.ProcessResult;
 import com.think.zrt.domain.ProductInfo;
@@ -35,6 +35,8 @@ public class AdminController {
 
 	@Autowired
 	private ProductInfoService productInfoService;
+
+	public static Map<String, String> pathMap = new HashMap<String, String>();
 
 	/**
 	 * 
@@ -57,6 +59,24 @@ public class AdminController {
 		ProcessResult processResult = new ProcessResult();
 
 		try {
+			String webappsPath = pathMap.get("path");
+			if (webappsPath == null) {
+				String path = request.getServletContext().getRealPath("/");
+
+				System.out.println("----------" + path);
+				String[] s = path.split("/");
+				StringBuilder sb = new StringBuilder();
+
+				for (int i = 0; i < s.length - 1; i++) {
+					sb.append(s[i]);
+					sb.append("/");
+				}
+
+				sb.append("upload/");
+				webappsPath = sb.toString();
+				pathMap.put("path", webappsPath);
+			}
+
 			ProductInfo productInfo = new ProductInfo();
 			productInfo.setProductName(productName);
 			if (templateId == null || "".equals(templateId.trim())) {
@@ -73,19 +93,19 @@ public class AdminController {
 			// request).getFiles("file");
 
 			if (file0 != null && !file0.isEmpty()) {
-				String clienPath = saveFile(productInfo.getId() + "", file0, 0);
+				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file0, 0);
 				productInfo.setProductPic(clienPath);
 			}
 			if (file1 != null && !file1.isEmpty()) {
-				String clienPath = saveFile(productInfo.getId() + "", file1, 1);
+				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file1, 1);
 				productInfo.setVideoUrl(clienPath);
 			}
 			if (file2 != null && !file2.isEmpty()) {
-				String clienPath = saveFile(productInfo.getId() + "", file2, 2);
+				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file2, 2);
 				productInfo.setAudioPic(clienPath);
 			}
 			if (file3 != null && !file3.isEmpty()) {
-				String clienPath = saveFile(productInfo.getId() + "", file3, 3);
+				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file3, 3);
 				productInfo.setAudioUrl(clienPath);
 			}
 			productInfoService.saveProductInfo(productInfo);
@@ -104,12 +124,13 @@ public class AdminController {
 		return processResult;
 	}
 
-	private String saveFile(String templateId, MultipartFile file, int i) throws IOException, FileNotFoundException {
+	private String saveFile(String uploadPath, String templateId, MultipartFile file, int i)
+			throws IOException, FileNotFoundException {
 		BufferedOutputStream stream;
-		File path = new File(ZrtConst.DATA_PATH + templateId + "/");
+		File path = new File(uploadPath + templateId + "/");
 		String[] temp = file.getOriginalFilename().split("\\.");
 		String serverFileName = i + "." + temp[1];
-		String clienPath = ZrtConst.DATA_PATH + templateId + "/" + serverFileName;
+		String clienPath = "/upload/" + templateId + "/" + serverFileName;
 		File localFile = new File(path, serverFileName);
 		if (!path.exists()) {
 			path.mkdirs();
@@ -122,13 +143,30 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/delet_product")
-	public ProcessResult delteProduct(String productName) {
+	public ProcessResult delteProduct(HttpServletRequest request,String productName) {
 
 		ProcessResult processResult = new ProcessResult();
 		ZrtLog.debug(logger, " enter delteProduct ", null, " productName: " + productName);
 		try {
-//			productName = new String(productName.getBytes("8859_1"), "utf8");
-			productInfoService.deleteProductInfoByName(productName);
+			// productName = new String(productName.getBytes("8859_1"), "utf8");
+			String webappsPath = pathMap.get("path");
+			if (webappsPath == null) {
+				String path = request.getServletContext().getRealPath("/");
+
+				System.out.println("----------" + path);
+				String[] s = path.split("/");
+				StringBuilder sb = new StringBuilder();
+
+				for (int i = 0; i < s.length - 1; i++) {
+					sb.append(s[i]);
+					sb.append("/");
+				}
+
+				sb.append("upload/");
+				webappsPath = sb.toString();
+				pathMap.put("path", webappsPath);
+			}
+			productInfoService.deleteProductInfoByName(productName,webappsPath);
 			processResult.setRetCode(ProcessResult.SUCCESS);
 			processResult.setRetMsg("ok");
 			processResult.setObj(null);
@@ -262,9 +300,25 @@ public class AdminController {
 		ProcessResult processResult = new ProcessResult();
 
 		try {
-//			ProductInfo productInfo = new ProductInfo();
-			 ProductInfo productInfo =
-			 productInfoService.queryProductInfo(oldName);
+			String webappsPath = pathMap.get("path");
+			if (webappsPath == null) {
+				String path = request.getServletContext().getRealPath("/");
+
+				System.out.println("----------" + path);
+				String[] s = path.split("/");
+				StringBuilder sb = new StringBuilder();
+
+				for (int i = 0; i < s.length - 1; i++) {
+					sb.append(s[i]);
+					sb.append("/");
+				}
+
+				sb.append("upload/");
+				webappsPath = sb.toString();
+				pathMap.put("path", webappsPath);
+			}
+			// ProductInfo productInfo = new ProductInfo();
+			ProductInfo productInfo = productInfoService.queryProductInfo(oldName);
 
 			if ("undefined".equals(templateId) || templateId == null || "".equals(templateId.trim())) {
 				productInfo.setTemplateId(-1);
@@ -292,25 +346,25 @@ public class AdminController {
 			}
 			ZrtLog.debug(logger, " enter uploadProudct ", null, " productInfo: " + productInfo);
 			if (file0 != null && !file0.isEmpty()) {
-				String clienPath = saveFile(productInfo.getId() + "", file0, 0);
+				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file0, 0);
 				productInfo.setProductPic(clienPath);
 			} else {
 				productInfo.setProductPic(null);
 			}
 			if (file1 != null && !file1.isEmpty()) {
-				String clienPath = saveFile(productInfo.getId() + "", file1, 1);
+				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file1, 1);
 				productInfo.setVideoUrl(clienPath);
 			} else {
 				productInfo.setVideoUrl(null);
 			}
 			if (file2 != null && !file2.isEmpty()) {
-				String clienPath = saveFile(productInfo.getId() + "", file2, 2);
+				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file2, 2);
 				productInfo.setAudioPic(clienPath);
 			} else {
 				productInfo.setAudioPic(null);
 			}
 			if (file3 != null && !file3.isEmpty()) {
-				String clienPath = saveFile(productInfo.getId() + "", file3, 3);
+				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file3, 3);
 				productInfo.setAudioUrl(clienPath);
 			} else {
 				productInfo.setAudioUrl(null);
@@ -356,6 +410,23 @@ public class AdminController {
 		}
 
 		return processResult;
+
+	}
+
+	public static void main(String[] args) {
+		String a = "/usr/share/zrt/tomcat_zrt/webapps/zrtweb/";
+		String[] s = a.split("/");
+
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < s.length - 1; i++) {
+			sb.append(s[i]);
+			sb.append("/");
+		}
+
+		sb.append("upload/");
+
+		System.out.println(sb.toString());
 
 	}
 

@@ -192,7 +192,7 @@
     				}
     				
     				myrow+='<tr id="tr_'+no+'">'
-    				 +'<td id="che_1" class="with-checkbox"> <input type="checkbox" name="check" id="che" value="'+i+'"> </td>'
+    				 +'<td id="che_1" class="with-checkbox"> <input type="checkbox" name="check" id="che" value="'+queryList[i].productName+'"> </td>'
 						+'<td class="data-mun">'+queryList[i].productName+'</td>'
 						+'<td class="data-mun">'+queryList[i].seriesName+'</td>'
 						+'<td class="data-mun">'+queryList[i].productDesc+'</td>'
@@ -303,19 +303,11 @@ console.log(del);
   	             success: function (data) {
   	            
   	            	 if (data.retCode == 0) {
-  	                     var queryList="";
-  	                        queryList=JSON.stringify(data.obj.list);
-  	        				queryList=eval('('+queryList +')');
-  	        				
-  	        				
-  	        				for(var i in queryList){
-  	        					if(i==del){
-  	        						ajaxDelItem(queryList[i].productName);		
-  	        					}else{
-  	        						return
-  	        					}
-  	        				}
-  	        				}
+	            		 var queryLists="";
+	                        queryLists=data.obj.list;
+	                        console.log(queryLists[del].productName);
+	                        ajaxDelItem(queryLists[del].productName); 
+	        				}
   	            	 
   	             }
   		   })
@@ -398,7 +390,7 @@ console.log(del);
     				}
     				
     				myrow+='<tr id="tr_'+no+'">'
-    				 +'<td id="che_1" class="with-checkbox"> <input type="checkbox" name="check" id="che" value="'+i+'"> </td>'
+    				 +'<td id="che_1" class="with-checkbox"> <input type="checkbox" name="check" id="che" value="'+queryList[i].productName+'"> </td>'
 						+'<td class="data-mun">'+queryList[i].productName+'</td>'
 						+'<td class="data-mun">'+queryList[i].seriesName+'</td>'
 						+'<td class="data-mun">'+queryList[i].productDesc+'</td>'
@@ -417,6 +409,22 @@ console.log(del);
     	 })
 
     	
+    }
+    
+    function getRadioRes(){
+        var rdsObj = document.getElementsByTagName("check");
+        var checkVal = "";
+        
+        console.log($(":checkbox[name=check]:checked").val())
+        if($(":checkbox[name=check]:checked").size()<2){
+        	var delid=$(":checkbox[name=check]:checked").val();
+        	ajaxDelItem(delid);
+        }else{
+        	
+        	alert("只能删除一条数据！");
+        	return;
+        }
+       
     }
     </script>
 
@@ -513,7 +521,7 @@ console.log(del);
 							</div>
 
                             <div>
-                                <input type="button" name="btn_Seach" value="删 除" id="btn_Seach" class="btn btn-primary" style=" margin:0px 0px 11px 0px;" onclick="if(confirm('确认要删除吗?')){ };" />
+                                <input type="button" name="btn_Seach" value="删 除" id="btn_Seach" class="btn btn-primary" style=" margin:0px 0px 11px 0px;" onclick="if(confirm('确认要删除吗?')){getRadioRes() };" />
                             </div>
 
 						</div>

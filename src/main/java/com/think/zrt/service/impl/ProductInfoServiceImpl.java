@@ -13,6 +13,7 @@ import com.github.pagehelper.PageInfo;
 import com.think.zrt.dao.ProductMapper;
 import com.think.zrt.domain.ProductInfo;
 import com.think.zrt.service.ProductInfoService;
+import com.think.zrt.util.ZrtConst;
 import com.think.zrt.util.ZrtLog;
 
 @Service
@@ -54,7 +55,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	}
 
 	@Override
-	public int deleteProductInfoByName(String productName) {
+	public int deleteProductInfoByName(String productName,String path) {
 
 		// 保证默认数据不能删除
 		if (DEFAULT_NAME.equals(productName)) {
@@ -66,7 +67,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		int result = productMapper.deleteProductInfoByName(productName);
 
 		// 如果文件存在就删除文件
-		File file = new File("D:/upload/" + productInfo.getId());
+		File file = new File(path+ productInfo.getId());
 		if (file.exists()) {
 			deleteDir(file);
 		}

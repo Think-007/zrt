@@ -33,19 +33,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<!-- 移除嵌入式tomcat插件 -->
-			<exclusions>
+<!-- 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
 				</exclusion>
-			</exclusions>
+			</exclusions> -->
 		</dependency>
-		<dependency>
+<!-- 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>

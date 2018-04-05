@@ -29,7 +29,7 @@ public interface ProductInfoService {
 	 * @param productName
 	 * @return
 	 */
-	public int deleteProductInfoByName(String productName);
+	public int deleteProductInfoByName(String productName,String path);
 
 	/**
 	 * 查询所有产品

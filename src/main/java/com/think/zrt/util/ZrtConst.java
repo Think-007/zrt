@@ -46,7 +46,7 @@ public interface ZrtConst {
 	// 参数不对描述
 	public static final String PARAM_ERROR_MSG = "账户或者密码有误";
 
-	// 图片服务器地址
-	public static final String DATA_PATH = "/upload/";
+	// 图片服务器存储地址
+	public static final String DATA_PATH = "./";
 
 }
