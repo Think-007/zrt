@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +39,8 @@ public class AdminController {
 	private ProductInfoService productInfoService;
 
 	public static Map<String, String> pathMap = new HashMap<String, String>();
+
+	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	/**
 	 * 
@@ -93,19 +97,19 @@ public class AdminController {
 			// request).getFiles("file");
 
 			if (file0 != null && !file0.isEmpty()) {
-				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file0, 0);
+				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file0);
 				productInfo.setProductPic(clienPath);
 			}
 			if (file1 != null && !file1.isEmpty()) {
-				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file1, 1);
+				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file1);
 				productInfo.setVideoUrl(clienPath);
 			}
 			if (file2 != null && !file2.isEmpty()) {
-				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file2, 2);
+				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file2);
 				productInfo.setAudioPic(clienPath);
 			}
 			if (file3 != null && !file3.isEmpty()) {
-				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file3, 3);
+				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file3);
 				productInfo.setAudioUrl(clienPath);
 			}
 			productInfoService.saveProductInfo(productInfo);
@@ -124,12 +128,12 @@ public class AdminController {
 		return processResult;
 	}
 
-	private String saveFile(String uploadPath, String templateId, MultipartFile file, int i)
+	private String saveFile(String uploadPath, String templateId, MultipartFile file)
 			throws IOException, FileNotFoundException {
 		BufferedOutputStream stream;
 		File path = new File(uploadPath + templateId + "/");
 		String[] temp = file.getOriginalFilename().split("\\.");
-		String serverFileName = i + "." + temp[1];
+		String serverFileName = IdUtil.generateId() + "." + temp[1];
 		String clienPath = "/upload/" + templateId + "/" + serverFileName;
 		File localFile = new File(path, serverFileName);
 		if (!path.exists()) {
@@ -143,7 +147,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/delet_product")
-	public ProcessResult delteProduct(HttpServletRequest request,String productName) {
+	public ProcessResult delteProduct(HttpServletRequest request, String productName) {
 
 		ProcessResult processResult = new ProcessResult();
 		ZrtLog.debug(logger, " enter delteProduct ", null, " productName: " + productName);
@@ -166,7 +170,7 @@ public class AdminController {
 				webappsPath = sb.toString();
 				pathMap.put("path", webappsPath);
 			}
-			productInfoService.deleteProductInfoByName(productName,webappsPath);
+			productInfoService.deleteProductInfoByName(productName, webappsPath);
 			processResult.setRetCode(ProcessResult.SUCCESS);
 			processResult.setRetMsg("ok");
 			processResult.setObj(null);
@@ -346,25 +350,25 @@ public class AdminController {
 			}
 			ZrtLog.debug(logger, " enter uploadProudct ", null, " productInfo: " + productInfo);
 			if (file0 != null && !file0.isEmpty()) {
-				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file0, 0);
+				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file0);
 				productInfo.setProductPic(clienPath);
 			} else {
 				productInfo.setProductPic(null);
 			}
 			if (file1 != null && !file1.isEmpty()) {
-				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file1, 1);
+				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file1);
 				productInfo.setVideoUrl(clienPath);
 			} else {
 				productInfo.setVideoUrl(null);
 			}
 			if (file2 != null && !file2.isEmpty()) {
-				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file2, 2);
+				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file2);
 				productInfo.setAudioPic(clienPath);
 			} else {
 				productInfo.setAudioPic(null);
 			}
 			if (file3 != null && !file3.isEmpty()) {
-				String clienPath = saveFile(webappsPath,productInfo.getId() + "", file3, 3);
+				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file3);
 				productInfo.setAudioUrl(clienPath);
 			} else {
 				productInfo.setAudioUrl(null);

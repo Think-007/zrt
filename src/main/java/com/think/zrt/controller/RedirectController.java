@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.think.zrt.dao.UserInfoMapper;
 import com.think.zrt.domain.ProcessResult;
 import com.think.zrt.domain.UserInfo;
+import com.think.zrt.service.MailService;
 import com.think.zrt.util.ZrtConst;
 import com.think.zrt.util.ZrtLog;
 
@@ -92,5 +94,24 @@ public class RedirectController {
 
 		return processResult;
 
+	}
+
+	@Autowired
+	private MailService mailService;
+	
+	@Value("${mail.sender.accout}")
+	private String sender;
+
+	@Value("${mail.receiver.account}")
+	private String receiver;
+
+	@RequestMapping("/mail")
+	@ResponseBody
+	public String mail() {
+
+		
+		mailService.sendMail(sender, receiver, "主题", "测试内容");
+		
+		return "success";
 	}
 }

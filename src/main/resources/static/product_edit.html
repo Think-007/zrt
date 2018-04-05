@@ -159,7 +159,7 @@ $("#audioNamepreview").text(stringG(data.obj.audioUrl));
         	$("#vedioprview").text(stringG(data.obj.videoUrl));
         	 $("#selectDemo").find("option[value="+data.obj.templateId+"]").attr("selected",true); 
         	//$(".selector").find("option[text='pxx']").attr("selected",true); 
-        	 console.log(data.obj)
+        	
         	 }
          }
 	 })
@@ -190,7 +190,8 @@ $("#audioNamepreview").text(stringG(data.obj.audioUrl));
            contentType: false,
            success: function (data, textStatus) {
           	 if (data.retCode == 0) {
-               	alert("修改成功！")
+          		initData($("#productName").val());
+               	alert("修改成功！");
                	location = 'product_list.html';
                	 }else{
                		 alert("修改失败！")

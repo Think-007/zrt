@@ -55,7 +55,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	}
 
 	@Override
-	public int deleteProductInfoByName(String productName,String path) {
+	public int deleteProductInfoByName(String productName, String path) {
 
 		// 保证默认数据不能删除
 		if (DEFAULT_NAME.equals(productName)) {
@@ -67,7 +67,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		int result = productMapper.deleteProductInfoByName(productName);
 
 		// 如果文件存在就删除文件
-		File file = new File(path+ productInfo.getId());
+		File file = new File(path + productInfo.getId());
 		if (file.exists()) {
 			deleteDir(file);
 		}
@@ -99,6 +99,13 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
 		PageHelper.startPage(startPage, pageSize);
 		List<ProductInfo> allProductList = productMapper.listProductInfo(name, seriesName);
+
+		if (allProductList.isEmpty()) {
+			ProductInfo productInfo = productMapper.getProductInfoByName(DEFAULT_NAME);
+
+			allProductList.add(productInfo);
+		}
+
 		PageInfo<ProductInfo> pageProductInfo = new PageInfo<ProductInfo>(allProductList);
 		return pageProductInfo;
 
