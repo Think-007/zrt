@@ -51,7 +51,7 @@ public class MailServiceImpl implements MailService {
 	public void sendMail(String from, String to, String subject, String content) {
 		try {
 			// 建立了一条通信路线
-			Session session = Session.getInstance(prop);
+			Session session = Session.getDefaultInstance(prop);
 			Message msg = new MimeMessage(session);
 			// 发件者邮箱
 			msg.setFrom(new InternetAddress(from));
@@ -62,13 +62,13 @@ public class MailServiceImpl implements MailService {
 			// 内容
 			msg.setText(content);
 
-			// 发送者的邮箱号和密码
-			Transport tran = session.getTransport();
+			Transport tran = session.getTransport("smtp");
 			tran.connect(from, password);
 			tran.sendMessage(msg, msg.getAllRecipients());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.mysql.fabric.Response;
 import com.think.zrt.domain.ProcessResult;
 import com.think.zrt.domain.ProductInfo;
 import com.think.zrt.service.MailService;
@@ -166,42 +167,62 @@ public class ProductController {
 		return processResult;
 	}
 
+	// /**
+	// * 负责回调jssdk的一个接口
+	// */
+	//
+	// @RequestMapping(value = "/to_weichat")
+	// public ProcessResult forwardToWeichat(String url) {
+	//
+	// ProcessResult processResult = new ProcessResult();
+	// try {
+	//
+	// ResponseEntity<String> response = restTemplate.getForEntity(WEICHAT_URL +
+	// "?url=" + url, String.class);
+	//
+	// if (response.getStatusCode() == HttpStatus.OK) {
+	// processResult.setRetCode(ProcessResult.SUCCESS);
+	// processResult.setRetMsg("ok");
+	// processResult.setObj(response.getBody());
+	// } else {
+	// processResult.setRetCode(ZrtConst.ERROR);
+	// processResult.setRetMsg(ZrtConst.ERROR_MSG);
+	// processResult.setObj(response.getBody());
+	// }
+	//
+	// } catch (ResourceAccessException e) {
+	//
+	// processResult.setRetCode(ZrtConst.TIME_OUT);
+	// processResult.setRetMsg(ZrtConst.TIME_OUT_MSG);
+	// ZrtLog.error(logger, "forwardToWeichat", null, processResult, e);
+	// } catch (Throwable t) {
+	// processResult.setRetCode(ZrtConst.EXCEPTION);
+	// processResult.setRetMsg(ZrtConst.EXCEPTION_MSG);
+	// processResult.setObj(t);
+	// ZrtLog.error(logger, "forwardToWeichat", null, processResult, t);
+	// t.printStackTrace();
+	// }
+	//
+	// return processResult;
+	//
+	// }
+
 	/**
 	 * 负责回调jssdk的一个接口
 	 */
 
 	@RequestMapping(value = "/to_weichat")
-	public ProcessResult forwardToWeichat(String url) {
-
-		ProcessResult processResult = new ProcessResult();
+	public String forwardToWeichat(String url) {
+		ResponseEntity<String> response = null;
 		try {
 
-			ResponseEntity<String> response = restTemplate.getForEntity(WEICHAT_URL + "?url=" + url, String.class);
+			response = restTemplate.getForEntity(WEICHAT_URL + "?url=" + url, String.class);
 
-			if (response.getStatusCode() == HttpStatus.OK) {
-				processResult.setRetCode(ProcessResult.SUCCESS);
-				processResult.setRetMsg("ok");
-				processResult.setObj(response.getBody());
-			} else {
-				processResult.setRetCode(ZrtConst.ERROR);
-				processResult.setRetMsg(ZrtConst.ERROR_MSG);
-				processResult.setObj(response.getBody());
-			}
-
-		} catch (ResourceAccessException e) {
-
-			processResult.setRetCode(ZrtConst.TIME_OUT);
-			processResult.setRetMsg(ZrtConst.TIME_OUT_MSG);
-			ZrtLog.error(logger, "forwardToWeichat", null, processResult, e);
 		} catch (Throwable t) {
-			processResult.setRetCode(ZrtConst.EXCEPTION);
-			processResult.setRetMsg(ZrtConst.EXCEPTION_MSG);
-			processResult.setObj(t);
-			ZrtLog.error(logger, "forwardToWeichat", null, processResult, t);
 			t.printStackTrace();
 		}
 
-		return processResult;
+		return response.getBody();
 
 	}
 
