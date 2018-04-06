@@ -9,12 +9,14 @@
 
 package com.think.zrt.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.think.zrt.dao.ProductMapper;
@@ -103,6 +105,20 @@ public class ProductMapperTest {
 		productInfo.setVideoPic("00000");
 		
 		productMapper.updateProductInfo(productInfo,"产品223545");
+		
+	}
+	
+	@Test
+	public void deleteProductInfoListTest(){
+		
+		List<String> list = new ArrayList<String>();
+		
+		list.add(1+"");
+		list.add(2+"");
+		list.add(3+"");
+		
+		int re = productMapper.deleteProductInfoList(list);
+		System.out.println(re);
 		
 	}
 

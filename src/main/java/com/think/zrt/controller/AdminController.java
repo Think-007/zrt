@@ -52,7 +52,15 @@ public class AdminController {
 	 * @param productDesc
 	 *            产品描述
 	 * @param seriesName
-	 *            产品系列
+	 *            系列名称
+	 * @param file0
+	 *            产品图片
+	 * @param file1
+	 *            产品音频
+	 * @param file2
+	 *            视频图片
+	 * @param file3
+	 *            产品视频
 	 * @return
 	 */
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
@@ -63,6 +71,7 @@ public class AdminController {
 		ProcessResult processResult = new ProcessResult();
 
 		try {
+			// 获取存储路径
 			String webappsPath = pathMap.get("path");
 			if (webappsPath == null) {
 				String path = request.getServletContext().getRealPath("/");
@@ -92,25 +101,28 @@ public class AdminController {
 			productInfo.setSeriesName(seriesName);
 			productInfo.setId(IdUtil.generateId());
 			ZrtLog.debug(logger, " enter uploadProudct ", null, " productInfo: " + productInfo);
-			// List<MultipartFile> files = ((MultipartHttpServletRequest)
-			// request).getFiles("file");
 
+			// 存储图片
 			if (file0 != null && !file0.isEmpty()) {
 				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file0);
 				productInfo.setProductPic(clienPath);
 			}
+			// 存储音频
 			if (file1 != null && !file1.isEmpty()) {
 				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file1);
 				productInfo.setAudioUrl(clienPath);
 			}
+			// 存储视频图片
 			if (file2 != null && !file2.isEmpty()) {
 				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file2);
 				productInfo.setVideoPic(clienPath);
 			}
+			// 存储视频
 			if (file3 != null && !file3.isEmpty()) {
 				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file3);
 				productInfo.setVideoUrl(clienPath);
 			}
+			// 存储记录
 			productInfoService.saveProductInfo(productInfo);
 			processResult.setRetCode(ProcessResult.SUCCESS);
 			processResult.setRetMsg("ok");
@@ -127,13 +139,26 @@ public class AdminController {
 		return processResult;
 	}
 
-	private String saveFile(String uploadPath, String templateId, MultipartFile file)
+	/**
+	 * 存储媒体信息
+	 * 
+	 * @param uploadPath
+	 *            存储路劲
+	 * @param pathId
+	 *            子目录
+	 * @param file
+	 *            文件
+	 * @return
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
+	private String saveFile(String uploadPath, String pathId, MultipartFile file)
 			throws IOException, FileNotFoundException {
 		BufferedOutputStream stream;
-		File path = new File(uploadPath + templateId + "/");
+		File path = new File(uploadPath + pathId + "/");
 		String[] temp = file.getOriginalFilename().split("\\.");
 		String serverFileName = IdUtil.generateId() + "." + temp[1];
-		String clienPath = "/upload/" + templateId + "/" + serverFileName;
+		String clienPath = "/upload/" + pathId + "/" + serverFileName;
 		File localFile = new File(path, serverFileName);
 		if (!path.exists()) {
 			path.mkdirs();
@@ -145,6 +170,14 @@ public class AdminController {
 		return clienPath;
 	}
 
+	/**
+	 * 单个删除产品
+	 * 
+	 * @param request
+	 * @param productName
+	 *            产品名称
+	 * @return
+	 */
 	@RequestMapping(value = "/delet_product")
 	public ProcessResult delteProduct(HttpServletRequest request, String productName) {
 
@@ -220,10 +253,15 @@ public class AdminController {
 	}
 
 	/**
+	 * 
 	 * 模糊查询接口
 	 * 
 	 * @param name
+	 *            产品名称
+	 * @param seriesName
+	 *            系列名称
 	 * @param startPage
+	 *            页码
 	 * @return
 	 */
 	@RequestMapping(value = "/list_product_fuzzy")
@@ -320,7 +358,6 @@ public class AdminController {
 				webappsPath = sb.toString();
 				pathMap.put("path", webappsPath);
 			}
-			// ProductInfo productInfo = new ProductInfo();
 			ProductInfo productInfo = productInfoService.queryProductInfo(oldName);
 
 			if ("undefined".equals(templateId) || templateId == null || "".equals(templateId.trim())) {

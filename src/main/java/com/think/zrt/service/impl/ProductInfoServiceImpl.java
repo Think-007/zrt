@@ -57,16 +57,16 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	@Override
 	public int deleteProductInfoByName(String productName, String path) {
 
-		// 保证默认数据不能删除
+		// 1、保证默认数据不能删除
 		if (DEFAULT_NAME.equals(productName)) {
 			return 0;
 		}
-		// 找到该产品
+		// 2 、找到该产品的id信息，留作删除视频文件信息
 		ProductInfo productInfo = productMapper.getProductInfoByName(productName);
-		// 删除记录
+		// 3、删除记录
 		int result = productMapper.deleteProductInfoByName(productName);
 
-		// 如果文件存在就删除文件
+		/// 4、如果文件存在就删除文件
 		File file = new File(path + productInfo.getId());
 		if (file.exists()) {
 			deleteDir(file);
@@ -74,7 +74,12 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		return result;
 	}
 
-	// 删除文件
+	/**
+	 * 删除文件
+	 * 
+	 * @param dir
+	 *            目录
+	 */
 	private void deleteDir(File dir) {
 		if (dir.isDirectory()) {
 			File[] files = dir.listFiles();
@@ -95,10 +100,10 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	}
 
 	@Override
-	public PageInfo<ProductInfo> listProductInfo(String name, String seriesName, int startPage, int pageSize) {
+	public PageInfo<ProductInfo> listProductInfo(String productName, String seriesName, int startPage, int pageSize) {
 
 		PageHelper.startPage(startPage, pageSize);
-		List<ProductInfo> allProductList = productMapper.listProductInfo(name, seriesName);
+		List<ProductInfo> allProductList = productMapper.listProductInfo(productName, seriesName);
 
 		if (allProductList.isEmpty()) {
 			ProductInfo productInfo = productMapper.getProductInfoByName(DEFAULT_NAME);
@@ -122,6 +127,19 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	public int updateProductInfo(ProductInfo productInfo, String oldName) {
 
 		int result = productMapper.updateProductInfo(productInfo, oldName);
+
+		return result;
+	}
+
+	@Override
+	public int delteProductList(List nameList) {
+
+		// 去除默认产品的数据
+		if (nameList.contains(DEFAULT_NAME)) {
+			nameList.remove(DEFAULT_NAME);
+		}
+
+		int result = productMapper.deleteProductInfoList(nameList);
 
 		return result;
 	}

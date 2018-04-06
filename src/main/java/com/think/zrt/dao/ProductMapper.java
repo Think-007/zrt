@@ -34,6 +34,14 @@ public interface ProductMapper {
 	public int deleteProductInfoByName(@Param("name") String name);
 
 	/**
+	 * 产品批量删除
+	 * 
+	 * @param names
+	 * @return
+	 */
+	public int deleteProductInfoList(@Param("names") List<String> names);
+
+	/**
 	 * 分页查询所有记录
 	 * 
 	 * @param rowBounds
@@ -49,13 +57,11 @@ public interface ProductMapper {
 	 */
 	public List<ProductInfo> listProductInfo(@Param("name") String name, @Param("seriesName") String seriesName);
 
-	// /**
-	// * 根据产品系列查询
-	// *
-	// * @param name
-	// * @return
-	// */
-	// public List<ProductInfo> listProductInfoBySeries(String seriesName);
+	/**
+	 * 查询系列
+	 * 
+	 * @return
+	 */
 
 	public List<String> listProductSeries();
 

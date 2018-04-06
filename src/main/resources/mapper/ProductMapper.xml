@@ -132,5 +132,14 @@
 		where product_name = #{oldName}
 
 	</update>
+	
+	
+	<delete id="deleteProductInfoList" parameterType="List">
+		
+		 delete from zrt_product where product_name in
+        <foreach item="item" collection="names" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+	</delete>
 
 </mapper>

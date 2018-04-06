@@ -7,7 +7,6 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<!-- Apple devices fullscreen -->
 	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	
 	<title>自然堂</title>
 
 	<!-- Bootstrap CSS框架-->
@@ -145,19 +144,20 @@
         	 }else{
         		 $("#imageId").attr("src","/adminskin/img/noimage.gif");
         	 }
-if(data.obj.audioPic!=null){
+			if(data.obj.videoPic!=null){
         		 
-        		 $("#imageId2").attr("src",data.obj.audioPic);
+        		 $("#imageId2").attr("src",data.obj.videoPic);
         	 }else{
         		 $("#imageId2").attr("src","/adminskin/img/noimage.gif");
         	 }
-$("#audioName").text(stringG(data.obj.audioUrl));
-$("#audioherf").attr("href",data.obj.audioUrl); 
-$("#audioNamepreview").text(stringG(data.obj.audioUrl));
-        	$("#vedio").text(stringG(data.obj.videoUrl));
-        	$("#vedioherf").attr("href",data.obj.videoUrl); 
-        	$("#vedioprview").text(stringG(data.obj.videoUrl));
-        	 $("#selectDemo").find("option[value="+data.obj.templateId+"]").attr("selected",true); 
+			console.log(data.obj.videoUrl);
+			$("#audioName").text(stringG(data.obj.videoUrl));
+			$("#audiohref").attr("href",data.obj.videoUrl); 
+			$("#audioNamepreview").text(stringG(data.obj.videoUrl));
+        	$("#vedio").text(stringG(data.obj.audioUrl));
+        	$("#vediohref").attr("href",data.obj.audioUrl); 
+        	$("#vedioprview").text(stringG(data.obj.audioUrl));
+        	$("#selectDemo").find("option[value="+data.obj.templateId+"]").attr("selected",true); 
         	//$(".selector").find("option[text='pxx']").attr("selected",true); 
         	
         	 }

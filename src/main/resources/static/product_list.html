@@ -7,7 +7,6 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<!-- Apple devices fullscreen -->
 	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
 	<title>自然堂</title>
 
 	<!-- Bootstrap CSS框架-->
@@ -197,8 +196,8 @@
 						+'<td class="data-mun">'+queryList[i].seriesName+'</td>'
 						+'<td class="data-mun">'+queryList[i].productDesc+'</td>'
 						+'<td class="data-mun"><img src="'+queryList[i].productPic+'" style="width:60px;" /></td>'
-						+'<td class="data-mun"><a href="'+queryList[i].videoUrl+'">'+videoName+'</a></td>'
-						+'<td class="data-mun"><a href="'+queryList[i].audioUrl+'">'+audioName+'</a></td>'
+						+'<td class="data-mun"><a href="'+queryList[i].audioUrl+'" target="_blank">'+audioName+'</a></td>'
+						+'<td class="data-mun"><a href="'+queryList[i].videoUrl+'" target="_blank">'+videoName+'</a></td>'
 						+'<td class="data-mun">'+queryList[i].templateId+'</td>'
 						+' <td class="data-act"><a href="product_edit.html?productName='+queryList[i].productName+'"><i class="icon-edit"></i> 编辑</a> | <a style="cursor: pointer;" onclick="dela('+i+')" class="delt"><i class="icon-remove"></i> 删除</a></td>'
 						+'<tr>';
@@ -395,8 +394,8 @@ console.log(del);
 						+'<td class="data-mun">'+queryList[i].seriesName+'</td>'
 						+'<td class="data-mun">'+queryList[i].productDesc+'</td>'
 						+'<td class="data-mun"><img src="'+queryList[i].productPic+'" style="width:60px;" /></td>'
-						+'<td class="data-mun"><a href="'+queryList[i].videoUrl+'">'+videoName+'</a></td>'
-						+'<td class="data-mun"><a href="'+queryList[i].audioUrl+'">'+audioName+'</a></td>'
+						+'<td class="data-mun"><a href="'+queryList[i].audioUrl+'" target="_blank" >'+audioName+'</a></td>'
+						+'<td class="data-mun"><a href="'+queryList[i].videoUrl+'" target="_blank" >'+videoName+'</a></td>'
 						+'<td class="data-mun">'+queryList[i].templateId+'</td>'
 						+' <td class="data-act"><a href="product_edit.html?productName='+queryList[i].productName+'"><i class="icon-edit"></i> 编辑</a> | <a style="cursor: pointer;" onclick="delasearch('+i+')" class="delt"><i class="icon-remove"></i> 删除</a></td>'
 						+'<tr>';

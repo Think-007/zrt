@@ -11,6 +11,7 @@ public interface ProductInfoService {
 	 * 查询商品信息业务逻辑
 	 * 
 	 * @param productName
+	 *            产品名称
 	 * @return
 	 */
 	public ProductInfo queryProductInfo(String productName);
@@ -19,17 +20,22 @@ public interface ProductInfoService {
 	 * 存储产品信息
 	 * 
 	 * @param productInfo
+	 *            产品信息
 	 * @return
 	 */
 	public int saveProductInfo(ProductInfo productInfo);
 
 	/**
+	 * 
 	 * 根据名称删除记录
 	 * 
 	 * @param productName
+	 *            记录名称
+	 * @param path
+	 *            信息路径
 	 * @return
 	 */
-	public int deleteProductInfoByName(String productName,String path);
+	public int deleteProductInfoByName(String productName, String path);
 
 	/**
 	 * 查询所有产品
@@ -39,11 +45,19 @@ public interface ProductInfoService {
 	public PageInfo<ProductInfo> listAllProductInfo(int startPage, int pageSize);
 
 	/**
-	 * 模糊查询产品
+	 * 模糊查询产品信息，没有的话返回默认值
 	 * 
+	 * @param productName
+	 *            产品名称
+	 * @param seriesName
+	 *            系列名称
+	 * @param startPage
+	 *            起始页码
+	 * @param pageSize
+	 *            每页数目
 	 * @return
 	 */
-	public PageInfo<ProductInfo> listProductInfo(String name, String seriesName, int startPage, int pageSize);
+	public PageInfo<ProductInfo> listProductInfo(String productName, String seriesName, int startPage, int pageSize);
 
 	/**
 	 * 查询系列数目
@@ -56,7 +70,19 @@ public interface ProductInfoService {
 	 * 更新产品信息
 	 * 
 	 * @param productInfo
+	 *            更改后的产品信息
+	 * @param oldName
+	 *            旧名称
 	 * @return
 	 */
-	public int updateProductInfo(ProductInfo productInfo,String oldName);
+	public int updateProductInfo(ProductInfo productInfo, String oldName);
+
+	/**
+	 * 根据名称批量删除产品
+	 * 
+	 * @param nameList
+	 *            名称列表
+	 * @return
+	 */
+	public int delteProductList(List nameList);
 }
