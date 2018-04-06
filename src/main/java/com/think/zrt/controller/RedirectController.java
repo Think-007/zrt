@@ -9,7 +9,9 @@
 
 package com.think.zrt.controller;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +61,8 @@ public class RedirectController {
 
 	@RequestMapping("/admin")
 	@ResponseBody
-	public ProcessResult login(HttpServletRequest request, String userName, String password) {
+	public ProcessResult login(HttpServletRequest request, HttpServletResponse response, String userName,
+			String password) {
 
 		ProcessResult processResult = new ProcessResult();
 		ZrtLog.debug(logger, " enter login ", null, " userName: " + userName + " pwd : " + password);
@@ -74,16 +77,18 @@ public class RedirectController {
 
 			// 2、查询用户信息
 			UserInfo userInfo = userInfoMapper.getUserInfoByName(userName);
-			if (password.equals(userInfo.getPassword())) {
+			if (userInfo == null || !password.equals(userInfo.getPassword())) {
+				request.getSession().removeAttribute("user");
+				processResult.setRetCode(ZrtConst.PARAM_ERROR);
+				processResult.setRetMsg(ZrtConst.PARAM_ERROR_MSG);
+			} else {
 				request.getSession().setAttribute("user", userInfo);
 				processResult.setRetCode(ProcessResult.SUCCESS);
 				processResult.setRetMsg("ok");
-			} else {
-				processResult.setRetCode(ZrtConst.PARAM_ERROR);
-				processResult.setRetMsg(ZrtConst.PARAM_ERROR_MSG);
 			}
 
 		} catch (Throwable t) {
+			request.getSession().removeAttribute("user");
 			processResult.setRetCode(ZrtConst.EXCEPTION);
 			processResult.setRetMsg(ZrtConst.EXCEPTION_MSG);
 			processResult.setObj(t);
@@ -98,7 +103,7 @@ public class RedirectController {
 
 	@Autowired
 	private MailService mailService;
-	
+
 	@Value("${mail.sender.accout}")
 	private String sender;
 
@@ -109,9 +114,8 @@ public class RedirectController {
 	@ResponseBody
 	public String mail() {
 
-		
 		mailService.sendMail(sender, receiver, "主题", "测试内容");
-		
+
 		return "success";
 	}
 }
