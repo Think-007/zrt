@@ -54,25 +54,16 @@
 	<!-- Apple devices Homescreen icon -->
 	<link rel="apple-touch-icon-precomposed" href="adminskin/img/apple-touch-icon-precomposed.png" />
     <script>
+         
         $(function () {
             $('#login').click(function () {
-
-               
-				console.log( $("#uname").val());
-
-                location = 'product_list.html';
                 
-
                 var uname = $("#uname").val();
                 var password = $("#password").val();
                 
                     if (uname == "") {
                         alert('请输入登陆名')
-                        flag = 0;
-                    }
-             
-               
-                
+                    }else{
                     $.ajax({
                         async: false,
                         type: "POST",
@@ -97,8 +88,7 @@
                         }
 
                     });
-
-               
+                }
 
             });
         })

@@ -14,6 +14,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -46,6 +47,7 @@ public class UrlFilter implements Filter {
 		// TODO Auto-generated method stub
 		// place your code here
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		HttpSession session = httpRequest.getSession();
 
 		String url = httpRequest.getRequestURI();
@@ -62,8 +64,12 @@ public class UrlFilter implements Filter {
 
 		if (flag) {
 			if (session.getAttribute("user") == null) {
-				RequestDispatcher requestDispatcher = httpRequest.getRequestDispatcher("/relogin");
-				requestDispatcher.forward(request, response);
+				// RequestDispatcher requestDispatcher =
+				// httpRequest.getRequestDispatcher("/relogin");
+				// requestDispatcher.forward(request, response);
+
+				httpResponse.sendRedirect("/zrtweb/");
+
 			} else {
 				chain.doFilter(request, response);
 			}
