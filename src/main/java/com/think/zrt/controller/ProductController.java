@@ -1,5 +1,7 @@
 package com.think.zrt.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,23 +67,28 @@ public class ProductController {
 		try {
 
 			// 1、现根据16位串码查询产品的名称。
+
 			String data = "{ 'code':'" + param + "','TimeStamp':152143525223 }";
 			String encode = SecurityUtils.encodeProductCode(data);
 			// 工具类加密后每76字节会自动换行，需要去除空格
 			encode = encode.replaceAll("[\\s*\t\n\r]", "");
 
 			ZrtLog.debug(logger, "getProductInfo", null, " encode :" + encode);
-			ResponseEntity<String> response = restTemplate.getForEntity(GET_INFO_URL + encode, String.class);
+			ResponseEntity<String> response = restTemplate.getForEntity(
+					GET_INFO_URL + encode, String.class);
 			if (response.getStatusCode() == HttpStatus.OK) {
 
 				// 2、拿到名称，去数据库查询该名称对应的信息。
 				String responseJson = response.getBody();
-				ZrtLog.debug(logger, "getProductInfo", null, " responseJson :" + responseJson);
+				ZrtLog.debug(logger, "getProductInfo", null, " responseJson :"
+						+ responseJson);
 				JSONObject jsonObj = JSON.parseObject(responseJson);
 
 				String productName = jsonObj.getString("pName");
-				ZrtLog.debug(logger, "getProductInfo", null, " productName :" + productName);
-				ProductInfo productInfo = productInfoService.queryProductInfo(productName);
+				ZrtLog.debug(logger, "getProductInfo", null, " productName :"
+						+ productName);
+				ProductInfo productInfo = productInfoService
+						.queryProductInfo(productName);
 				productInfo.setSearchName(productName);
 				processResult.setRetCode(ProcessResult.SUCCESS);
 				processResult.setRetMsg("ok");
@@ -108,7 +115,8 @@ public class ProductController {
 			// 发邮件
 			MailService.sendMail(sender, receiver, "自然堂查询", t.toString());
 		}
-		ZrtLog.debug(logger, " finish getProductInfo ", null, " processResult: " + processResult);
+		ZrtLog.debug(logger, " finish getProductInfo ", null,
+				" processResult: " + processResult);
 		return processResult;
 
 	}
@@ -119,21 +127,26 @@ public class ProductController {
 	 * @return
 	 */
 	@RequestMapping(value = "/auth_product")
-	public ProcessResult authProductInfo(String code) {
+	public ProcessResult authProductInfo(HttpServletRequest request, String code) {
 		ZrtLog.debug(logger, " enter authProductInfo ", null, " code: " + code);
 
 		ProcessResult processResult = new ProcessResult();
 
 		try {
+			String clientIp = request.getRemoteAddr();
+			System.out.println(clientIp);
 			// 1、直接调用自然堂接口进行校验即可。
-			String data = "{ 'code':'" + code + "','TimeStamp':152143525223 }";
+
+			String data = "{ 'code':'" + code
+					+ "','TimeStamp':152143525223,'ip':'" + clientIp + "' }";
 			String encode = SecurityUtils.encodeProductCode(data);
 			// 工具类加密后每76字节会自动换行，需要去除空格
 			encode = encode.replaceAll("[\\s*\t\n\r]", "");
 
 			ZrtLog.debug(logger, "authProductInfo", null, " encode :" + encode);
 
-			ResponseEntity<String> response = restTemplate.getForEntity(GET_CHECK_URL + encode, String.class);
+			ResponseEntity<String> response = restTemplate.getForEntity(
+					GET_CHECK_URL + encode, String.class);
 			if (response.getStatusCode() == HttpStatus.OK) {
 				processResult.setRetCode(ProcessResult.SUCCESS);
 				processResult.setRetMsg("ok");
@@ -162,7 +175,8 @@ public class ProductController {
 			MailService.sendMail(sender, receiver, "自然堂查询", t.toString());
 		}
 
-		ZrtLog.debug(logger, " finish authProductInfo ", null, " processResult: " + processResult);
+		ZrtLog.debug(logger, " finish authProductInfo ", null,
+				" processResult: " + processResult);
 
 		return processResult;
 	}
@@ -216,7 +230,8 @@ public class ProductController {
 		ResponseEntity<String> response = null;
 		try {
 
-			response = restTemplate.getForEntity(WEICHAT_URL + "?url=" + url, String.class);
+			response = restTemplate.getForEntity(WEICHAT_URL + "?url=" + url,
+					String.class);
 
 		} catch (Throwable t) {
 			t.printStackTrace();

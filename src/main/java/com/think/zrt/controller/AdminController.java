@@ -40,7 +40,8 @@ public class AdminController {
 
 	public static Map<String, String> pathMap = new HashMap<String, String>();
 
-	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+			"yyyy-MM-dd");
 
 	/**
 	 * 
@@ -61,12 +62,15 @@ public class AdminController {
 	 *            视频图片
 	 * @param file3
 	 *            产品视频
+	 * @param file4
+	 *            防伪图片
 	 * @return
 	 */
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public ProcessResult uploadProudct(HttpServletRequest request, String templateId, String productName,
-			String productDesc, String seriesName, MultipartFile file0, MultipartFile file1, MultipartFile file2,
-			MultipartFile file3) {
+	public ProcessResult uploadProudct(HttpServletRequest request,
+			String templateId, String productName, String productDesc,
+			String seriesName, MultipartFile file0, MultipartFile file1,
+			MultipartFile file2, MultipartFile file3, MultipartFile file4) {
 
 		ProcessResult processResult = new ProcessResult();
 
@@ -100,27 +104,38 @@ public class AdminController {
 			productInfo.setProductDesc(productDesc);
 			productInfo.setSeriesName(seriesName);
 			productInfo.setId(IdUtil.generateId());
-			ZrtLog.debug(logger, " enter uploadProudct ", null, " productInfo: " + productInfo);
+			ZrtLog.debug(logger, " enter uploadProudct ", null,
+					" productInfo: " + productInfo);
 
 			// 存储图片
 			if (file0 != null && !file0.isEmpty()) {
-				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file0);
+				String clienPath = saveFile(webappsPath, productInfo.getId()
+						+ "", file0);
 				productInfo.setProductPic(clienPath);
 			}
 			// 存储音频
 			if (file1 != null && !file1.isEmpty()) {
-				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file1);
+				String clienPath = saveFile(webappsPath, productInfo.getId()
+						+ "", file1);
 				productInfo.setAudioUrl(clienPath);
 			}
 			// 存储视频图片
 			if (file2 != null && !file2.isEmpty()) {
-				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file2);
+				String clienPath = saveFile(webappsPath, productInfo.getId()
+						+ "", file2);
 				productInfo.setVideoPic(clienPath);
 			}
 			// 存储视频
 			if (file3 != null && !file3.isEmpty()) {
-				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file3);
+				String clienPath = saveFile(webappsPath, productInfo.getId()
+						+ "", file3);
 				productInfo.setVideoUrl(clienPath);
+			}
+			// 存储防伪图片
+			if (file4 != null && !file4.isEmpty()) {
+				String clienPath = saveFile(webappsPath, productInfo.getId()
+						+ "", file4);
+				productInfo.setCodePic(clienPath);
 			}
 			// 存储记录
 			productInfoService.saveProductInfo(productInfo);
@@ -135,7 +150,8 @@ public class AdminController {
 			ZrtLog.error(logger, "uploadProudct", null, processResult, t);
 			t.printStackTrace();
 		}
-		ZrtLog.debug(logger, " finish  uploadProudct ", null, " processResult: " + processResult);
+		ZrtLog.debug(logger, " finish  uploadProudct ", null,
+				" processResult: " + processResult);
 		return processResult;
 	}
 
@@ -179,10 +195,12 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping(value = "/delet_product")
-	public ProcessResult delteProduct(HttpServletRequest request, String productName) {
+	public ProcessResult delteProduct(HttpServletRequest request,
+			String productName) {
 
 		ProcessResult processResult = new ProcessResult();
-		ZrtLog.debug(logger, " enter delteProduct ", null, " productName: " + productName);
+		ZrtLog.debug(logger, " enter delteProduct ", null, " productName: "
+				+ productName);
 		try {
 			// productName = new String(productName.getBytes("8859_1"), "utf8");
 			String webappsPath = pathMap.get("path");
@@ -202,7 +220,8 @@ public class AdminController {
 				webappsPath = sb.toString();
 				pathMap.put("path", webappsPath);
 			}
-			productInfoService.deleteProductInfoByName(productName, webappsPath);
+			productInfoService
+					.deleteProductInfoByName(productName, webappsPath);
 			processResult.setRetCode(ProcessResult.SUCCESS);
 			processResult.setRetMsg("ok");
 			processResult.setObj(null);
@@ -214,7 +233,8 @@ public class AdminController {
 			ZrtLog.error(logger, "delteProduct", null, processResult, t);
 			t.printStackTrace();
 		}
-		ZrtLog.debug(logger, " finish delteProduct ", null, " processResult: " + processResult);
+		ZrtLog.debug(logger, " finish delteProduct ", null, " processResult: "
+				+ processResult);
 		return processResult;
 
 	}
@@ -234,7 +254,8 @@ public class AdminController {
 		ProcessResult processResult = new ProcessResult();
 
 		try {
-			PageInfo<ProductInfo> pageInfo = productInfoService.listAllProductInfo(startPage, 10);
+			PageInfo<ProductInfo> pageInfo = productInfoService
+					.listAllProductInfo(startPage, 10);
 
 			processResult.setRetCode(ProcessResult.SUCCESS);
 			processResult.setRetMsg("ok");
@@ -265,12 +286,14 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping(value = "/list_product_fuzzy")
-	public ProcessResult listProductInfoFuzzy(String name, String seriesName, int startPage) {
+	public ProcessResult listProductInfoFuzzy(String name, String seriesName,
+			int startPage) {
 
 		ProcessResult processResult = new ProcessResult();
 
 		try {
-			PageInfo<ProductInfo> pageInfo = productInfoService.listProductInfo(name, seriesName, startPage, 10);
+			PageInfo<ProductInfo> pageInfo = productInfoService
+					.listProductInfo(name, seriesName, startPage, 10);
 			processResult.setRetCode(ProcessResult.SUCCESS);
 			processResult.setRetMsg("ok");
 			processResult.setObj(pageInfo);
@@ -300,7 +323,8 @@ public class AdminController {
 
 		try {
 			productName = new String(productName.getBytes("8859_1"), "utf8");
-			ProductInfo productInfo = productInfoService.queryProductInfo(productName);
+			ProductInfo productInfo = productInfoService
+					.queryProductInfo(productName);
 			processResult.setRetCode(ProcessResult.SUCCESS);
 			processResult.setRetMsg("ok");
 			processResult.setObj(productInfo);
@@ -329,14 +353,18 @@ public class AdminController {
 	 * @param file1
 	 * @param file2
 	 * @param file3
+	 * @param file4
 	 * @return
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ProcessResult updateProudct(HttpServletRequest request, String oldName, String templateId,
-			String productName, String productDesc, String seriesName, MultipartFile file0, MultipartFile file1,
-			MultipartFile file2, MultipartFile file3) {
-		ZrtLog.debug(logger, " enter  update ", null, " oldName: " + oldName + " templateId : " + templateId
-				+ " productName: " + productName + " productDesc: " + productDesc);
+	public ProcessResult updateProudct(HttpServletRequest request,
+			String oldName, String templateId, String productName,
+			String productDesc, String seriesName, MultipartFile file0,
+			MultipartFile file1, MultipartFile file2, MultipartFile file3,
+			MultipartFile file4) {
+		ZrtLog.debug(logger, " enter  update ", null, " oldName: " + oldName
+				+ " templateId : " + templateId + " productName: "
+				+ productName + " productDesc: " + productDesc);
 
 		ProcessResult processResult = new ProcessResult();
 
@@ -358,9 +386,11 @@ public class AdminController {
 				webappsPath = sb.toString();
 				pathMap.put("path", webappsPath);
 			}
-			ProductInfo productInfo = productInfoService.queryProductInfo(oldName);
+			ProductInfo productInfo = productInfoService
+					.queryProductInfo(oldName);
 
-			if ("undefined".equals(templateId) || templateId == null || "".equals(templateId.trim())) {
+			if ("undefined".equals(templateId) || templateId == null
+					|| "".equals(templateId.trim())) {
 				productInfo.setTemplateId(-1);
 			} else {
 				productInfo.setTemplateId(Integer.parseInt(templateId));
@@ -384,30 +414,42 @@ public class AdminController {
 			} else {
 				productInfo.setSeriesName(seriesName);
 			}
-			ZrtLog.debug(logger, " enter uploadProudct ", null, " productInfo: " + productInfo);
+			ZrtLog.debug(logger, " enter uploadProudct ", null,
+					" productInfo: " + productInfo);
 			if (file0 != null && !file0.isEmpty()) {
-				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file0);
+				String clienPath = saveFile(webappsPath, productInfo.getId()
+						+ "", file0);
 				productInfo.setProductPic(clienPath);
 			} else {
 				productInfo.setProductPic(null);
 			}
 			if (file1 != null && !file1.isEmpty()) {
-				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file1);
+				String clienPath = saveFile(webappsPath, productInfo.getId()
+						+ "", file1);
 				productInfo.setAudioUrl(clienPath);
 			} else {
 				productInfo.setAudioUrl(null);
 			}
 			if (file2 != null && !file2.isEmpty()) {
-				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file2);
+				String clienPath = saveFile(webappsPath, productInfo.getId()
+						+ "", file2);
 				productInfo.setVideoPic(clienPath);
 			} else {
 				productInfo.setVideoPic(null);
 			}
 			if (file3 != null && !file3.isEmpty()) {
-				String clienPath = saveFile(webappsPath, productInfo.getId() + "", file3);
+				String clienPath = saveFile(webappsPath, productInfo.getId()
+						+ "", file3);
 				productInfo.setVideoUrl(clienPath);
 			} else {
 				productInfo.setVideoUrl(null);
+			}
+			if (file4 != null && !file4.isEmpty()) {
+				String clienPath = saveFile(webappsPath, productInfo.getId()
+						+ "", file4);
+				productInfo.setCodePic(clienPath);
+			} else {
+				productInfo.setCodePic(null);
 			}
 
 			productInfoService.updateProductInfo(productInfo, oldName);
@@ -422,7 +464,8 @@ public class AdminController {
 			ZrtLog.error(logger, "uploadProudct", null, processResult, t);
 			t.printStackTrace();
 		}
-		ZrtLog.debug(logger, " finish  uploadProudct ", null, " processResult: " + processResult);
+		ZrtLog.debug(logger, " finish  uploadProudct ", null,
+				" processResult: " + processResult);
 		return processResult;
 	}
 

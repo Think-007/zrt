@@ -39,6 +39,9 @@ public class ProductInfo implements Serializable {
 	// 自然堂的名称
 	private String searchName;
 
+	// 防伪验证图片
+	private String codePic;
+
 	public long getId() {
 		return id;
 	}
@@ -119,11 +122,22 @@ public class ProductInfo implements Serializable {
 		this.searchName = searchName;
 	}
 
+	public String getCodePic() {
+		return codePic;
+	}
+
+	public void setCodePic(String codePic) {
+		this.codePic = codePic;
+	}
+
 	@Override
 	public String toString() {
-		return "ProductInfo [id=" + id + ", productName=" + productName + ", seriesName=" + seriesName + ", productPic="
-				+ productPic + ", productDesc=" + productDesc + ", audioUrl=" + audioUrl + ", videoUrl=" + videoUrl
-				+ ", videoPic=" + videoPic + ", templateId=" + templateId + ", searchName=" + searchName + "]";
+		return "ProductInfo [id=" + id + ", productName=" + productName
+				+ ", seriesName=" + seriesName + ", productPic=" + productPic
+				+ ", productDesc=" + productDesc + ", audioUrl=" + audioUrl
+				+ ", videoUrl=" + videoUrl + ", videoPic=" + videoPic
+				+ ", templateId=" + templateId + ", searchName=" + searchName
+				+ ", codePic=" + codePic + "]";
 	}
 
 }

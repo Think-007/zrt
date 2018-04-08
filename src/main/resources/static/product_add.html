@@ -109,10 +109,12 @@
       var file1 = document.getElementById('upload_file_audiopic').files[0];
       var file2 = document.getElementById('upload_file_audio').files[0];
       var file3 = document.getElementById('upload_file_vedio').files[0];
+      var file4 = document.getElementById('upload_file_codePic').files[0];
       fd.append('file0', file); 
       fd.append('file2', file1); 
       fd.append('file1', file2); 
       fd.append('file3', file3); 
+      fd.append('file4', file4); 
       fd.append('templateId',$("#selectDemo").val());
       fd.append('productName',$("#productName").val());
       fd.append('productDesc',$("#productDes").val());
@@ -269,6 +271,19 @@
 											</select>
 										</div>
 									</div>
+									   <div class="control-group">
+                                        <label for="textfield" class="control-label">防伪图片上传</label>
+                                        <div class="controls">
+                                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="adminskin/img/noimage.gif" /></div>
+                                                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                                <div>
+                                                    <span class="btn btn-file"><span class="fileupload-new">选择图片</span><span class="fileupload-exists">更改</span><input id="upload_file_codePic" type="file" name="file" /></span>
+                                                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">移除</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 									<div class="form-actions">
 										<button type="button" class="btn btn-primary" onclick="addBtn()">保存</button>
 										<button type="button" class="btn" onclick="location = 'product_list.html'">取消</button>
