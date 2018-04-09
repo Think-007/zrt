@@ -9,6 +9,10 @@
 
 package com.think.zrt.controller;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,6 +52,8 @@ public class RedirectController {
 	@Autowired
 	private UserInfoMapper userInfoMapper;
 
+	private ExecutorService threadPoole = Executors.newFixedThreadPool(1000);
+
 	/**
 	 * 登录重定向
 	 * 
@@ -61,11 +67,12 @@ public class RedirectController {
 
 	@RequestMapping("/admin")
 	@ResponseBody
-	public ProcessResult login(HttpServletRequest request, HttpServletResponse response, String userName,
-			String password) {
+	public ProcessResult login(HttpServletRequest request,
+			HttpServletResponse response, String userName, String password) {
 
 		ProcessResult processResult = new ProcessResult();
-		ZrtLog.debug(logger, " enter login ", null, " userName: " + userName + " pwd : " + password);
+		ZrtLog.debug(logger, " enter login ", null, " userName: " + userName
+				+ " pwd : " + password);
 		try {
 
 			// 1、校验参数
@@ -95,7 +102,8 @@ public class RedirectController {
 			ZrtLog.error(logger, "uploadProudct", null, processResult, t);
 			t.printStackTrace();
 		}
-		ZrtLog.debug(logger, " finish login ", null, " processResult: " + processResult);
+		ZrtLog.debug(logger, " finish login ", null, " processResult: "
+				+ processResult);
 
 		return processResult;
 
@@ -114,7 +122,13 @@ public class RedirectController {
 	@ResponseBody
 	public String mail() {
 
-		mailService.sendMail(sender, receiver, "主题", "测试内容");
+		threadPoole.submit(new Runnable() {
+
+			@Override
+			public void run() {
+				mailService.sendMail(sender, receiver, "主题", "测试内容 qq邮箱");
+			}
+		});
 
 		return "success";
 	}

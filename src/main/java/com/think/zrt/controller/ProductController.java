@@ -1,5 +1,8 @@
 package com.think.zrt.controller;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -46,13 +49,15 @@ public class ProductController {
 	private RestTemplate restTemplate;
 
 	@Autowired
-	private MailService MailService;
+	private MailService mailService;
 
 	@Value("${mail.sender.accout}")
 	private String sender;
 
 	@Value("${mail.receiver.account}")
 	private String receiver;
+
+	private ExecutorService threadPoole = Executors.newFixedThreadPool(1000);
 
 	/**
 	 * 查询商品信息接口
@@ -104,7 +109,14 @@ public class ProductController {
 			processResult.setRetMsg(ZrtConst.TIME_OUT_MSG);
 			ZrtLog.error(logger, "getProductInfo", null, processResult, e);
 			// 发邮件
-			MailService.sendMail(sender, receiver, "自然堂查询", e.toString());
+			threadPoole.submit(new Runnable() {
+
+				@Override
+				public void run() {
+					mailService.sendMail(sender, receiver, "自然堂查询",
+							e.toString());
+				}
+			});
 		} catch (Throwable t) {
 
 			processResult.setRetCode(ZrtConst.EXCEPTION);
@@ -113,7 +125,14 @@ public class ProductController {
 			ZrtLog.error(logger, "getProductInfo", null, processResult, t);
 			t.printStackTrace();
 			// 发邮件
-			MailService.sendMail(sender, receiver, "自然堂查询", t.toString());
+			threadPoole.submit(new Runnable() {
+
+				@Override
+				public void run() {
+					mailService.sendMail(sender, receiver, "自然堂查询",
+							t.toString());
+				}
+			});
 		}
 		ZrtLog.debug(logger, " finish getProductInfo ", null,
 				" processResult: " + processResult);
@@ -163,7 +182,14 @@ public class ProductController {
 			processResult.setRetMsg(ZrtConst.TIME_OUT_MSG);
 			ZrtLog.error(logger, "authProductInfo", null, processResult, e);
 			// 发邮件
-			MailService.sendMail(sender, receiver, "自然堂防伪", e.toString());
+			threadPoole.submit(new Runnable() {
+
+				@Override
+				public void run() {
+					mailService.sendMail(sender, receiver, "自然堂防伪",
+							e.toString());
+				}
+			});
 		} catch (Throwable t) {
 
 			processResult.setRetCode(ZrtConst.EXCEPTION);
@@ -172,7 +198,14 @@ public class ProductController {
 			ZrtLog.error(logger, "authProductInfo", null, processResult, t);
 			t.printStackTrace();
 			// 发邮件
-			MailService.sendMail(sender, receiver, "自然堂查询", t.toString());
+			threadPoole.submit(new Runnable() {
+
+				@Override
+				public void run() {
+					mailService.sendMail(sender, receiver, "自然堂查询",
+							t.toString());
+				}
+			});
 		}
 
 		ZrtLog.debug(logger, " finish authProductInfo ", null,
