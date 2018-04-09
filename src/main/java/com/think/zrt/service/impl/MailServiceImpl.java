@@ -9,6 +9,7 @@
 
 package com.think.zrt.service.impl;
 
+import java.security.GeneralSecurityException;
 /**
  * 
  * 类简要描述
@@ -34,6 +35,7 @@ import javax.mail.internet.MimeMessage.RecipientType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.sun.mail.util.MailSSLSocketFactory;
 import com.think.zrt.service.MailService;
 
 @Service
@@ -79,6 +81,17 @@ public class MailServiceImpl implements MailService {
 			// 建立了一条通信路线
 			Session session = Session.getInstance(prop, authenticator);
 			Message msg = new MimeMessage(session);
+			// 开启安全协议
+			MailSSLSocketFactory sf = null;
+			try {
+				sf = new MailSSLSocketFactory();
+				sf.setTrustAllHosts(true);
+			} catch (GeneralSecurityException e1) {
+				e1.printStackTrace();
+			}
+			prop.put("mail.smtp.ssl.enable", "true");
+			prop.put("mail.smtp.ssl.socketFactory", sf);
+
 			// 发件者邮箱
 			msg.setFrom(new InternetAddress(from));
 			// 收件者邮箱
