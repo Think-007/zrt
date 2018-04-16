@@ -21720,3 +21720,214 @@ Caused by: org.springframework.context.ApplicationContextException: Unable to st
 2018-04-09 19:15:46.594  WARN 12320 --- [main] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
 2018-04-09 19:15:47.006  INFO 12320 --- [main] c.think.zrt.service.MailServiceImplTest  : Started MailServiceImplTest in 5.571 seconds (JVM running for 6.605)
 2018-04-09 19:15:58.232  INFO 12320 --- [Thread-3] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@52102734: startup date [Mon Apr 09 19:15:41 CST 2018]; root of context hierarchy
+2018-04-11 20:48:23.868  INFO 196 --- [main] com.think.zrt.mapper.ProductMapperTest   : Starting ProductMapperTest on DESKTOP-4V8P2LO with PID 196 (started by LPF in G:\sts_files\workspace_wb\zrtweb)
+2018-04-11 20:48:23.901 DEBUG 196 --- [main] com.think.zrt.mapper.ProductMapperTest   : Running with Spring Boot v1.5.10.RELEASE, Spring v4.3.14.RELEASE
+2018-04-11 20:48:23.901  INFO 196 --- [main] com.think.zrt.mapper.ProductMapperTest   : The following profiles are active: dev
+2018-04-11 20:48:24.005  INFO 196 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@52102734: startup date [Wed Apr 11 20:48:23 CST 2018]; root of context hierarchy
+2018-04-11 20:48:26.438  WARN 196 --- [main] o.h.v.m.ParameterMessageInterpolator     : HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-04-11 20:48:28.126  WARN 196 --- [main] o.h.v.m.ParameterMessageInterpolator     : HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-04-11 20:48:28.569  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@52102734: startup date [Wed Apr 11 20:48:23 CST 2018]; root of context hierarchy
+2018-04-11 20:48:28.828  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/list_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.listProductInfo(int)
+2018-04-11 20:48:28.833  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/series]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.listSeries()
+2018-04-11 20:48:28.834  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/update],methods=[POST]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.updateProudct(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile)
+2018-04-11 20:48:28.835  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/delet_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.delteProduct(javax.servlet.http.HttpServletRequest,java.lang.String)
+2018-04-11 20:48:28.836  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/upload],methods=[POST]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.uploadProudct(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile)
+2018-04-11 20:48:28.838  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/edit_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.editProductSeries(java.lang.String)
+2018-04-11 20:48:28.838  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/list_product_fuzzy]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.listProductInfoFuzzy(java.lang.String,java.lang.String,int)
+2018-04-11 20:48:28.842  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/product_info]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.ProductController.getProductInfo(java.lang.String)
+2018-04-11 20:48:28.843  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/to_weichat]}" onto public java.lang.String com.think.zrt.controller.ProductController.forwardToWeichat(java.lang.String)
+2018-04-11 20:48:28.844  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/auth_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.ProductController.authProductInfo(javax.servlet.http.HttpServletRequest,java.lang.String)
+2018-04-11 20:48:28.848  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.RedirectController.login(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse,java.lang.String,java.lang.String)
+2018-04-11 20:48:28.850  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/relogin]}" onto public java.lang.String com.think.zrt.controller.RedirectController.redirect()
+2018-04-11 20:48:28.851  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/mail]}" onto public java.lang.String com.think.zrt.controller.RedirectController.mail()
+2018-04-11 20:48:28.857  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-04-11 20:48:28.858  INFO 196 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-04-11 20:48:28.922  INFO 196 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2018-04-11 20:48:28.955  INFO 196 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-11 20:48:28.955  INFO 196 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-11 20:48:29.075  INFO 196 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-11 20:48:29.197  INFO 196 --- [main] oConfiguration$WelcomePageHandlerMapping : Adding welcome page: ServletContext resource [/index.html]
+2018-04-11 20:48:29.493  INFO 196 --- [main] o.s.ui.freemarker.SpringTemplateLoader   : SpringTemplateLoader for FreeMarker: using resource loader [org.springframework.web.context.support.GenericWebApplicationContext@52102734: startup date [Wed Apr 11 20:48:23 CST 2018]; root of context hierarchy] and template loader path [classpath:/templates/]
+2018-04-11 20:48:29.494  INFO 196 --- [main] o.s.w.s.v.f.FreeMarkerConfigurer         : ClassTemplateLoader for Spring macros added to FreeMarker configuration
+2018-04-11 20:48:29.568  WARN 196 --- [main] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2018-04-11 20:48:30.112  INFO 196 --- [main] com.think.zrt.mapper.ProductMapperTest   : Started ProductMapperTest in 7.034 seconds (JVM running for 8.628)
+2018-04-11 20:48:34.222 DEBUG 196 --- [main] c.t.z.d.P.getProductInfoByName           : ==>  Preparing: select id as id, product_name as productName, product_series as seriesName, product_pic as productPic, product_desc as productDesc, video_url as videoUrl, audio_url as audioUrl, video_pic as videoPic, code_pic as codePic, template_id as templateId from zrt_product t where t.product_name=? 
+2018-04-11 20:48:34.310 DEBUG 196 --- [main] c.t.z.d.P.getProductInfoByName           : ==> Parameters: 冰川水s(String)
+2018-04-11 20:48:34.386 DEBUG 196 --- [main] c.t.z.d.P.getProductInfoByName           : <==      Total: 0
+2018-04-11 20:48:34.425  INFO 196 --- [Thread-3] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@52102734: startup date [Wed Apr 11 20:48:23 CST 2018]; root of context hierarchy
+2018-04-11 20:51:33.804  INFO 9148 --- [main] com.think.zrt.mapper.UserInfoMapperTest  : Starting UserInfoMapperTest on DESKTOP-4V8P2LO with PID 9148 (started by LPF in G:\sts_files\workspace_wb\zrtweb)
+2018-04-11 20:51:33.806 DEBUG 9148 --- [main] com.think.zrt.mapper.UserInfoMapperTest  : Running with Spring Boot v1.5.10.RELEASE, Spring v4.3.14.RELEASE
+2018-04-11 20:51:33.807  INFO 9148 --- [main] com.think.zrt.mapper.UserInfoMapperTest  : The following profiles are active: dev
+2018-04-11 20:51:33.934  INFO 9148 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@3568f9d2: startup date [Wed Apr 11 20:51:33 CST 2018]; root of context hierarchy
+2018-04-11 20:51:37.345  WARN 9148 --- [main] o.h.v.m.ParameterMessageInterpolator     : HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-04-11 20:51:39.168  WARN 9148 --- [main] o.h.v.m.ParameterMessageInterpolator     : HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-04-11 20:51:39.735  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@3568f9d2: startup date [Wed Apr 11 20:51:33 CST 2018]; root of context hierarchy
+2018-04-11 20:51:40.097  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/list_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.listProductInfo(int)
+2018-04-11 20:51:40.111  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/update],methods=[POST]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.updateProudct(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile)
+2018-04-11 20:51:40.112  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/series]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.listSeries()
+2018-04-11 20:51:40.113  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/delet_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.delteProduct(javax.servlet.http.HttpServletRequest,java.lang.String)
+2018-04-11 20:51:40.115  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/upload],methods=[POST]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.uploadProudct(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile)
+2018-04-11 20:51:40.118  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/list_product_fuzzy]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.listProductInfoFuzzy(java.lang.String,java.lang.String,int)
+2018-04-11 20:51:40.121  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/edit_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.editProductSeries(java.lang.String)
+2018-04-11 20:51:40.125  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/to_weichat]}" onto public java.lang.String com.think.zrt.controller.ProductController.forwardToWeichat(java.lang.String)
+2018-04-11 20:51:40.126  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/auth_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.ProductController.authProductInfo(javax.servlet.http.HttpServletRequest,java.lang.String)
+2018-04-11 20:51:40.127  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/product_info]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.ProductController.getProductInfo(java.lang.String)
+2018-04-11 20:51:40.129  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.RedirectController.login(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse,java.lang.String,java.lang.String)
+2018-04-11 20:51:40.130  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/relogin]}" onto public java.lang.String com.think.zrt.controller.RedirectController.redirect()
+2018-04-11 20:51:40.131  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/mail]}" onto public java.lang.String com.think.zrt.controller.RedirectController.mail()
+2018-04-11 20:51:40.143  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-04-11 20:51:40.145  INFO 9148 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-04-11 20:51:40.248  INFO 9148 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2018-04-11 20:51:40.284  INFO 9148 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-11 20:51:40.284  INFO 9148 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-11 20:51:40.439  INFO 9148 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-11 20:51:40.588  INFO 9148 --- [main] oConfiguration$WelcomePageHandlerMapping : Adding welcome page: ServletContext resource [/index.html]
+2018-04-11 20:51:40.972  INFO 9148 --- [main] o.s.ui.freemarker.SpringTemplateLoader   : SpringTemplateLoader for FreeMarker: using resource loader [org.springframework.web.context.support.GenericWebApplicationContext@3568f9d2: startup date [Wed Apr 11 20:51:33 CST 2018]; root of context hierarchy] and template loader path [classpath:/templates/]
+2018-04-11 20:51:40.974  INFO 9148 --- [main] o.s.w.s.v.f.FreeMarkerConfigurer         : ClassTemplateLoader for Spring macros added to FreeMarker configuration
+2018-04-11 20:51:41.029  WARN 9148 --- [main] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2018-04-11 20:51:41.801  INFO 9148 --- [main] com.think.zrt.mapper.UserInfoMapperTest  : Started UserInfoMapperTest in 8.697 seconds (JVM running for 13.257)
+2018-04-11 20:54:21.278 DEBUG 9148 --- [main] c.t.z.d.U.getUserInfoByName              : ==>  Preparing: select user_name as name, password as password from zrt_user t where t.user_name=? 
+2018-04-11 20:54:24.345 DEBUG 9148 --- [main] c.t.z.d.U.getUserInfoByName              : ==> Parameters: admin(String)
+2018-04-11 20:54:25.842 DEBUG 9148 --- [main] c.t.z.d.U.getUserInfoByName              : <==      Total: 1
+2018-04-12 07:32:53.880  INFO 7000 --- [main] com.think.zrt.mapper.ProductMapperTest   : Starting ProductMapperTest on DESKTOP-4V8P2LO with PID 7000 (started by LPF in G:\sts_files\workspace_wb\zrtweb)
+2018-04-12 07:32:53.895 DEBUG 7000 --- [main] com.think.zrt.mapper.ProductMapperTest   : Running with Spring Boot v1.5.10.RELEASE, Spring v4.3.14.RELEASE
+2018-04-12 07:32:53.895  INFO 7000 --- [main] com.think.zrt.mapper.ProductMapperTest   : The following profiles are active: dev
+2018-04-12 07:32:54.130  INFO 7000 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@52102734: startup date [Thu Apr 12 07:32:54 CST 2018]; root of context hierarchy
+2018-04-12 07:32:57.665  WARN 7000 --- [main] o.h.v.m.ParameterMessageInterpolator     : HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-04-12 07:32:59.968  WARN 7000 --- [main] o.h.v.m.ParameterMessageInterpolator     : HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2018-04-12 07:33:00.939  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@52102734: startup date [Thu Apr 12 07:32:54 CST 2018]; root of context hierarchy
+2018-04-12 07:33:01.095  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/list_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.listProductInfo(int)
+2018-04-12 07:33:01.111  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/upload],methods=[POST]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.uploadProudct(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile)
+2018-04-12 07:33:01.112  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/series]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.listSeries()
+2018-04-12 07:33:01.112  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/delet_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.delteProduct(javax.servlet.http.HttpServletRequest,java.lang.String)
+2018-04-12 07:33:01.112  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/update],methods=[POST]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.updateProudct(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile,org.springframework.web.multipart.MultipartFile)
+2018-04-12 07:33:01.112  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/list_product_fuzzy]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.listProductInfoFuzzy(java.lang.String,java.lang.String,int)
+2018-04-12 07:33:01.112  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/auth/edit_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.AdminController.editProductSeries(java.lang.String)
+2018-04-12 07:33:01.112  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/to_weichat]}" onto public java.lang.String com.think.zrt.controller.ProductController.forwardToWeichat(java.lang.String)
+2018-04-12 07:33:01.112  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/product_info]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.ProductController.getProductInfo(java.lang.String)
+2018-04-12 07:33:01.112  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/zrt/auth_product]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.ProductController.authProductInfo(javax.servlet.http.HttpServletRequest,java.lang.String)
+2018-04-12 07:33:01.112  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/relogin]}" onto public java.lang.String com.think.zrt.controller.RedirectController.redirect()
+2018-04-12 07:33:01.112  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/mail]}" onto public java.lang.String com.think.zrt.controller.RedirectController.mail()
+2018-04-12 07:33:01.112  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/admin]}" onto public com.think.zrt.domain.ProcessResult com.think.zrt.controller.RedirectController.login(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse,java.lang.String,java.lang.String)
+2018-04-12 07:33:01.112  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-04-12 07:33:01.112  INFO 7000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-04-12 07:33:01.144  INFO 7000 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Root mapping to handler of type [class org.springframework.web.servlet.mvc.ParameterizableViewController]
+2018-04-12 07:33:01.218  INFO 7000 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-12 07:33:01.218  INFO 7000 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-12 07:33:01.312  INFO 7000 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-12 07:33:01.437  INFO 7000 --- [main] oConfiguration$WelcomePageHandlerMapping : Adding welcome page: ServletContext resource [/index.html]
+2018-04-12 07:33:01.765  INFO 7000 --- [main] o.s.ui.freemarker.SpringTemplateLoader   : SpringTemplateLoader for FreeMarker: using resource loader [org.springframework.web.context.support.GenericWebApplicationContext@52102734: startup date [Thu Apr 12 07:32:54 CST 2018]; root of context hierarchy] and template loader path [classpath:/templates/]
+2018-04-12 07:33:01.765  INFO 7000 --- [main] o.s.w.s.v.f.FreeMarkerConfigurer         : ClassTemplateLoader for Spring macros added to FreeMarker configuration
+2018-04-12 07:33:01.843  WARN 7000 --- [main] o.s.b.a.f.FreeMarkerAutoConfiguration    : Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2018-04-12 07:33:02.663  INFO 7000 --- [main] com.think.zrt.mapper.ProductMapperTest   : Started ProductMapperTest in 10.193 seconds (JVM running for 13.691)
+2018-04-12 07:33:03.653 ERROR 7000 --- [main] o.a.tomcat.jdbc.pool.ConnectionPool      : Unable to create initial connections of pool.
+
+com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_31]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_31]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_31]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:408) ~[na:1.8.0_31]
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425) ~[mysql-connector-java-5.1.45.jar:5.1.45]
+	at com.mysql.jdbc.SQLError.createCommunicationsException(SQLError.java:990) ~[mysql-connector-java-5.1.45.jar:5.1.45]
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:341) ~[mysql-connector-java-5.1.45.jar:5.1.45]
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2186) ~[mysql-connector-java-5.1.45.jar:5.1.45]
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2219) ~[mysql-connector-java-5.1.45.jar:5.1.45]
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2014) ~[mysql-connector-java-5.1.45.jar:5.1.45]
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:776) ~[mysql-connector-java-5.1.45.jar:5.1.45]
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47) ~[mysql-connector-java-5.1.45.jar:5.1.45]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_31]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_31]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_31]
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:408) ~[na:1.8.0_31]
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425) ~[mysql-connector-java-5.1.45.jar:5.1.45]
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:386) ~[mysql-connector-java-5.1.45.jar:5.1.45]
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:330) ~[mysql-connector-java-5.1.45.jar:5.1.45]
+	at org.apache.tomcat.jdbc.pool.PooledConnection.connectUsingDriver(PooledConnection.java:310) ~[tomcat-jdbc-8.5.27.jar:na]
+	at org.apache.tomcat.jdbc.pool.PooledConnection.connect(PooledConnection.java:203) ~[tomcat-jdbc-8.5.27.jar:na]
+	at org.apache.tomcat.jdbc.pool.ConnectionPool.createConnection(ConnectionPool.java:735) [tomcat-jdbc-8.5.27.jar:na]
+	at org.apache.tomcat.jdbc.pool.ConnectionPool.borrowConnection(ConnectionPool.java:667) [tomcat-jdbc-8.5.27.jar:na]
+	at org.apache.tomcat.jdbc.pool.ConnectionPool.init(ConnectionPool.java:482) [tomcat-jdbc-8.5.27.jar:na]
+	at org.apache.tomcat.jdbc.pool.ConnectionPool.<init>(ConnectionPool.java:154) [tomcat-jdbc-8.5.27.jar:na]
+	at org.apache.tomcat.jdbc.pool.DataSourceProxy.pCreatePool(DataSourceProxy.java:118) [tomcat-jdbc-8.5.27.jar:na]
+	at org.apache.tomcat.jdbc.pool.DataSourceProxy.createPool(DataSourceProxy.java:107) [tomcat-jdbc-8.5.27.jar:na]
+	at org.apache.tomcat.jdbc.pool.DataSourceProxy.getConnection(DataSourceProxy.java:131) [tomcat-jdbc-8.5.27.jar:na]
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:111) [spring-jdbc-4.3.14.RELEASE.jar:4.3.14.RELEASE]
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:77) [spring-jdbc-4.3.14.RELEASE.jar:4.3.14.RELEASE]
+	at org.mybatis.spring.transaction.SpringManagedTransaction.openConnection(SpringManagedTransaction.java:82) [mybatis-spring-1.3.2.jar:1.3.2]
+	at org.mybatis.spring.transaction.SpringManagedTransaction.getConnection(SpringManagedTransaction.java:68) [mybatis-spring-1.3.2.jar:1.3.2]
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:338) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.SimpleExecutor.prepareStatement(SimpleExecutor.java:84) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:62) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:326) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83) [mybatis-3.4.6.jar:3.4.6]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_31]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_31]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_31]
+	at java.lang.reflect.Method.invoke(Method.java:483) ~[na:1.8.0_31]
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49) [mybatis-3.4.6.jar:3.4.6]
+	at com.github.pagehelper.SqlUtil._processPage(SqlUtil.java:351) [pagehelper-4.0.0.jar:na]
+	at com.github.pagehelper.SqlUtil.processPage(SqlUtil.java:329) [pagehelper-4.0.0.jar:na]
+	at com.github.pagehelper.PageHelper.intercept(PageHelper.java:150) [pagehelper-4.0.0.jar:na]
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61) [mybatis-3.4.6.jar:3.4.6]
+	at com.sun.proxy.$Proxy81.query(Unknown Source) [na:na]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:77) [mybatis-3.4.6.jar:3.4.6]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_31]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_31]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_31]
+	at java.lang.reflect.Method.invoke(Method.java:483) ~[na:1.8.0_31]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:433) [mybatis-spring-1.3.2.jar:1.3.2]
+	at com.sun.proxy.$Proxy72.selectOne(Unknown Source) [na:na]
+	at org.mybatis.spring.SqlSessionTemplate.selectOne(SqlSessionTemplate.java:166) [mybatis-spring-1.3.2.jar:1.3.2]
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:83) [mybatis-3.4.6.jar:3.4.6]
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:59) [mybatis-3.4.6.jar:3.4.6]
+	at com.sun.proxy.$Proxy73.getProductInfoByName(Unknown Source) [na:na]
+	at com.think.zrt.mapper.ProductMapperTest.queryProductInfoByName(ProductMapperTest.java:46) [test-classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_31]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_31]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_31]
+	at java.lang.reflect.Method.invoke(Method.java:483) ~[na:1.8.0_31]
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47) [junit-4.12.jar:4.12]
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75) [spring-test-4.3.14.RELEASE.jar:4.3.14.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86) [spring-test-4.3.14.RELEASE.jar:4.3.14.RELEASE]
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84) [spring-test-4.3.14.RELEASE.jar:4.3.14.RELEASE]
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:252) [spring-test-4.3.14.RELEASE.jar:4.3.14.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94) [spring-test-4.3.14.RELEASE.jar:4.3.14.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-4.3.14.RELEASE.jar:4.3.14.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-4.3.14.RELEASE.jar:4.3.14.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191) [spring-test-4.3.14.RELEASE.jar:4.3.14.RELEASE]
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86) [.cp/:na]
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38) [.cp/:na]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538) [.cp/:na]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760) [.cp/:na]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460) [.cp/:na]
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206) [.cp/:na]
+Caused by: java.net.NoRouteToHostException: No route to host: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method) ~[na:1.8.0_31]
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:79) ~[na:1.8.0_31]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:345) ~[na:1.8.0_31]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_31]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_31]
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[na:1.8.0_31]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_31]
+	at java.net.Socket.connect(Socket.java:589) ~[na:1.8.0_31]
+	at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:211) ~[mysql-connector-java-5.1.45.jar:5.1.45]
+	at com.mysql.jdbc.MysqlIO.<init>(MysqlIO.java:300) ~[mysql-connector-java-5.1.45.jar:5.1.45]
+	... 85 common frames omitted
+
+2018-04-12 07:33:03.890  INFO 7000 --- [Thread-3] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@52102734: startup date [Thu Apr 12 07:32:54 CST 2018]; root of context hierarchy

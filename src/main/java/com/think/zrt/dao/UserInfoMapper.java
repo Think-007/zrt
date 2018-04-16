@@ -31,6 +31,6 @@ public interface UserInfoMapper {
 	 * @param name
 	 * @return
 	 */
-	public UserInfo getUserInfoByName(String name);
+	UserInfo getUserInfoByName(String name);
 
 }

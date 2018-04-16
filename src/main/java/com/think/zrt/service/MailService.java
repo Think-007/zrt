@@ -35,6 +35,6 @@ public interface MailService {
 	 * @param content
 	 *            内容
 	 */
-	public void sendMail(String from, String to, String subject, String content);
+	void sendMail(String from, String to, String subject, String content);
 
 }

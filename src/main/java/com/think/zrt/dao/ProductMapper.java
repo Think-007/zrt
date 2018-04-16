@@ -15,7 +15,7 @@ public interface ProductMapper {
 	 * @param name
 	 * @return
 	 */
-	public ProductInfo getProductInfoByName(@Param("name") String name);
+	ProductInfo getProductInfoByName(@Param("name") String name);
 
 	/**
 	 * 存储商品信息
@@ -23,7 +23,7 @@ public interface ProductMapper {
 	 * @param productInfo
 	 * @return
 	 */
-	public int saveProductInfo(ProductInfo productInfo);
+	int saveProductInfo(ProductInfo productInfo);
 
 	/**
 	 * 根据产品名称删除记录
@@ -31,7 +31,7 @@ public interface ProductMapper {
 	 * @param name
 	 * @return
 	 */
-	public int deleteProductInfoByName(@Param("name") String name);
+	int deleteProductInfoByName(@Param("name") String name);
 
 	/**
 	 * 产品批量删除
@@ -39,7 +39,7 @@ public interface ProductMapper {
 	 * @param names
 	 * @return
 	 */
-	public int deleteProductInfoList(@Param("names") List<String> names);
+	int deleteProductInfoList(@Param("names") List<String> names);
 
 	/**
 	 * 分页查询所有记录
@@ -47,7 +47,7 @@ public interface ProductMapper {
 	 * @param rowBounds
 	 * @return
 	 */
-	public List<ProductInfo> listAllProductInfoByPage();
+	List<ProductInfo> listAllProductInfoByPage();
 
 	/**
 	 * 根据名称 模糊查询
@@ -55,7 +55,7 @@ public interface ProductMapper {
 	 * @param name
 	 * @return
 	 */
-	public List<ProductInfo> listProductInfo(@Param("name") String name, @Param("seriesName") String seriesName);
+	List<ProductInfo> listProductInfo(@Param("name") String name, @Param("seriesName") String seriesName);
 
 	/**
 	 * 查询系列
@@ -63,7 +63,7 @@ public interface ProductMapper {
 	 * @return
 	 */
 
-	public List<String> listProductSeries();
+	List<String> listProductSeries();
 
 	/**
 	 * 更新商品信息
@@ -71,6 +71,6 @@ public interface ProductMapper {
 	 * @param productInfo
 	 * @return
 	 */
-	public int updateProductInfo(@Param("productInfo") ProductInfo productInfo, @Param("oldName") String oldName);
+	int updateProductInfo(@Param("productInfo") ProductInfo productInfo, @Param("oldName") String oldName);
 
 }
