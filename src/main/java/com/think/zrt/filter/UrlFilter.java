@@ -89,6 +89,9 @@ public class UrlFilter implements Filter {
 		urlList.add("/product_list.html");
 		urlList.add("/product_add.html");
 		urlList.add("/product_edit.html");
+		urlList.add("/manager_list.html");
+		urlList.add("/manager_add.html");
+		urlList.add("/manager_edit.html");
 		urlList.add("/auth/");
 	}
 

@@ -77,7 +77,15 @@
                                 data = JSON.parse(data)
                             }
                             if (data.retCode == 0) {
-                                location = 'product_list.html';
+                            	//用户信息对象，保存到cookie中
+                            	
+        						var userInfo = {
+        								username:data.obj.name,
+        								roleid:data.obj.roleId
+        						}
+                            	localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                               
+                            	location = 'product_list.html';
                             }
                             if(data.retCode == -4){
                            

@@ -9,6 +9,8 @@
 
 package com.think.zrt.dao;
 
+import java.util.List;
+
 import com.think.zrt.domain.UserInfo;
 
 /**
@@ -32,7 +34,7 @@ public interface UserInfoMapper {
 	 * @return
 	 */
 	UserInfo getUserInfoByName(String name);
-	
+
 	/**
 	 * 添加管理员
 	 * 
@@ -40,21 +42,29 @@ public interface UserInfoMapper {
 	 * @return
 	 */
 	void saveUserInfo(UserInfo userInfo);
-	
+
 	/**
 	 * 删除管理员
 	 * 
 	 * @param name
 	 * @return
 	 */
-	void deleteUserInfo(String userName);
-	
+	void deleteUserInfoByName(String userName);
+
 	/**
 	 * 更改管理员信息
+	 * 
 	 * 
 	 * @param name
 	 * @return
 	 */
-	void updateUserInfo(String userName);
+	void updateUserInfo(UserInfo userInfo,String oldName);
+
+	/**
+	 * 查询所有的用户信息
+	 * 
+	 * @return
+	 */
+	List<UserInfo> listAllUserInfo();
 
 }

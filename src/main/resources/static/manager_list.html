@@ -106,61 +106,16 @@
     $(function () {
     	
     	initPage(0);
-    	selectCho();
-    	var roleCheck = JSON.parse(localStorage.getItem('userInfo'));
-    	console.log(roleCheck);
-    	if(roleCheck.roleid!=1){
-       $("#manageFlag").hide();
-    	}else{
-    		 $("#manageFlag").show();
-    	}
-    	 
+    	
     })
     
-    function selectCho(){
-    	
-    	$.ajax({
-            async: false,
-            type: "POST",
-            url:"/zrtweb/auth/series",
 
-            success: function (data) {
-              
-                if (data.retCode == 0) {
-                	 
-     				var selectopt="";
-     				selectopt='<option value="">全部</option>'
-     				for(i=0;i<data.obj.length;i++){
-   					
-     			selectopt+='<option value="'+data.obj[i]+'">'+data.obj[i]+'</option>'
-
-     				}
-     				document.getElementById("seriesChoose").innerHTML = selectopt;       	
-                }
-                }
-    	})
-    }
-    /*全选样式变换*/
-	function checkAll(event){
-		var target = event.target||event.srcElement;
-		var _checked  = target.checked;
-		
-		var checkbox=$("#che_1 input[type='checkbox']");
-		
-		if(checkbox.length>0){
-			checkbox.prop("checked", _checked);
-			
-		}
-		//$("#che_0").prop("checked", !$("#che_1").prop("checked"));
-			  
-	};
-	
     function initPage(cur){
     	
     	 $.ajax({
              async: false,
              type: "POST",
-             url:"/zrtweb/auth/list_product",
+             url:"/zrtweb/auth/all_admin",
              data: {
             	 startPage:cur
              },
@@ -183,33 +138,13 @@
     				for(i=0;i<queryList.length;i++){
     					
     					var no=i+1;
-    					var videoName="";
-    					var audioName="";
-    				if(queryList[i].videoUrl!=null){
     					
-    					videoName=stringG(queryList[i].videoUrl);
-    					queryList[i].videoUrl=queryList[i].videoUrl;
-    				}else{
-    					queryList[i].videoUrl="";
-    				}
-    				if(queryList[i].audioUrl!=null){
-    					queryList[i].audioUrl=queryList[i].audioUrl;
-    					audioName=stringG(queryList[i].audioUrl);
-    				}else{
-    					queryList[i].audioUrl="";
-    				}
     				
     				myrow+='<tr id="tr_'+no+'">'
-    				 +'<td id="che_1" class="with-checkbox"> <input type="checkbox" name="check" id="che" value="'+queryList[i].productName+'"> </td>'
-						+'<td class="data-mun">'+queryList[i].productName+'</td>'
-						+'<td class="data-mun">'+queryList[i].productSimple+'</td>'
-						+'<td class="data-mun">'+queryList[i].seriesName+'</td>'
-						+'<td class="data-mun">'+queryList[i].productDesc+'</td>'
-						+'<td class="data-mun"><img src="'+queryList[i].productPic+'" style="width:60px;" /></td>'
-						+'<td class="data-mun"><a href="'+queryList[i].audioUrl+'" target="_blank">'+audioName+'</a></td>'
-						+'<td class="data-mun"><a href="'+queryList[i].videoUrl+'" target="_blank">'+videoName+'</a></td>'
-						+'<td class="data-mun">'+queryList[i].templateId+'</td>'
-						+' <td class="data-act"><a href="product_edit.html?productName='+queryList[i].productName+'"><i class="icon-edit"></i> 编辑</a> | <a style="cursor: pointer;" onclick="dela('+i+')" class="delt"><i class="icon-remove"></i> 删除</a></td>'
+    				    +'<td  class="with-checkbox"> '+no+'</td>'
+						+'<td class="data-mun">'+queryList[i].name+'</td>'
+						+'<td class="data-mun">******</td>'
+						+' <td class="data-act"><a href="manager_edit.html?name='+queryList[i].name+'"><i class="icon-edit"></i> 编辑</a> | <a style="cursor: pointer;" onclick="dela('+queryList[i].name+')" class="delt"><i class="icon-remove"></i> 删除</a></td>'
 						+'<tr>';
                  }
 
@@ -268,23 +203,17 @@
      function dela(del){
     	 
     	   if(confirm("确定删除当前数据？")){
-console.log(del);
+
     		   $.ajax({
     	             async: false,
     	             type: "POST",
-    	             url:"/zrtweb/auth/list_product",
+    	             url:"/zrtweb/auth/delete_user",
     	             data: {
-    	            	 startPage:$("#pageNum").text()
+    	            	 userName:del
     	             },
-    	             success: function (data) {
-    	            	
-    	            	 if (data.retCode == 0) {
-    	            		 var queryLists="";
-    	                        queryLists=data.obj.list;
-    	                       // console.log(queryLists[del].productName);
-    	                        ajaxDelItem(queryLists[del].productName); 
-    	        				}
-    	            	 
+    	             success: function (data, textStatus) {
+    	            	 alert("删除成功！");
+    	            	 initPage(0);
     	             }
     		   })
     		  
@@ -296,39 +225,7 @@ console.log(del);
     	    }
      }
      
-     function delasearch(del){
-    	 if(confirm("确定删除当前数据？")){
 
-  		   $.ajax({
-  	           async: false,
-  	           type: "POST",
-  	           url:"/zrtweb/auth/list_product_fuzzy",
-               data: {
-              name:$("#tbsearch").val(),
-      	    seriesName:$("#seriesChoose option:selected").val(),
-      	     startPage:0
- 
-               },
-  	             success: function (data) {
-  	            
-  	            	 if (data.retCode == 0) {
-	            		 var queryLists="";
-	                        queryLists=data.obj.list;
-	                        console.log(queryLists[del].productName);
-	                        ajaxDelItem(queryLists[del].productName); 
-	        				}
-  	            	 
-  	             }
-  		   })
-  		  
-
-  	    }else{
-
-  	        return;
-
-  	    }
-    	 
-     }
     function stringG(url){
     	
     	var str = url;
@@ -353,100 +250,20 @@ console.log(del);
     	 })
 
     }
-    function search(){
-    	
-    	
-    	 $.ajax({
-             async: false,
-             type: "POST",
-             url:"/zrtweb/auth/list_product_fuzzy",
-             data: {
-            name:$("#tbsearch").val(),
-    	    seriesName:$("#seriesChoose option:selected").val(),
-    	     startPage:0
-    	 
-             },
-             success: function (data, textStatus) {
-            	 if (data.retCode == 0) {
-
-                     $("#firstRow").text(data.obj.firstPage);
-                 $("#lastRow").text(data.obj.size);
-                 $("#totalNum").text(data.obj.total);
-                 $("#pageNum").text(data.obj.pageNum);
-                 $("#totalPage").val(data.obj.pages);
-                	var myrow="";
-                    queryList=JSON.stringify(data.obj.list);
-    				queryList=eval('('+queryList +')');
-    				
-    				
-    				for(i=0;i<queryList.length;i++){
-    					
-    					var no=i+1;
-    					var videoName="";
-    					var audioName="";
-    				if(queryList[i].videoUrl!=null){
-    					
-    					videoName=stringG(queryList[i].videoUrl);
-    					queryList[i].videoUrl=queryList[i].videoUrl;
-    				}else{
-    					queryList[i].videoUrl="";
-    				}
-    				if(queryList[i].audioUrl!=null){
-    					queryList[i].audioUrl=queryList[i].audioUrl;
-    					audioName=stringG(queryList[i].audioUrl);
-    				}else{
-    					queryList[i].audioUrl="";
-    				}
-    				
-    				myrow+='<tr id="tr_'+no+'">'
-    				 +'<td id="che_1" class="with-checkbox"> <input type="checkbox" name="check" id="che" value="'+queryList[i].productName+'"> </td>'
-						+'<td class="data-mun">'+queryList[i].productName+'</td>'
-						+'<td class="data-mun">'+queryList[i].productSimple+'</td>'
-						+'<td class="data-mun">'+queryList[i].seriesName+'</td>'
-						+'<td class="data-mun">'+queryList[i].productDesc+'</td>'
-						+'<td class="data-mun"><img src="'+queryList[i].productPic+'" style="width:60px;" /></td>'
-						+'<td class="data-mun"><a href="'+queryList[i].audioUrl+'" target="_blank" >'+audioName+'</a></td>'
-						+'<td class="data-mun"><a href="'+queryList[i].videoUrl+'" target="_blank" >'+videoName+'</a></td>'
-						+'<td class="data-mun">'+queryList[i].templateId+'</td>'
-						+' <td class="data-act"><a href="product_edit.html?productName='+queryList[i].productName+'"><i class="icon-edit"></i> 编辑</a> | <a style="cursor: pointer;" onclick="delasearch('+i+')" class="delt"><i class="icon-remove"></i> 删除</a></td>'
-						+'<tr>';
-                 }
-
-                 $("#productList").html(myrow);
-                
-            	 }
-             }
-    	 })
-
-    	
-    }
+   
     
-    function getRadioRes(){
-        var rdsObj = document.getElementsByTagName("check");
-        var checkVal = "";
-        
-        console.log($(":checkbox[name=check]:checked").val())
-        if($(":checkbox[name=check]:checked").size()<2){
-        	var delid=$(":checkbox[name=check]:checked").val();
-        	ajaxDelItem(delid);
-        }else{
-        	
-        	alert("只能删除一条数据！");
-        	return;
-        }
-       
-    }
+   
     </script>
 
 </head>
 
 <body>
-  <div id="navigation">
+	<div id="navigation">
 		<div class="container-fluid">
 			<a href=" " id="brand">自然堂</a>
 			<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="收起侧栏"><i class="icon-reorder"></i></a>
             <ul class='main-nav'>
-				<li >
+				<li>
 					<a href="product_list.html" data-toggle="dropdown" class='dropdown-toggle'>
 						<span>系统首页</span>
 						<span class="caret"></span>
@@ -461,7 +278,7 @@ console.log(del);
 						</li>
 					</ul>  
 				</li>
-				<li class='active' id="manageFlag" style="dislay:block">
+				<li class='active' >
 					<a href="manager_list.html" data-toggle="dropdown" class='dropdown-toggle'>
 						<span>管理员</span>
 						<span class="caret"></span>
@@ -479,21 +296,22 @@ console.log(del);
 		</div>
 	</div>
 	<div class="container-fluid" id="content">
-        <div id="left">
-            <div class="subnav">
-                <div class="subnav-title">
-                    <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>扫码产品管理</span></a>
+		<div id="left">
+			<div class="subnav">
+				 <div class="subnav-title">
+                    <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>管理员</span></a>
                 </div>
                 <ul class="subnav-menu">
                     <li>
-                        <a href="product_add.html">添加产品</a>
+                        <a href="manager_add.html">添加管理员</a>
                     </li>
                     <li>
-                        <a href="product_list.html">产品管理</a>
+                        <a href="manager_list.html">管理员管理</a>
                     </li>
                 </ul>
-            </div>
-        </div>
+				  
+			</div>
+		</div>
 		<div id="main">
 			<div class="container-fluid">
 
@@ -504,41 +322,19 @@ console.log(del);
 							<div class="box-title">
 								<h3>
 									<i class="icon-table"></i>
-									产品列表
+									管理员列表
 								</h3>
 							</div>
 						  <div class="box-content  col-xs-12 col-md-12 col-lg-12 clear-fixed">
 
-                            <div class="col-xs-12 col-md-12 col-lg-12 ">
-                                    <span class="col-xs-12 col-md-6 col-lg-6 ">
-                                        <span>关键字查询：</span>
-                                       
-                                            <input name="tbsearch" type="text" maxlength="25" id="tbsearch" placeholder="" class="input-xlarge" />
-                                           </span> <span class="col-xs-12 col-md-6 col-lg-6 ">
-                                             <span>系列名称</span>
-                                            <select name="DropDownList1" id="seriesChoose" class="input-large" style="width:90px;">
-                                                <option selected="selected" value="">全部</option>
-                                              
-                                            </select>
-
-                                            <input type="submit" name="btn_Seach" value="查找" id="btn_Seach" onclick="search();" class="btn btn-primary" style=" margin:0px 0px 11px 0px;" />
-                                        </span>
-                                   
-                              </div>
-
+                           
 
 							  <table class="table table-hover table-nomargin table-bordered " data-nosort="0,2,4">
 								  <thead>
 									  <tr>
-										  <th class="with-checkbox"><input type="checkbox" name="check_all"  id="che_0" onclick="checkAll(event)"></th>
-										  <th>产品名称</th>
-										   <th>产品名</th>
-										  <th>系列名称</th>
-                                          <th>产品描述</th>
-                                          <th>产品图片</th>
-                                          <th>音频地址</th>
-                                          <th>视频地址</th>
-                                          <th>模板</th>
+										  <th class="with-checkbox"></th>
+										  <th>用户名</th>
+										  <th>密码</th>
 										  <th>操作</th>
 									  </tr>
 								  </thead>
@@ -562,9 +358,7 @@ console.log(del);
 						
 							</div>
 
-                            <div>
-                                <input type="button" name="btn_Seach" value="删 除" id="btn_Seach" class="btn btn-primary" style=" margin:0px 0px 11px 0px;" onclick="if(confirm('确认要删除吗?')){getRadioRes() };" />
-                            </div>
+                          
 
 						</div>
 					</div>

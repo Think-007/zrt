@@ -29,6 +29,7 @@ import com.think.zrt.dao.UserInfoMapper;
 import com.think.zrt.domain.ProcessResult;
 import com.think.zrt.domain.UserInfo;
 import com.think.zrt.service.MailService;
+import com.think.zrt.service.UserInfoService;
 import com.think.zrt.util.ZrtConst;
 import com.think.zrt.util.ZrtLog;
 
@@ -50,7 +51,7 @@ public class RedirectController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	private UserInfoMapper userInfoMapper;
+	private UserInfoService userInfoService;
 
 	private ExecutorService threadPoole = Executors.newFixedThreadPool(1000);
 
@@ -67,12 +68,11 @@ public class RedirectController {
 
 	@RequestMapping("/admin")
 	@ResponseBody
-	public ProcessResult login(HttpServletRequest request,
-			HttpServletResponse response, String userName, String password) {
+	public ProcessResult login(HttpServletRequest request, HttpServletResponse response, String userName,
+			String password) {
 
 		ProcessResult processResult = new ProcessResult();
-		ZrtLog.debug(logger, " enter login ", null, " userName: " + userName
-				+ " pwd : " + password);
+		ZrtLog.debug(logger, " enter login ", null, " userName: " + userName + " pwd : " + password);
 		try {
 
 			// 1、校验参数
@@ -83,15 +83,17 @@ public class RedirectController {
 			}
 
 			// 2、查询用户信息
-			UserInfo userInfo = userInfoMapper.getUserInfoByName(userName);
+			UserInfo userInfo = userInfoService.getUserInfo(userName);
 			if (userInfo == null || !password.equals(userInfo.getPassword())) {
 				request.getSession().removeAttribute("user");
 				processResult.setRetCode(ZrtConst.PARAM_ERROR);
 				processResult.setRetMsg(ZrtConst.PARAM_ERROR_MSG);
 			} else {
 				request.getSession().setAttribute("user", userInfo);
+				userInfo.setPassword(null);
 				processResult.setRetCode(ProcessResult.SUCCESS);
 				processResult.setRetMsg("ok");
+				processResult.setObj(userInfo);
 			}
 
 		} catch (Throwable t) {
@@ -102,8 +104,7 @@ public class RedirectController {
 			ZrtLog.error(logger, "uploadProudct", null, processResult, t);
 			t.printStackTrace();
 		}
-		ZrtLog.debug(logger, " finish login ", null, " processResult: "
-				+ processResult);
+		ZrtLog.debug(logger, " finish login ", null, " processResult: " + processResult);
 
 		return processResult;
 

@@ -25,7 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.pagehelper.PageInfo;
 import com.think.zrt.domain.ProcessResult;
 import com.think.zrt.domain.ProductInfo;
+import com.think.zrt.domain.UserInfo;
 import com.think.zrt.service.ProductInfoService;
+import com.think.zrt.service.UserInfoService;
 import com.think.zrt.util.IdUtil;
 import com.think.zrt.util.ZrtConst;
 import com.think.zrt.util.ZrtLog;
@@ -38,6 +40,9 @@ public class AdminController {
 
 	@Autowired
 	private ProductInfoService productInfoService;
+
+	@Autowired
+	private UserInfoService userInfoService;
 
 	public static Map<String, String> pathMap = new HashMap<String, String>();
 
@@ -264,6 +269,7 @@ public class AdminController {
 	public ProcessResult listProductInfo(int startPage) {
 
 		ProcessResult processResult = new ProcessResult();
+		ZrtLog.debug(logger, " enter listProductInfo ", null, " startPage: " + startPage);
 
 		try {
 			PageInfo<ProductInfo> pageInfo = productInfoService.listAllProductInfo(startPage, 10);
@@ -504,6 +510,155 @@ public class AdminController {
 
 		return processResult;
 
+	}
+
+	// **********************管理员增删*****************************
+
+	/**
+	 * 添加管理员
+	 * 
+	 * @param userInfo
+	 *            管理员参数
+	 * @return
+	 */
+	@RequestMapping(value = "/add_user")
+	public ProcessResult addAdmin(String name, String password, Integer roleId) {
+		ZrtLog.debug(logger, " enter  addAdmin ", null,
+				" name: " + name + " password : " + password + " roleId : " + roleId);
+
+		ProcessResult processResult = new ProcessResult();
+		UserInfo userInfo = new UserInfo();
+		userInfo.setName(name);
+		userInfo.setPassword(password);
+		userInfo.setRoleId(roleId);
+
+		ZrtLog.debug(logger, " enter addAdmin ", null, " userInfo: " + userInfo);
+
+		try {
+			userInfoService.saveUserInfo(userInfo);
+			processResult.setRetCode(ProcessResult.SUCCESS);
+			processResult.setRetMsg("ok");
+		} catch (Throwable t) {
+			processResult.setRetCode(ZrtConst.EXCEPTION);
+			processResult.setRetMsg(ZrtConst.EXCEPTION_MSG);
+			processResult.setObj(t);
+			ZrtLog.error(logger, "addAdmin", null, processResult, t);
+			t.printStackTrace();
+		}
+		ZrtLog.debug(logger, " finish addAdmin ", null, " processResult: " + processResult);
+		return processResult;
+	}
+
+	/**
+	 * 删除管理员信息
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	@RequestMapping(value = "/delete_user")
+	public ProcessResult deleteAdmin(String userName) {
+
+		ProcessResult processResult = new ProcessResult();
+		ZrtLog.debug(logger, " enter deleteAdmin ", null, " userName: " + userName);
+		try {
+			userInfoService.delteUserInfo(userName);
+			processResult.setRetCode(ProcessResult.SUCCESS);
+			processResult.setRetMsg("ok");
+		} catch (Throwable t) {
+			processResult.setRetCode(ZrtConst.EXCEPTION);
+			processResult.setRetMsg(ZrtConst.EXCEPTION_MSG);
+			processResult.setObj(t);
+			ZrtLog.error(logger, "deleteAdmin", null, processResult, t);
+			t.printStackTrace();
+		}
+		ZrtLog.debug(logger, " finish deleteAdmin ", null, " processResult: " + processResult);
+		return processResult;
+	}
+
+	/**
+	 * 更新管理员信息
+	 * 
+	 * @param userInfo
+	 * @return
+	 */
+	@RequestMapping(value = "/update_user")
+	public ProcessResult updateAdmin(String name, String password, int roleId, String oldName) {
+
+		ZrtLog.debug(logger, " enter  updateAdmin ", null,
+				" name: " + name + " password : " + password + " roleId : " + roleId + " oldName : " + oldName);
+		ProcessResult processResult = new ProcessResult();
+		UserInfo userInfo = new UserInfo();
+		userInfo.setName(name);
+		userInfo.setPassword(password);
+		userInfo.setRoleId(roleId);
+		ZrtLog.debug(logger, " enter  updateAdmin ", null, " userInfo: " + userInfo);
+		try {
+			userInfoService.updateUserInfo(userInfo, oldName);
+			processResult.setRetCode(ProcessResult.SUCCESS);
+			processResult.setRetMsg("ok");
+		} catch (Throwable t) {
+			processResult.setRetCode(ZrtConst.EXCEPTION);
+			processResult.setRetMsg(ZrtConst.EXCEPTION_MSG);
+			processResult.setObj(t);
+			ZrtLog.error(logger, "deleteAdmin", null, processResult, t);
+			t.printStackTrace();
+		}
+		ZrtLog.debug(logger, " enter  updateAdmin ", null, " processResult: " + processResult);
+		return processResult;
+	}
+
+	/**
+	 * 获取所有管理员信息
+	 * 
+	 * @param startPage
+	 *            起始页码
+	 * @return
+	 */
+	@RequestMapping(value = "/all_admin")
+	public ProcessResult listAllAdmin(int startPage) {
+
+		ProcessResult processResult = new ProcessResult();
+		ZrtLog.debug(logger, " enter  listAllAdmin ", null, " startPage: " + startPage);
+		try {
+			PageInfo<UserInfo> infoList = userInfoService.getAllUserInfo(startPage, 10);
+			processResult.setRetCode(ProcessResult.SUCCESS);
+			processResult.setRetMsg("ok");
+			processResult.setObj(infoList);
+
+		} catch (Throwable t) {
+			processResult.setRetCode(ZrtConst.EXCEPTION);
+			processResult.setRetMsg(ZrtConst.EXCEPTION_MSG);
+			processResult.setObj(t);
+			ZrtLog.error(logger, "deleteAdmin", null, processResult, t);
+			t.printStackTrace();
+		}
+		ZrtLog.debug(logger, " enter  listAllAdmin ", null, " processResult: " + processResult);
+
+		return processResult;
+	}
+
+	@RequestMapping(value = "/edit_user")
+	public ProcessResult editAdmin(String name) {
+
+		ProcessResult processResult = new ProcessResult();
+		ZrtLog.debug(logger, " enter  editAdmin ", null, " name: " + name);
+		try {
+			UserInfo userInfo = userInfoService.getUserInfo(name);
+			userInfo.setPassword(null);
+			processResult.setRetCode(ProcessResult.SUCCESS);
+			processResult.setRetMsg("ok");
+			processResult.setObj(userInfo);
+
+		} catch (Throwable t) {
+			processResult.setRetCode(ZrtConst.EXCEPTION);
+			processResult.setRetMsg(ZrtConst.EXCEPTION_MSG);
+			processResult.setObj(t);
+			ZrtLog.error(logger, "edit_user", null, processResult, t);
+			t.printStackTrace();
+		}
+		ZrtLog.debug(logger, " finish  edit_user ", null, " processResult: " + processResult);
+
+		return processResult;
 	}
 
 	public static void main(String[] args) {

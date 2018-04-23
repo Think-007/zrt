@@ -35,6 +35,9 @@ public class UserInfo implements Serializable {
 	// 密码
 	private String password;
 
+	// 用户角色
+	private int roleId;
+
 	public String getName() {
 		return name;
 	}
@@ -51,9 +54,17 @@ public class UserInfo implements Serializable {
 		this.password = password;
 	}
 
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+
 	@Override
 	public String toString() {
-		return "UserInfo [name=" + name + ", password=" + password + "]";
+		return "UserInfo [name=" + name + ", password=" + password + ", roleId=" + roleId + "]";
 	}
 
 }

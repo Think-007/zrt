@@ -9,6 +9,8 @@
 
 package com.think.zrt.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,27 @@ public class UserInfoMapperTest {
 
 		System.out.println(u);
 
+	}
+
+	@Test
+	public void saveUserInfo() {
+
+		UserInfo u = new UserInfo();
+		u.setName("test");
+		u.setPassword("33333");
+		u.setRoleId(0);
+
+		userInfoMapper.saveUserInfo(u);
+
+		System.out.println(u);
+
+	}
+
+	@Test
+	public void listAllUserInfo() {
+
+		List<UserInfo> l = userInfoMapper.listAllUserInfo();
+		System.out.println(l);
 	}
 
 }

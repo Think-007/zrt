@@ -101,7 +101,20 @@
 	<link rel="shortcut icon" href="adminskin/img/favicon.ico" />
 	<!-- Apple devices Homescreen icon -->
 	<link rel="apple-touch-icon-precomposed" href="adminskin/img/apple-touch-icon-precomposed.png" />
+   <style>
+
+.dropdown-menu{margin-top:0;border:none}
+   </style>
  <script>
+ $(function () {
+	
+	 	var roleCheck = JSON.parse(localStorage.getItem('userInfo'));
+		if(roleCheck.roleid!=1){
+	   $("#manageFlag").hide();
+		}else{
+			 $("#manageFlag").show();
+		}
+	 })
  function addBtn(){
  	
 	  var fd = new FormData();
@@ -193,8 +206,39 @@
 <body>
 	<div id="navigation">
 		<div class="container-fluid">
-			<a href="#" id="brand">自然堂</a>
+			<a href=" " id="brand">自然堂</a>
 			<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="收起侧栏"><i class="icon-reorder"></i></a>
+            <ul class='main-nav'>
+				<li >
+					<a href="product_list.html" data-toggle="dropdown" class='dropdown-toggle'>
+						<span>系统首页</span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+					   <li>
+							<a href="/zrtweb/product_list.html">扫码产品管理</a>
+						</li>
+						
+						<li>
+							<a href="/zrtweb/">退出</a>
+						</li>
+					</ul>  
+				</li>
+				<li class='active' id="manageFlag" style="dislay:block">
+					<a href="manager_list.html" data-toggle="dropdown" class='dropdown-toggle'>
+						<span>管理员</span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="manager_add.html">添加管理员</a>
+						</li>
+						<li>
+							<a href="manager_list.html">管理员管理</a>
+						</li>
+					</ul>  
+				</li>
+			</ul>
 		</div>
 	</div>
 	<div class="container-fluid" id="content">
