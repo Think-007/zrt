@@ -15,6 +15,9 @@ public class ProductInfo implements Serializable {
 	// 商品名称
 	private String productName;
 
+	// 产品名
+	private String productSimple;
+
 	// 商品系列名称
 	private String seriesName;
 
@@ -32,6 +35,9 @@ public class ProductInfo implements Serializable {
 
 	// 视频封面地址
 	private String videoPic;
+
+	// 视频模板id
+	private int videoTemplateId;
 
 	// 模板id
 	private int templateId;
@@ -130,14 +136,29 @@ public class ProductInfo implements Serializable {
 		this.codePic = codePic;
 	}
 
+	public String getProductSimple() {
+		return productSimple;
+	}
+
+	public void setProductSimple(String productSimple) {
+		this.productSimple = productSimple;
+	}
+
+	public int getVideoTemplateId() {
+		return videoTemplateId;
+	}
+
+	public void setVideoTemplateId(int videoTemplateId) {
+		this.videoTemplateId = videoTemplateId;
+	}
+
 	@Override
 	public String toString() {
-		return "ProductInfo [id=" + id + ", productName=" + productName
-				+ ", seriesName=" + seriesName + ", productPic=" + productPic
-				+ ", productDesc=" + productDesc + ", audioUrl=" + audioUrl
-				+ ", videoUrl=" + videoUrl + ", videoPic=" + videoPic
-				+ ", templateId=" + templateId + ", searchName=" + searchName
-				+ ", codePic=" + codePic + "]";
+		return "ProductInfo [id=" + id + ", productName=" + productName + ", productSimple=" + productSimple
+				+ ", seriesName=" + seriesName + ", productPic=" + productPic + ", productDesc=" + productDesc
+				+ ", audioUrl=" + audioUrl + ", videoUrl=" + videoUrl + ", videoPic=" + videoPic + ", videoTemplateId="
+				+ videoTemplateId + ", templateId=" + templateId + ", searchName=" + searchName + ", codePic=" + codePic
+				+ "]";
 	}
 
 }

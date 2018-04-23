@@ -117,9 +117,54 @@
       fd.append('file4', file4); 
       fd.append('templateId',$("#selectDemo").val());
       fd.append('productName',$("#productName").val());
+      fd.append('productSimple',$("#productSimple").val());
       fd.append('productDesc',$("#productDes").val());
       fd.append('seriesName',$("#seriesName").val());
-      console.log(fd);
+      fd.append('videoTemplateId',$("#selectVedioDemo").val());
+
+
+
+      if (document.getElementById("upload_file").value != "") {
+          var pic_size = file.size / 1024;//产品图片
+          if (pic_size > 200) {
+              alert('产品图片不能大于200k');
+              return;
+          }
+      }
+      if (document.getElementById("upload_file_audiopic").value != "") {
+          var audiopic_size = file1.size / 1024;//视频图片
+          if (audiopic_size > 120) {
+              alert('视频图片不能大于120k');
+              return;
+          }
+      }
+      if (document.getElementById("upload_file_audio").value != "") {
+          var audio_size = file2.size / 1024;//音频
+          if (audio_size > 2048) {
+              alert('音频不能大于2m');
+              return;
+          }
+
+      }
+      if (document.getElementById("upload_file_vedio").value != "") {
+          var video_size = file3.size / 1024;//视频
+          if (video_size > 10240) {
+              alert('视频不能大于10m');
+              return;
+          }
+
+      }
+      if (document.getElementById("upload_file_codePic").value != "") {
+          var codepic_size = file4.size / 1024;//防伪
+          if (codepic_size > 200) {
+              alert('防伪图片不能大于200k');
+              return;
+          }
+
+      }
+
+
+
 	 $.ajax({
        asynca: false,
        type: "POST",
@@ -129,10 +174,13 @@
        contentType: false,
        success: function (data, textStatus) {
       	 if (data.retCode == 0) {
-           	alert("修改成功！")
+           	alert("保存成功！")
            	location = 'product_list.html';
+           	 }else if(data.retCode == -1){
+           		 alert("产品名称已存在,请重新输入产品名称！")
+           		 $("#productName").val("");
            	 }else{
-           		 alert("修改失败！")
+           		 alert("保存失败！") 
            	 }
        }
 	 })
@@ -140,7 +188,6 @@
 	
 }
 </script>
-    </script>
 </head>
 
 <body>
@@ -183,6 +230,13 @@
 										</div>
 									</div>
 									<div class="control-group">
+										<label for="textfield" class="control-label">产品名</label>
+										<div class="controls">
+											<input type="text" name="textfield" id="productSimple" placeholder="" class="input-xlarge">
+										</div>
+									</div>
+									
+									<div class="control-group">
 										<label for="textfield1" class="control-label">系列名称</label>
 										<div class="controls">
 											<input type="text" name="textfield1" id="seriesName" placeholder="" class="input-xlarge">
@@ -196,7 +250,7 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label for="textfield" class="control-label">产品图片上传</label>
+                                        <label for="textfield" class="control-label">产品图片上传<small>750 x 400</small></label>
                                         <div class="controls">
                                             <div class="fileupload fileupload-new" data-provides="fileupload">
                                                 <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="adminskin/img/noimage.gif" /></div>
@@ -220,7 +274,40 @@
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="textfield" class="control-label">视频图片上传</label>
+										<label for="select" class="control-label">选择视频模板</label>
+										<div class="controls">
+											<select name="select" id="selectVedioDemo" class='input-large'>
+                                                <option value="">请选择</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
+                                                <option value="25">25</option>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="textfield" class="control-label">视频图片上传<small>580 x 325</small></label>
 										<div class="controls">
 											<div class="fileupload fileupload-new" data-provides="fileupload">
 												<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="adminskin/img/noimage.gif" /></div>
@@ -272,7 +359,7 @@
 										</div>
 									</div>
 									   <div class="control-group">
-                                        <label for="textfield" class="control-label">防伪图片上传</label>
+                                        <label for="textfield" class="control-label">防伪图片上传<small>750 x 400</small></label>
                                         <div class="controls">
                                             <div class="fileupload fileupload-new" data-provides="fileupload">
                                                 <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="adminskin/img/noimage.gif" /></div>

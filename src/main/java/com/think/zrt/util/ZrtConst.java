@@ -28,6 +28,11 @@ public interface ZrtConst {
 	// 异常返回消息
 	public static final String EXCEPTION_MSG = "EXCEPTION";
 
+	// 异常
+	public static final int REPEAT_NAME = -10001;
+	// 异常返回消息
+	public static final String REPEAT_NAME_MSG = "NAME_REPEAT";
+
 	// 出错
 	public static final int ERROR = -2;
 

@@ -38,6 +38,14 @@ public interface ProductInfoService {
 	int deleteProductInfoByName(String productName, String path);
 
 	/**
+	 * 批量删除指定目录的文件信息
+	 * 
+	 * @param pathList
+	 *            文件路径
+	 */
+	void deleteProductServerInfo(List<String> pathList);
+
+	/**
 	 * 查询所有产品
 	 * 
 	 * @return

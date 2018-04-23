@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.think.zrt</groupId>
-	<artifactId>zrt</artifactId>
+	<artifactId>zrtweb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>zrt</name>
+	<name>zrtweb</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -90,6 +90,10 @@
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
 			<version>4.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jta-narayana</artifactId>
 		</dependency>
 	</dependencies>
 

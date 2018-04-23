@@ -80,7 +80,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 	 * @param dir
 	 *            目录
 	 */
-	private void deleteDir(File dir) {
+	public void deleteDir(File dir) {
 		if (dir.isDirectory()) {
 			File[] files = dir.listFiles();
 			for (int i = 0; i < files.length; i++) {
@@ -142,6 +142,18 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 		int result = productMapper.deleteProductInfoList(nameList);
 
 		return result;
+	}
+
+	@Override
+	public void deleteProductServerInfo(List<String> pathList) {
+
+		pathList.forEach(item -> {
+
+			File tempFile = new File(item);
+			this.deleteDir(tempFile);
+
+		});
+
 	}
 
 }

@@ -137,7 +137,8 @@
         	 $("#oldName").val(data.obj.productName);
         	 $("#productDesc").val(data.obj.productDesc);
         	 $("#seriesName").val(data.obj.seriesName);
-        	
+        	 $("#productSimple").val(data.obj.productSimple);
+        	 
         	 if(data.obj.productPic!=null){
         		 
         		 $("#imageId").attr("src",data.obj.productPic);
@@ -157,14 +158,35 @@
        		 $("#imageId3").attr("src","/adminskin/img/noimage.gif");
        	 }
 			//console.log(data.obj.videoUrl);
-			$("#audioName").text(stringG(data.obj.videoUrl));
+			if(data.obj.videoUrl!=null){
+				$("#audioName").text(stringG(data.obj.videoUrl));
+			}else{
+				$("#audioName").text("");
+			}
+			if(data.obj.videoUrl!=null){
+				$("#audioNamepreview").text(stringG(data.obj.videoUrl));
+			}else{
+				$("#audioNamepreview").text("");
+			}
+			if(data.obj.audioUrl!=null){
+				$("#vedioprview").text(stringG(data.obj.audioUrl));
+			}else{
+				$("#vedioprview").text("");
+			}
+			if(data.obj.audioUrl!=null){
+				$("#vedio").text(stringG(data.obj.audioUrl));
+			}else{
+				$("#vedio").text("");
+			}
+			
+			
 			$("#audiohref").attr("href",data.obj.videoUrl); 
-			$("#audioNamepreview").text(stringG(data.obj.videoUrl));
-        	$("#vedio").text(stringG(data.obj.audioUrl));
+			
+        	
         	$("#vediohref").attr("href",data.obj.audioUrl); 
-        	$("#vedioprview").text(stringG(data.obj.audioUrl));
+        	
         	$("#selectDemo").find("option[value="+data.obj.templateId+"]").attr("selected",true); 
-        	//$(".selector").find("option[text='pxx']").attr("selected",true); 
+        	$("#selectVedioDemo").find("option[value="+data.obj.videoTemplateId+"]").attr("selected",true); 
         	
         	 }
          }
@@ -187,8 +209,49 @@
           fd.append('oldName',$("#oldName").val());
           fd.append('productDesc',$("#productDesc").val());
           fd.append('seriesName',$("#seriesName").val());
-         
-          
+          fd.append('productSimple',$("#productSimple").val());
+          fd.append('videoTemplateId',$("#selectVedioDemo").val());
+
+          if (document.getElementById("upload_file").value != "") {
+              var pic_size = file.size / 1024;//产品图片
+              if (pic_size > 200) {
+                  alert('产品图片不能大于200k');
+                  return;
+              }
+          }
+          if (document.getElementById("upload_file_audiopic").value != "") {
+              var audiopic_size = file1.size / 1024;//视频图片
+              if (audiopic_size > 120) {
+                  alert('视频图片不能大于120k');
+                  return;
+              }
+          }
+          if (document.getElementById("upload_file_audio").value != "") {
+              var audio_size = file2.size / 1024;//音频
+              if (audio_size > 2048) {
+                  alert('音频不能大于2m');
+                  return;
+              }
+
+          }
+          if (document.getElementById("upload_file_vedio").value != "") {
+              var video_size = file3.size / 1024;//视频
+              if (video_size > 10240) {
+                  alert('视频不能大于10m');
+                  return;
+              }
+
+          }
+          if (document.getElementById("upload_file_codePic").value != "") {
+              var codepic_size = file4.size / 1024;//防伪
+              if (codepic_size > 200) {
+                  alert('防伪图片不能大于200k');
+                  return;
+              }
+
+          }
+
+
     	 $.ajax({
            async: false,
            type: "POST",
@@ -201,6 +264,9 @@
           		initData($("#productName").val());
                	alert("修改成功！");
                	location = 'product_list.html';
+               	 }else if(data.retCode == -1){
+               		 alert("产品名称已存在,请重新输入产品名称！")
+               		initData($("#productName").val());
                	 }else{
                		 alert("修改失败！")
                	 }
@@ -251,6 +317,14 @@
 										</div>
 									</div>
 									<div class="control-group">
+										<label for="textfield" class="control-label">产品名</label>
+										<div class="controls">
+											<input type="text" name="textfield" id="productSimple" placeholder="" class="input-xlarge">
+											
+										</div>
+									</div>
+									
+									<div class="control-group">
 										<label for="textfield1" class="control-label">系列名称</label>
 										<div class="controls">
 											<input type="text" name="textfield1" id="seriesName" placeholder="" class="input-xlarge">
@@ -264,7 +338,7 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label for="textfield" class="control-label">产品图片上传</label>
+                                        <label for="textfield" class="control-label">产品图片上传<small>750 x 400</small></label>
                                         <div class="controls">
                                             <div class="fileupload fileupload-exists" data-provides="fileupload">
                                                 <input type="hidden" value="" name="">
@@ -291,7 +365,40 @@
 										</div>
 									</div>
 									<div class="control-group">
-										<label for="textfield" class="control-label">视频图片上传</label>
+										<label for="select" class="control-label">选择视频模板</label>
+										<div class="controls">
+											<select name="select" id="selectVedioDemo" class='input-large'>
+                                                <option value="">请选择</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
+                                                <option value="25">25</option>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label for="textfield" class="control-label">视频图片上传<small>580 x 325</small></label>
                                         <div class="controls">
                                             <div class="fileupload fileupload-exists" data-provides="fileupload">
                                                 <input type="hidden" value="" name="">
@@ -345,7 +452,7 @@
 										</div>
 									</div>
 									 <div class="control-group">
-										<label for="textfield" class="control-label">防伪图片上传</label>
+										<label for="textfield" class="control-label">防伪图片上传<small>750 x 400</small></label>
                                         <div class="controls">
                                             <div class="fileupload fileupload-exists" data-provides="fileupload">
                                                 <input type="hidden" value="" name="">

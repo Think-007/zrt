@@ -32,5 +32,29 @@ public interface UserInfoMapper {
 	 * @return
 	 */
 	UserInfo getUserInfoByName(String name);
+	
+	/**
+	 * 添加管理员
+	 * 
+	 * @param name
+	 * @return
+	 */
+	void saveUserInfo(UserInfo userInfo);
+	
+	/**
+	 * 删除管理员
+	 * 
+	 * @param name
+	 * @return
+	 */
+	void deleteUserInfo(String userName);
+	
+	/**
+	 * 更改管理员信息
+	 * 
+	 * @param name
+	 * @return
+	 */
+	void updateUserInfo(String userName);
 
 }
